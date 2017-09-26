@@ -20,6 +20,8 @@ namespace A_ZCamp.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<PreSurvey> PreSurvey { get; set; }
+        public DbSet<PostSurvey> PostSurvey { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

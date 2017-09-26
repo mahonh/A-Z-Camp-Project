@@ -6,24 +6,21 @@ using System.Web.Mvc;
 
 namespace A_ZCamp.Controllers
 {
-    public class HomeController : Controller
+    public class SurveysController : Controller
     {
+        // GET: Surveys
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult PreSurvey()
         {
-            ViewBag.Message = "This page is for the Marshall University Adventure Zone Camp";
-
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult PostSurvey()
         {
-            ViewBag.Message = "Do you have questions or concerns about the camp? Feel free to contact us!";
-
             return View();
         }
     }

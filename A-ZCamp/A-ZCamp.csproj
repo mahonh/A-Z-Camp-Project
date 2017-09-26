@@ -192,14 +192,28 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PostSurveyController.cs" />
     <Compile Include="Controllers\PreSurveyController.cs" />
+    <Compile Include="Controllers\SurveyReportsController.cs" />
+    <Compile Include="Controllers\SurveysController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709232018302_InitialCreate.cs" />
+    <Compile Include="Migrations\201709232018302_InitialCreate.Designer.cs">
+      <DependentUpon>201709232018302_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709251936462_AddSurveysTables.cs" />
+    <Compile Include="Migrations\201709251936462_AddSurveysTables.Designer.cs">
+      <DependentUpon>201709251936462_AddSurveysTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PostSurvey.cs" />
     <Compile Include="Models\PreSurvey.cs" />
+    <Compile Include="Models\SurveyReports.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -228,7 +242,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -262,7 +278,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\PreSurvey\Index.cshtml" />
+    <Content Include="Views\Surveys\PreSurvey.cshtml" />
+    <Content Include="Views\Surveys\Index.cshtml" />
+    <Content Include="Views\Surveys\PostSurvey.cshtml" />
+    <Content Include="Views\SurveyReports\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -279,6 +298,14 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709232018302_InitialCreate.resx">
+      <DependentUpon>201709232018302_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709251936462_AddSurveysTables.resx">
+      <DependentUpon>201709251936462_AddSurveysTables.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

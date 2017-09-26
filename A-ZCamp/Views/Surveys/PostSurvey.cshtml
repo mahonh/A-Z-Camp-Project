@@ -1,0 +1,21 @@
+﻿@model A_ZCamp.Models.PostSurvey
+@{
+    ViewBag.Title = "Post-Camp Survey";
+}
+<h2>@ViewBag.Title</h2>
+<h3>Welcome! Please fill out the survey</h3>
+
+@using (Html.BeginForm("Add", "Surveys/PostSurvey", FormMethod.Post, new { @class = "form" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.WhatDidYouThink)
+        @Html.TextAreaFor(m => m.WhatDidYouThink, new { @class = "form-control", rows = 4 })
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Submit" />
+}

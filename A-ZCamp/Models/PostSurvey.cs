@@ -5,10 +5,10 @@ using System.Web;
 
 namespace A_ZCamp.Models
 {
-    public class PreSurvey
+    public class PostSurvey
     {
         public int ID { get; set; }
         public String Email { get; set; }
-        public String WhatDoYouExpect { get; set; }
+        public String WhatDidYouThink { get; set; }
     }
 }
