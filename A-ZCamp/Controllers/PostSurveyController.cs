@@ -16,7 +16,6 @@ namespace A_ZCamp.Controllers
             _dbContextPost = new ApplicationDbContext();
         }
 
-        // GET: PostSurvey
         public ActionResult Index()
         {
             return View();
@@ -26,7 +25,7 @@ namespace A_ZCamp.Controllers
         {
             _dbContextPost.PostSurvey.Add(postsurvey);
             _dbContextPost.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "SurveyReports");
         }
     }
 }

@@ -16,17 +16,16 @@ namespace A_ZCamp.Controllers
             _dbContextPre = new ApplicationDbContext();
         }
 
-        // GET: PreSurvey
         public ActionResult Index()
         {
             return View();
         }
-
+     
         public ActionResult Add(PreSurvey presurvey)
         {
             _dbContextPre.PreSurvey.Add(presurvey);
             _dbContextPre.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "SurveyReports");
         }
     }
 }
