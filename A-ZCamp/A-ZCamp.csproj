@@ -284,6 +284,10 @@
     <Content Include="Views\Surveys\PostSurvey.cshtml" />
     <Content Include="Views\SurveyReports\Index.cshtml" />
     <Content Include="Views\Edit\Index.cshtml" />
+    <Content Include="Views\Edit\Add.cshtml" />
+    <Content Include="Views\Edit\Edit.cshtml" />
+    <Content Include="Views\Edit\Delete.cshtml" />
+    <Content Include="Views\SurveyReports\RunReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

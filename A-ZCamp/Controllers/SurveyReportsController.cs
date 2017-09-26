@@ -19,6 +19,11 @@ namespace A_ZCamp.Controllers
         // GET: SurveyReports
         public ActionResult Index()
         {
+            return View();
+        }
+
+        public ActionResult RunReport()
+        {
             var PreSurveys = _dbContext.PreSurvey.ToList();
             var PostSurveys = _dbContext.PostSurvey.ToList();
 

@@ -1,0 +1,36 @@
+﻿@model A_ZCamp.Models.SurveyReports
+@{
+    ViewBag.Title = "RunReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Survey Reports Example (Sort of)</h1>
+<h2>Pre Survey</h2>
+<table>
+    <tr>
+        <th>Email:</th>
+        <th>What Do You Expect From Camp?</th>
+    </tr>
+    @foreach (var Pre in Model.PreSurveys)
+    {
+        <tr>
+            <td>@Pre.Email &nbsp; &nbsp; &nbsp;</td>
+            <td>@Pre.WhatDoYouExpect</td>
+        </tr>
+    }
+</table>
+
+<h2>Post Survey</h2>
+<table>
+    <tr>
+        <th>Email:</th>
+        <th>What Did You Think About Camp?</th>
+    </tr>
+    @foreach (var Post in Model.PostSurveys)
+    {
+        <tr>
+            <td>@Post.Email &nbsp; &nbsp; &nbsp;</td>
+            <td>@Post.WhatDidYouThink</td>
+        </tr>
+    }
+</table>
