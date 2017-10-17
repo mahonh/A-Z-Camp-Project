@@ -243,6 +243,37 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\Home\Index.html" />
+    <Content Include="Views\Site Support\animate.css" />
+    <Content Include="Views\Site Support\bootstrap.css" />
+    <Content Include="Views\Site Support\bootstrap.js" />
+    <Content Include="Views\Site Support\common.js" />
+    <Content Include="Views\Site Support\css.css" />
+    <Content Include="Views\Site Support\custom.css" />
+    <Content Include="Views\Site Support\font-awesome.css" />
+    <Content Include="Views\Site Support\front.js" />
+    <Content Include="Views\Site Support\gmaps.js" />
+    <Content Include="Views\Site Support\home.jpg" />
+    <Content Include="Views\Site Support\img1.jpg" />
+    <Content Include="Views\Site Support\jquery-1.js" />
+    <Content Include="Views\Site Support\jquery.js" />
+    <Content Include="Views\Site Support\jquery_002.js" />
+    <Content Include="Views\Site Support\jquery_003.js" />
+    <Content Include="Views\Site Support\jquery_004.js" />
+    <Content Include="Views\Site Support\masonry.js" />
+    <Content Include="Views\Site Support\modernizr-2.js" />
+    <Content Include="Views\Site Support\owl.css" />
+    <Content Include="Views\Site Support\owl.js" />
+    <Content Include="Views\Site Support\owl_002.css" />
+    <Content Include="Views\Site Support\p-2.jpg" />
+    <Content Include="Views\Site Support\p-3.jpg" />
+    <Content Include="Views\Site Support\p-4.png" />
+    <Content Include="Views\Site Support\p-5.jpg" />
+    <Content Include="Views\Site Support\Picture1.png" />
+    <Content Include="Views\Site Support\stats.js" />
+    <Content Include="Views\Site Support\style.css" />
+    <Content Include="Views\Site Support\util.js" />
+    <Content Include="Views\Site Support\waypoints.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -258,7 +289,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\OLDIndex.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -288,9 +319,11 @@
     <Content Include="Views\Edit\Edit.cshtml" />
     <Content Include="Views\Edit\Delete.cshtml" />
     <Content Include="Views\SurveyReports\RunReport.cshtml" />
+    <Content Include="Views\Site Support\js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\TEMP\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
