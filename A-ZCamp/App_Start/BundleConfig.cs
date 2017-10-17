@@ -24,7 +24,7 @@ namespace A_ZCamp
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/cosmo.css",
+                      "~/Content/bootstrap.css",
                       "~/Content/site.css"));
         }
     }
