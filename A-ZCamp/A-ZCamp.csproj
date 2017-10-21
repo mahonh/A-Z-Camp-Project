@@ -220,13 +220,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\ORGbootstrap.min.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\OLDcosmo.css" />
     <Content Include="Content\OLDcosmo.min.css" />
-    <Content Include="favicon.ico" />
+    <Content Include="ORIGINALfavicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="favicon.ico" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -245,7 +246,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Views\Home\NarmansSite.html" />
     <Content Include="Content\Style\animate.css" />
-    <Content Include="Content\NEWbootstrap.css" />
+    <Content Include="Content\bootstrapNARMAN.css" />
     <Content Include="Content\JavaScript\bootstrap.js" />
     <Content Include="Content\JavaScript\common.js" />
     <Content Include="Content\Style\css.css" />
@@ -320,9 +321,9 @@
     <Content Include="Views\Edit\Delete.cshtml" />
     <Content Include="Views\SurveyReports\RunReport.cshtml" />
     <Content Include="Content\JavaScript\js" />
-    <Content Include="Views\Home\Index - Copy.cshtml" />
-    <Content Include="Views\Shared\_Layout - Copy.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial - Copy.cshtml" />
+    <Content Include="Views\Home\Index - ORIGINAL.cshtml" />
+    <Content Include="Views\Shared\_Layout - ORIGINAL.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial - ORIGINAL.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
