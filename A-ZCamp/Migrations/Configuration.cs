@@ -10,7 +10,6 @@ namespace A_ZCamp.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "A_ZCamp.Models.ApplicationDbContext";
         }
 
         protected override void Seed(A_ZCamp.Models.ApplicationDbContext context)

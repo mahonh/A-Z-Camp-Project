@@ -193,37 +193,22 @@
     <Compile Include="Controllers\EditController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PostSurveyController.cs" />
-    <Compile Include="Controllers\PreSurveyController.cs" />
-    <Compile Include="Controllers\SurveyReportsController.cs" />
-    <Compile Include="Controllers\SurveysController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709232018302_InitialCreate.cs" />
-    <Compile Include="Migrations\201709232018302_InitialCreate.Designer.cs">
-      <DependentUpon>201709232018302_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709251936462_AddSurveysTables.cs" />
-    <Compile Include="Migrations\201709251936462_AddSurveysTables.Designer.cs">
-      <DependentUpon>201709251936462_AddSurveysTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710212146357_BasicDBSetup.cs" />
-    <Compile Include="Migrations\201710212146357_BasicDBSetup.Designer.cs">
-      <DependentUpon>201710212146357_BasicDBSetup.cs</DependentUpon>
+    <Compile Include="Migrations\201710241316504_BasicDBSetup.cs" />
+    <Compile Include="Migrations\201710241316504_BasicDBSetup.Designer.cs">
+      <DependentUpon>201710241316504_BasicDBSetup.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\PostSurvey.cs" />
-    <Compile Include="Models\PreSurvey.cs" />
     <Compile Include="Models\SurveyMCResponse.cs" />
     <Compile Include="Models\SurveyQuestionOrdering.cs" />
     <Compile Include="Models\SurveyQuestion.cs" />
     <Compile Include="Models\SurveyQuestionSuppliedAnswer.cs" />
     <Compile Include="Models\SurveyRankingResponse.cs" />
-    <Compile Include="Models\SurveyReports.cs" />
     <Compile Include="Models\SurveyRespondent.cs" />
     <Compile Include="Models\SurveyShortAnswerResponse.cs" />
     <Compile Include="Models\SurveyType.cs" />
@@ -326,12 +311,10 @@
     <Content Include="Views\Surveys\PreSurvey.cshtml" />
     <Content Include="Views\Surveys\Index.cshtml" />
     <Content Include="Views\Surveys\PostSurvey.cshtml" />
-    <Content Include="Views\SurveyReports\Index.cshtml" />
     <Content Include="Views\Edit\Index.cshtml" />
     <Content Include="Views\Edit\Add.cshtml" />
     <Content Include="Views\Edit\Edit.cshtml" />
     <Content Include="Views\Edit\Delete.cshtml" />
-    <Content Include="Views\SurveyReports\RunReport.cshtml" />
     <Content Include="Content\JavaScript\js" />
     <Content Include="Views\Home\Index - ORIGINAL.cshtml" />
     <Content Include="Views\Shared\_Layout - ORIGINAL.cshtml" />
@@ -354,14 +337,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709232018302_InitialCreate.resx">
-      <DependentUpon>201709232018302_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709251936462_AddSurveysTables.resx">
-      <DependentUpon>201709251936462_AddSurveysTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710212146357_BasicDBSetup.resx">
-      <DependentUpon>201710212146357_BasicDBSetup.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710241316504_BasicDBSetup.resx">
+      <DependentUpon>201710241316504_BasicDBSetup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

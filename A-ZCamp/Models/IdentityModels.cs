@@ -20,8 +20,6 @@ namespace A_ZCamp.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<PreSurvey> PreSurvey { get; set; }
-        public DbSet<PostSurvey> PostSurvey { get; set; }
         public DbSet<SurveyType> SurveyType { get; set; }
         public DbSet<SurveyQuestionOrdering> SurveyQuestionOrdering { get; set; }
         public DbSet<SurveyQuestion> SurveyQuestion { get; set; }
