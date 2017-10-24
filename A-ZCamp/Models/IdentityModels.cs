@@ -22,6 +22,12 @@ namespace A_ZCamp.Models
     {
         public DbSet<PreSurvey> PreSurvey { get; set; }
         public DbSet<PostSurvey> PostSurvey { get; set; }
+        public DbSet<SurveyType> SurveyType { get; set; }
+        public DbSet<SurveyQuestionOrdering> SurveyQuestionOrdering { get; set; }
+        public DbSet<SurveyQuestion> SurveyQuestion { get; set; }
+        public DbSet<SurveyQuestionType> SurveyQuestionType { get; set; }
+        public DbSet<SurveyQuestionSuppliedAnswer> SurveyQuestionSuppliedAnswer { get; set; }
+        public DbSet<SurveyResponses> SurveyResponses { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

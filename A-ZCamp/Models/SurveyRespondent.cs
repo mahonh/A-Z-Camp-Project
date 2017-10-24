@@ -7,13 +7,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace A_ZCamp.Models
 {
-    public class SurveyQuestionSuppliedAnswer
+    public class SurveyRespondent
     {
         public int ID { get; set; }
         
-        public int SurveyQuestionID { get; set; }
-        [ForeignKey("SurveyQuestionID")]
-        public SurveyQuestion SurveyQuestion { get; set; }
-        public string Answer { get; set; }
+        public int SurveyTypeID { get; set; }
+        [ForeignKey("SurveyTypeID")]
+        public SurveyType SurveyType { get; set; }
     }
 }
