@@ -9,15 +9,15 @@ namespace A_ZCamp.Models
 {
     public class SurveyQuestionOrdering
     {
-        
-        public int SurveyTypeID { get; set; }
         [Key]
-        [ForeignKey("SurveyTypeID")]
+        [ForeignKey("SurveyType")]
+        [Column(Order = 1)]
+        public int SurveyTypeId { get; set; }
         public SurveyType SurveyType { get; set; }
-        
-        public int SurveyQuestionID { get; set; }
         [Key]
-        [ForeignKey("SurveyQuestionID")]
+        [ForeignKey("SurveyQuestion")]
+        [Column(Order = 2)]
+        public int SurveyQuestionId { get; set; }
         public SurveyQuestion SurveyQuestion { get; set; }
         public int Order { get; set; }
     }

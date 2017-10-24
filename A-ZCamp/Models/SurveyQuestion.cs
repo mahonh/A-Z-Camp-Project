@@ -7,7 +7,7 @@ namespace A_ZCamp.Models
 {
     public class SurveyQuestion
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public QuestionType QuestionType { get; set; }
         public string Question { get; set; }
         public Boolean Active { get; set; }

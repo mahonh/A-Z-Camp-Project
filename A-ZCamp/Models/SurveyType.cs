@@ -7,7 +7,7 @@ namespace A_ZCamp.Models
 {
     public class SurveyType
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public Survey Survey { get; set; }
         public Boolean Active { get; set; }
     }

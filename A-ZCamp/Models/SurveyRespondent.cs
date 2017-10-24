@@ -9,10 +9,9 @@ namespace A_ZCamp.Models
 {
     public class SurveyRespondent
     {
-        public int ID { get; set; }
-        
-        public int SurveyTypeID { get; set; }
-        [ForeignKey("SurveyTypeID")]
+        public int Id { get; set; }
+        [ForeignKey("SurveyType")]
+        public int SurveyTypeId { get; set; }
         public SurveyType SurveyType { get; set; }
     }
 }

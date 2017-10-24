@@ -218,11 +218,14 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PostSurvey.cs" />
     <Compile Include="Models\PreSurvey.cs" />
+    <Compile Include="Models\SurveyMCResponse.cs" />
     <Compile Include="Models\SurveyQuestionOrdering.cs" />
     <Compile Include="Models\SurveyQuestion.cs" />
     <Compile Include="Models\SurveyQuestionSuppliedAnswer.cs" />
+    <Compile Include="Models\SurveyRankingResponse.cs" />
     <Compile Include="Models\SurveyReports.cs" />
-    <Compile Include="Models\SurveyResponses.cs" />
+    <Compile Include="Models\SurveyRespondent.cs" />
+    <Compile Include="Models\SurveyShortAnswerResponse.cs" />
     <Compile Include="Models\SurveyType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
