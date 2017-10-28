@@ -12,7 +12,7 @@ namespace A_ZCamp.Models
         public int Id { get; set; }
         [ForeignKey("SurveyQuestion")]
         public int SurveyQuestionId { get; set; }
-        public SurveyQuestion SurveyQuestion { get; set; }
+        public virtual SurveyQuestion SurveyQuestion { get; set; }
         public string Answer { get; set; }
     }
 }

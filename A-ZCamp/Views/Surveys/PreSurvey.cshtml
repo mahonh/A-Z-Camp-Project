@@ -1,2 +1,18 @@
-﻿<h2>@ViewBag.Title</h2>
+﻿@*
+    @model IEnumerable<A_ZCamp.Models.SurveyQuestion>
+*@
+@{ 
+    ViewBag.Title = "Pre Camp Survey";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>@ViewBag.Title</h2>
 <h3>Welcome! Please fill out the survey</h3>
+
+@*
+    @foreach (var x in Model)
+    {
+        @x.Question <br />
+    }
+*@

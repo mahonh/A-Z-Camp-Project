@@ -1,9 +1,14 @@
-﻿
+﻿@model A_ZCamp.Models.SurveyType
+
 @{
     ViewBag.Title = "Add";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<br />
 <h2>Add</h2>
 <h3>Add a survey question</h3>
+
+
+@Html.EnumDropDownListFor(model => model.Survey)
 

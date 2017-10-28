@@ -12,6 +12,6 @@ namespace A_ZCamp.Models
         public int Id { get; set; }
         [ForeignKey("SurveyType")]
         public int SurveyTypeId { get; set; }
-        public SurveyType SurveyType { get; set; }
+        public virtual SurveyType SurveyType { get; set; }
     }
 }

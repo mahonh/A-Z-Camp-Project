@@ -201,11 +201,16 @@
     <Compile Include="Migrations\201710241316504_BasicDBSetup.Designer.cs">
       <DependentUpon>201710241316504_BasicDBSetup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710262328117_UpdateKeys.cs" />
+    <Compile Include="Migrations\201710262328117_UpdateKeys.Designer.cs">
+      <DependentUpon>201710262328117_UpdateKeys.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SurveyMCResponse.cs" />
+    <Compile Include="Models\SurveyQuestioning.cs" />
     <Compile Include="Models\SurveyQuestionOrdering.cs" />
     <Compile Include="Models\SurveyQuestion.cs" />
     <Compile Include="Models\SurveyQuestionSuppliedAnswer.cs" />
@@ -340,6 +345,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710241316504_BasicDBSetup.resx">
       <DependentUpon>201710241316504_BasicDBSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710262328117_UpdateKeys.resx">
+      <DependentUpon>201710262328117_UpdateKeys.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
