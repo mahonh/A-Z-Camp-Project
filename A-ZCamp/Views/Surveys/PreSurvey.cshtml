@@ -1,6 +1,4 @@
-﻿@*
-    @model IEnumerable<A_ZCamp.Models.SurveyQuestion>
-*@
+﻿@model IEnumerable<A_ZCamp.Models.SurveyQuestionOrdering>
 @{ 
     ViewBag.Title = "Pre Camp Survey";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,9 +8,18 @@
 <h2>@ViewBag.Title</h2>
 <h3>Welcome! Please fill out the survey</h3>
 
-@*
-    @foreach (var x in Model)
+
+@foreach (var x in Model)
+{
+    if (x.SurveyQuestion.QuestionType == A_ZCamp.Models.QuestionType.MultipleChoice)
     {
-        @x.Question <br />
+        <h3>MULTIPLE CHOICE</h3>
+        @x.SurveyQuestion.Question 
     }
-*@
+
+    if (x.SurveyQuestion.QuestionType == A_ZCamp.Models.QuestionType.ShortAnswer)
+    {
+        <h3>SHORT ANSWER</h3>
+        @x.SurveyQuestion.Question
+    }
+}
