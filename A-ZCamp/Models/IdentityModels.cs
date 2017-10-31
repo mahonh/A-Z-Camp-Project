@@ -28,6 +28,7 @@ namespace A_ZCamp.Models
         public DbSet<SurveyRankingResponse> SurveyRankingResponse { get; set; }
         public DbSet<SurveyMCResponse> SurveyMCResponse { get; set; }
         public DbSet<SurveyShortAnswerResponse> SurveyShortAnswerResponse { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
