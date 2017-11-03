@@ -53,6 +53,11 @@ namespace A_ZCamp.Controllers
             return RedirectToAction("Index", "Surveys");
         }
 
+        public ActionResult AddSurveyResultsPOST()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult AddSurveyResultsPOST(SMPostCamp postSurveyResults)
         {
