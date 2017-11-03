@@ -25,19 +25,46 @@ namespace A_ZCamp.Controllers
 
         public ActionResult PreSurvey()
         {
-            /*
-            var preSurveyQuestions = from pc in preSurvey.SurveyQuestion
-                                     where pc.QuestionType == QuestionType.MultipleChoice
-                                     select pc;
-            */                                 
-
-            //var questions = preSurvey.SurveyQuestion.Where(x => x.QuestionType == QuestionType.ShortAnswer).ToList();
-
             return View();
         }
 
         public ActionResult PostSurvey()
         {
+            return View();
+        }
+
+        public ActionResult AddSA()
+        {
+            
+            return RedirectToAction("Index", "Surveys");
+        }
+
+        public ActionResult AddMC()
+        {
+            
+            return RedirectToAction("Index", "Surveys");
+        }
+
+        public ActionResult AddSurveyResultsPRE(SMPreCamp preSurveyResults)
+        {
+            preSurvey.SMPreCamp.Add(preSurveyResults);
+            preSurvey.SaveChanges();
+
+            return RedirectToAction("Index", "Surveys");
+        }
+
+        [HttpPost]
+        public ActionResult AddSurveyResultsPOST(SMPostCamp postSurveyResults)
+        {
+           if (ModelState.IsValid)
+            {
+              postSurvey.SMPostCamp.Add(postSurveyResults);
+            postSurvey.SaveChanges();
+
+            return RedirectToAction("Index", "Surveys");  
+            }
+
+     
             return View();
         }
     }

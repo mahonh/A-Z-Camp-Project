@@ -117,6 +117,5 @@ C:\Users\Chad\source\repos\A-ZCamp\A-ZCamp\obj\Debug\A-ZCamp.csprojResolveAssemb
 C:\Users\Chad\source\repos\A-ZCamp\A-ZCamp\obj\Debug\A-ZCamp.csproj.CoreCompileInputs.cache
 C:\Users\Chad\source\repos\A-ZCamp\A-ZCamp\obj\Debug\A-ZCamp.dll
 C:\Users\Chad\source\repos\A-ZCamp\A-ZCamp\obj\Debug\A-ZCamp.pdb
-C:\Users\Chad\source\repos\A-ZCamp\A-ZCamp\obj\Debug\A_ZCamp.Migrations.BasicDBSetup.resources
+C:\Users\Chad\source\repos\A-ZCamp\A-ZCamp\obj\Debug\A_ZCamp.Migrations.SMSetup.resources
 C:\Users\Chad\source\repos\A-ZCamp\A-ZCamp\obj\Debug\A-ZCamp.csproj.GenerateResource.Cache
-C:\Users\Chad\source\repos\A-ZCamp\A-ZCamp\obj\Debug\A_ZCamp.Migrations.UpdateKeys.resources

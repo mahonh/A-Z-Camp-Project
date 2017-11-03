@@ -1,0 +1,73 @@
+﻿@model A_ZCamp.Models.SMReporting
+
+@{
+    ViewBag.Title = "Survey Reports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h1>Survey Reports</h1>
+<br />
+
+<h2>Pre Camp Survey Results</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Respondents</th>
+            <th>Are you looking forward to camp?</th>
+            <th>How much programming experience do you have?</th>
+            <th>List any extra computer related experiences you currently have at your school:</th>
+            <th>What's your favorite language?</th>
+            <th>Do you have any additional comments?</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{ int i = 0; }
+
+        @foreach (var x in @Model.PreCampData)
+        {
+            i++;
+            <tr>
+                <th scope="row">@i</th>
+                <td>@x.Question1</td>
+                <td>@x.Question2</td>
+                <td>@x.Question3</td>
+                <td>@x.Question4</td>
+                <td>@x.Question5</td>
+            </tr>  }
+    </tbody>
+</table>
+
+<br />
+<br />
+
+<h2>Post Camp Survey Results</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Respondents</th>
+            <th>Did you enjoy camp?</th>
+            <th>Do you think you are more familar with programming now? How so?</th>
+            <th>Do you think you'll attend next year?</th>
+            <th>What was your favorite part of camp?</th>
+            <th>Do you have any additional comments?</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{ int b = 0; }
+
+        @foreach (var x in @Model.PostCampData)
+        {
+            b++;
+            <tr>
+                <th scope="row">@b</th>
+                <td>@x.Question1</td>
+                <td>@x.Question2</td>
+                <td>@x.Question3</td>
+                <td>@x.Question4</td>
+                <td>@x.Question5</td>
+            </tr>  }
+    </tbody>
+</table>

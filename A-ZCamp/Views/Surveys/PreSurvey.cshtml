@@ -1,18 +1,52 @@
-﻿@*
-    @model IEnumerable<A_ZCamp.Models.SurveyQuestion>
-*@
+﻿@model A_ZCamp.Models.SMPreCamp
 @{ 
-    ViewBag.Title = "Pre Camp Survey";
+    ViewBag.Title = "Pre-Camp Survey";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <br />
 <h2>@ViewBag.Title</h2>
-<h3>Welcome! Please fill out the survey</h3>
+<h3>Welcome! We have just a few questions for you.</h3>
 
-@*
-    @foreach (var x in Model)
-    {
-        @x.Question <br />
-    }
-*@
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script> 
+
+@using (Html.BeginForm("AddSurveyResultsPRE", "Surveys", FormMethod.Post, new { @class = "form" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Question1) <br />
+        @Html.RadioButtonFor(m => m.Question1, "Yes") Yes<br />
+        @Html.RadioButtonFor(m => m.Question1, "No") No<br />
+        @Html.RadioButtonFor(m => m.Question1, "Unsure") Unsure<br />
+        @Html.ValidationMessageFor(m => m.Question1)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Question2)
+        @Html.TextAreaFor(m => m.Question2, new { @class = "form-control", rows = 4 })
+        @Html.ValidationMessageFor(m => m.Question2)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Question3)
+        @Html.TextAreaFor(m => m.Question3, new { @class = "form-control", rows = 4 })
+        @Html.ValidationMessageFor(m => m.Question3)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Question4) <br />
+        @Html.RadioButtonFor(m => m.Question4, "Python") Python<br />
+        @Html.RadioButtonFor(m => m.Question4, "C++") C++<br />
+        @Html.RadioButtonFor(m => m.Question4, "Java") Java<br />
+        @Html.RadioButtonFor(m => m.Question4, "What's a programming language?!") What's a programming language?!<br />
+        @Html.ValidationMessageFor(m => m.Question4)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Question5)
+        @Html.TextAreaFor(m => m.Question5, new { @class = "form-control", rows = 4 })
+        @Html.ValidationMessageFor(m => m.Question5)
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Submit" />
+}
