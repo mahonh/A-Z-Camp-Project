@@ -79,13 +79,13 @@
                     </li>
                    
                     <li>
-                        @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
+                        @if (Context.User.Identity.IsAuthenticated) //ViewContext.HttpContext.User.IsInRole("Administrator")
                         {
                             @Html.ActionLink("Reporting", "Index", "SurveyReporting")
                         }
                     </li>
                     <li>
-                        @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
+                        @if (Context.User.Identity.IsAuthenticated)
                         {
                              @Html.ActionLink("Survey MOD", "Index", "EditQuestion")
                         }
