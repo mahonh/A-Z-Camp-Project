@@ -11,7 +11,7 @@ namespace A_ZCamp.Controllers
     {
         private ApplicationDbContext reporting;
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize] //Roles = "Administrator"
         public ActionResult Index()
         {
             reporting = new ApplicationDbContext();

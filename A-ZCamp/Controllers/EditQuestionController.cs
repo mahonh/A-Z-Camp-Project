@@ -8,25 +8,25 @@ namespace A_ZCamp.Controllers
 {
     public class EditQuestionController : Controller
     {
-        [Authorize(Roles = "Administrator")]
+        [Authorize]
         public ActionResult Index()
         {
             return View();
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize]
         public ActionResult Add()
         {
             return View();
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize]
         public ActionResult Edit()
         {
             return View();
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize]
         public ActionResult Delete()
         {
             return View();
