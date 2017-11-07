@@ -20,9 +20,11 @@ namespace A_ZCamp.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<SMPreCamp> SMPreCamp { get; set; }
-        public DbSet<SMPostCamp> SMPostCamp { get; set; }
-        
+        public DbSet<SurveyType> SurveyTypes { get; set; }
+        public DbSet<SurveyQuestionOrdering> SurveyQuestionOrderings { get; set; }
+        public DbSet<SurveyQuestion> SurveyQuestions { get; set; }
+        public DbSet<SurveyQuestionSuppliedAnswer> SurveyQuestionSuppliedAnswers { get; set; }
+        public DbSet<SurveyResponse> SurveyResponses { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

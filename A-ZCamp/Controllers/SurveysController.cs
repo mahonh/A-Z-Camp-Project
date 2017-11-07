@@ -10,12 +10,12 @@ namespace A_ZCamp.Controllers
     public class SurveysController : Controller
     {
         private ApplicationDbContext preSurvey;
-        private ApplicationDbContext postSurvey;
+      
+        private ApplicationDbContext addResults;
 
         public SurveysController()
         {
-            preSurvey = new ApplicationDbContext();
-            postSurvey = new ApplicationDbContext();
+            addResults = new ApplicationDbContext();
         }
 
         public ActionResult Index()
@@ -25,7 +25,67 @@ namespace A_ZCamp.Controllers
 
         public ActionResult PreSurvey()
         {
-            return View();
+            preSurvey = new ApplicationDbContext();
+
+            /*
+            var preSurveyQuestion = from pc in preSurvey.SurveyQuestionOrdering
+                                    where pc.SurveyType.Survey == Survey.PreCamp
+                                    select pc;
+                                    */
+
+            SurveyPageViewModel vms = new SurveyPageViewModel();
+            /*
+            var stuff = preSurvey.SurveyQuestionOrderings.Where(x => x.SurveyType.Survey == Survey.PreCamp)
+                                                   .Select(x => new QuestionData
+                                                   {
+                                                       Question = x.SurveyQuestion.Question,
+                                                       QType = x.SurveyQuestion.QuestionType,
+                                                       Qid = x.SurveyQuestion.SurveyQuestionId
+                                                       vms.QuestionData.Add()
+                                                   });
+                                                   */
+
+
+            /*
+            vm = preSurvey.SurveyQuestionOrdering.Select(x => new SurveyPageViewModel {
+                SurveyQuestionType = x.SurveyQuestion.QuestionType,
+                SurveyQuestion = x.SurveyQuestion.Question,
+                SuppliedAnswers = x.SurveyQuestion.SuppliedAnswers})
+            */
+
+            /*
+            var SQ = preSurvey.SurveyQuestionOrdering;
+            var SA = preSurvey.SurveyQuestionSuppliedAnswer;
+
+            var testQ = (from x in SQ
+                         where x.SurveyType.Survey == Survey.PreCamp
+                         join y in SA on x.SurveyQuestionId equals y.SurveyQuestionId into ANS
+                         select new SurveyPageViewModel
+                         {
+                             SurveyQuestionType = (from xy in SQ select xy.SurveyQuestion.QuestionType).ToList(), //x.SurveyQuestion.QuestionType
+                             SurveyQuestion = (from zy in SQ select zy.SurveyQuestion.Question).ToList(), //x.SurveyQuestion.Question
+                             SuppliedAnswers = (from y in ANS select y.Answer).ToList()
+                         });
+
+
+            var preSurveyQuestion3 = from pc in preSurvey.SurveyQuestionOrdering
+                                     join px in preSurvey.SurveyQuestionSuppliedAnswer on pc.SurveyQuestionId equals px.SurveyQuestionId
+                                     where pc.SurveyQuestion.QuestionType == QuestionType.MultipleChoice
+                                     select pc;
+
+
+            var preSurveyQuestion2 = preSurvey.SurveyQuestionOrdering.Where(x => x.SurveyType.Survey == Survey.PreCamp).OrderByDescending(y => y.Order).ToList();
+            */
+
+            /*
+            var preSurveyQuestions = from pc in preSurvey.SurveyQuestion
+                                     where pc.QuestionType == QuestionType.MultipleChoice
+                                     select pc;
+            */
+
+            //var questions = preSurvey.SurveyQuestion.Where(x => x.QuestionType == QuestionType.ShortAnswer).ToList();
+
+            return View(vms);
         }
 
         public ActionResult PostSurvey()
@@ -33,44 +93,53 @@ namespace A_ZCamp.Controllers
             return View();
         }
 
-        public ActionResult AddSA()
+        public ActionResult Add(SurveyQuestionOrdering newQuestion)
         {
-            
+            /*
+            addQuestion.SurveyQuestionOrdering.Add(newQuestion);
+            addQuestion.SaveChanges();
             return RedirectToAction("Index", "Surveys");
-        }
+            */
 
-        public ActionResult AddMC()
-        {
-            
-            return RedirectToAction("Index", "Surveys");
-        }
-
-        public ActionResult AddSurveyResultsPRE(SMPreCamp preSurveyResults)
-        {
-            preSurvey.SMPreCamp.Add(preSurveyResults);
-            preSurvey.SaveChanges();
-
-            return RedirectToAction("Index", "Surveys");
-        }
-
-        public ActionResult AddSurveyResultsPOST()
-        {
             return View();
         }
 
-        [HttpPost]
-        public ActionResult AddSurveyResultsPOST(SMPostCamp postSurveyResults)
+        public ActionResult AddSurveyResults(SurveyPageViewModel newResults)
         {
-           if (ModelState.IsValid)
-            {
-              postSurvey.SMPostCamp.Add(postSurveyResults);
-            postSurvey.SaveChanges();
+            var test = addResults.SurveyResponses;
 
-            return RedirectToAction("Index", "Surveys");  
+            foreach (var x in newResults.QuestionData)
+            {
+                test.Add(new SurveyResponse
+                {
+                    SurveyQuestionId = 1,
+                    Response = x.UserResponse
+                });
             }
 
-     
-            return View();
+            addResults.SaveChanges();
+
+            
+
+            /*
+            var mc = addResults.SurveyMCResponse;
+            var sa = addResults.SurveyShortAnswerResponse;
+
+            
+            mc.Add(new SurveyMCResponse { Choice = newResults.MCAnswer,
+                                          SurveyQuestionId = 2,
+                                          SurveyRespondentId = 1 });
+
+            sa.Add(new SurveyShortAnswerResponse { Answer = newResults.ShortAnswer,
+                                                   SurveyQuestionId = 4,
+                                                   SurveyRespondentId = 1 });
+            
+            addResults.SaveChanges();
+
+            return RedirectToAction("Index", "Surveys");
+            */
+
+            return RedirectToAction("Index", "Surveys");
         }
     }
 }

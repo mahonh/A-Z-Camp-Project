@@ -54,42 +54,26 @@
             <div class="navbar-collapse collapse" id="navigation">
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li class=""> @*active*@
-                        <a href="~/">Home</a>
+                    <li class="active">
+                        <a href="#intro">Home</a>
                     </li>
-                    @*
-    <li>
-        <a href="#about">About</a>
-    </li>
-    <li>
-        <a href="#Registration">Registration</a>
-    </li>
-    <li>
-        <a href="#references">Activities</a>
-    </li>
-    <li>
-        <a href="#contact">Contact</a>
-    </li>
-                    *@
+                    <li>
+                        <a href="#about">About</a>
+                    </li>
+                    <li>
+                        <a href="#Registration">Registration</a>
+                    </li>
+                    <li>
+                        <a href="#references">Activities</a>
+                    </li>
+                    <li>
+                        <a href="#contact">Contact</a>
+                    </li>
+
                     <li>
                         @Html.ActionLink("Surveys", "Index", "Surveys")
                     </li>
-                    <li>
-                         @Html.Partial("_LoginPartial")
-                    </li>
-                   
-                    <li>
-                        @if (Context.User.Identity.IsAuthenticated) //ViewContext.HttpContext.User.IsInRole("Administrator")
-                        {
-                            @Html.ActionLink("Reporting", "Index", "SurveyReporting")
-                        }
-                    </li>
-                    <li>
-                        @if (Context.User.Identity.IsAuthenticated)
-                        {
-                             @Html.ActionLink("Survey MOD", "Index", "EditQuestion")
-                        }
-                    </li>
+
                 </ul>
             </div>
         </div>
