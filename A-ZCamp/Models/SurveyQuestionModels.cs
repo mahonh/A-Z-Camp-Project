@@ -13,6 +13,7 @@ namespace A_ZCamp.Models
         public int SurveyTypeId { get; set; }
         public Survey Survey { get; set; }
         public Boolean Active { get; set; }
+        public String Name { get; set; }
     }
 
     public enum Survey

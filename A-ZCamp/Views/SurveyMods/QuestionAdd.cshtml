@@ -1,0 +1,96 @@
+﻿@model A_ZCamp.Models.SurveyQuestionOrdering
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Add a New Survey Question</h2>
+
+@using (Html.BeginForm("QuestionAdd", "SurveyMods", FormMethod.Post, new { @class = "form" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.SurveyType.Survey)
+        @Html.EnumDropDownListFor(model => model.SurveyType.Survey, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.SurveyQuestion.QuestionType)
+        @Html.EnumDropDownListFor(model => model.SurveyQuestion.QuestionType, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.SurveyQuestion.Question)
+        @Html.TextBoxFor(m => m.SurveyQuestion.Question, new { @class = "form-control", rows = 4 })
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Save" />
+}
+   
+
+@*
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+  
+</head>
+<body>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        <input id="btnAdd" type="button" value="Add" onclick="AddTextBox()" />
+        <br />
+        <br />
+        <div id="TextBoxContainer">
+            <!--Textboxes will be added here -->
+        </div>
+        <br />
+        <input type="submit" value="Submit" />
+    }
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        function GetDynamicTextBox(value) {
+            var div = $("<div />");
+
+            var textBox = $("<input />").attr("type", "textbox").attr("name", "DynamicTextBox");
+            textBox.val(value);
+            div.append(textBox);
+
+            var button = $("<input />").attr("type", "button").attr("value", "Remove");
+            button.attr("onclick", "RemoveTextBox(this)");
+            div.append(button);
+
+            return div;
+        }
+        function AddTextBox() {
+            var div = GetDynamicTextBox("");
+            $("#TextBoxContainer").append(div);
+        }
+
+        function RemoveTextBox(button) {
+            $(button).parent().remove();
+        }
+
+        $(function () {
+            var values = eval('@Html.Raw(ViewBag.Values)');
+            if (values != null) {
+                $("#TextBoxContainer").html("");
+                $(values).each(function () {
+                    $("#TextBoxContainer").append(GetDynamicTextBox(this));
+                });
+            }
+        });
+    </script>
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            $(function () {
+                alert("@ViewBag.Message")
+            });
+        </script>
+    }
+</body>
+</html>
+*@

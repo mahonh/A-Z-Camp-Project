@@ -190,7 +190,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\EditQuestionController.cs" />
+    <Compile Include="Controllers\SurveyModsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SurveysController.cs" />
@@ -200,6 +200,10 @@
     <Compile Include="Migrations\201711071403150_BasicDBSetup.cs" />
     <Compile Include="Migrations\201711071403150_BasicDBSetup.Designer.cs">
       <DependentUpon>201711071403150_BasicDBSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711081514487_SurveyTableUpdate.cs" />
+    <Compile Include="Migrations\201711081514487_SurveyTableUpdate.Designer.cs">
+      <DependentUpon>201711081514487_SurveyTableUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -307,10 +311,10 @@
     <Content Include="Views\Surveys\PreSurvey.cshtml" />
     <Content Include="Views\Surveys\Index.cshtml" />
     <Content Include="Views\Surveys\PostSurvey.cshtml" />
-    <Content Include="Views\EditQuestion\Index.cshtml" />
-    <Content Include="Views\EditQuestion\Add.cshtml" />
-    <Content Include="Views\EditQuestion\Edit.cshtml" />
-    <Content Include="Views\EditQuestion\Delete.cshtml" />
+    <Content Include="Views\SurveyMods\Index.cshtml" />
+    <Content Include="Views\SurveyMods\QuestionAdd.cshtml" />
+    <Content Include="Views\SurveyMods\QuestionOptions.cshtml" />
+    <Content Include="Views\SurveyMods\SurveyOptions.cshtml" />
     <Content Include="Content\JavaScript\js" />
     <Content Include="Views\Home\Index - ORIGINAL.cshtml" />
     <Content Include="Views\Shared\_Layout - ORIGINAL.cshtml" />
@@ -335,6 +339,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711071403150_BasicDBSetup.resx">
       <DependentUpon>201711071403150_BasicDBSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711081514487_SurveyTableUpdate.resx">
+      <DependentUpon>201711081514487_SurveyTableUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

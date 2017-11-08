@@ -32,8 +32,11 @@ namespace A_ZCamp.Controllers
             var answersToShow = preSurvey.SurveyQuestionSuppliedAnswers;
 
             var surveyData = (from x in questionsToShow
-                             where x.SurveyType.Survey == Survey.PreCamp
+                             where x.SurveyType.Survey == Survey.PreCamp &&
+                                   x.SurveyType.Active == true &&
+                                   x.SurveyQuestion.Active == true
                              join y in answersToShow on x.SurveyQuestionId equals y.SurveyQuestionId into GOOD
+                             orderby x.Order ascending
                              select new QuestionData
                              {
                                  Qid = x.SurveyQuestionId,
@@ -112,17 +115,6 @@ namespace A_ZCamp.Controllers
 
         public ActionResult PostSurvey()
         {
-            return View();
-        }
-
-        public ActionResult Add(SurveyQuestionOrdering newQuestion)
-        {
-            /*
-            addQuestion.SurveyQuestionOrdering.Add(newQuestion);
-            addQuestion.SaveChanges();
-            return RedirectToAction("Index", "Surveys");
-            */
-
             return View();
         }
 
