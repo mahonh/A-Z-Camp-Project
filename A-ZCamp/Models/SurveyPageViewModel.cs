@@ -9,15 +9,7 @@ namespace A_ZCamp.Models
     {
         public SurveyPageViewModel()
         {
-            List<String> fruits = new List<String> { "Orange", "Apple", "Chocolate" };
-            List<String> games = new List<String> { "Mario", "Zelda", "Donkey Kong" };
-
-            QuestionData = new List<QuestionData> {
-                new QuestionData() { Question = "How are you?", Qid = 1, QType = QuestionType.ShortAnswer},
-                new QuestionData() { Question = "What do you think so far?", Qid = 2, QType = QuestionType.ShortAnswer},
-                new QuestionData() { Question = "Does it work?", Qid = 3, QType = QuestionType.ShortAnswer},
-                new QuestionData() { Question = "What's your favorite fruit?", QSupAnswers = fruits, QType = QuestionType.MultipleChoice},
-                new QuestionData() { Question = "What's your favorite game?", QSupAnswers = games, QType = QuestionType.MultipleChoice} };
+            QuestionData = new List<QuestionData>();
         }
         public List<QuestionData> QuestionData { get; set; }
         /*

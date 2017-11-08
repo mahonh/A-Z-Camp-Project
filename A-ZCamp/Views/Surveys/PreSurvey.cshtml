@@ -16,29 +16,31 @@
 
     foreach (var x in Model.QuestionData)
     {
+        int temp = x.Qid;
 
         if (x.QType == A_ZCamp.Models.QuestionType.ShortAnswer)
         {
             <div>
+                @Html.HiddenFor(m => m.QuestionData[z].Qid)
                 @Html.DisplayFor(modelItem => x.Question) <br />
                 @Html.TextAreaFor(m => m.QuestionData[z].UserResponse) <br />
             </div>
-
+            <br />
             z++;
         }
 
         if (x.QType == A_ZCamp.Models.QuestionType.MultipleChoice)
         {
             <div>
+                @Html.HiddenFor(m => m.QuestionData[z].Qid)
                 @Html.DisplayFor(modelItem => x.Question) <br />
                 
                 @foreach (var u in x.QSupAnswers)
                 {
                     @Html.RadioButtonFor(m => m.QuestionData[z].UserResponse, u) @Html.Label(u) <br />
                 }
-
             </div>
-
+            <br />
             z++;
         }
 
@@ -56,7 +58,7 @@
     }
     <br />
     */
-    <input type="submit" value="Save" />
+    <input type="submit" class="btn btn-primary "value="Submit" />
 
 }
 

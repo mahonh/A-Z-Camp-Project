@@ -16,6 +16,7 @@ namespace A_ZCamp.Controllers
         public SurveysController()
         {
             addResults = new ApplicationDbContext();
+            preSurvey = new ApplicationDbContext();
         }
 
         public ActionResult Index()
@@ -25,7 +26,28 @@ namespace A_ZCamp.Controllers
 
         public ActionResult PreSurvey()
         {
-            preSurvey = new ApplicationDbContext();
+            SurveyPageViewModel vms = new SurveyPageViewModel();
+
+            var questionsToShow = preSurvey.SurveyQuestionOrderings;
+            var answersToShow = preSurvey.SurveyQuestionSuppliedAnswers;
+
+            var surveyData = (from x in questionsToShow
+                             where x.SurveyType.Survey == Survey.PreCamp
+                             join y in answersToShow on x.SurveyQuestionId equals y.SurveyQuestionId into GOOD
+                             select new QuestionData
+                             {
+                                 Qid = x.SurveyQuestionId,
+                                 QType = x.SurveyQuestion.QuestionType,
+                                 Question = x.SurveyQuestion.Question,
+                                 QSupAnswers = (from y in GOOD select y.Answer).ToList()
+                             }).ToList();
+
+            foreach (var p in surveyData)
+            {
+                vms.QuestionData.Add(p);
+            }
+
+           // vms.QuestionData.AddRange(surveyData);
 
             /*
             var preSurveyQuestion = from pc in preSurvey.SurveyQuestionOrdering
@@ -33,7 +55,7 @@ namespace A_ZCamp.Controllers
                                     select pc;
                                     */
 
-            SurveyPageViewModel vms = new SurveyPageViewModel();
+            
             /*
             var stuff = preSurvey.SurveyQuestionOrderings.Where(x => x.SurveyType.Survey == Survey.PreCamp)
                                                    .Select(x => new QuestionData
@@ -112,7 +134,7 @@ namespace A_ZCamp.Controllers
             {
                 test.Add(new SurveyResponse
                 {
-                    SurveyQuestionId = 1,
+                    SurveyQuestionId = x.Qid,
                     Response = x.UserResponse
                 });
             }
