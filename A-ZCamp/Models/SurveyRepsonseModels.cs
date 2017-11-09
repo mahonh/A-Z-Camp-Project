@@ -10,13 +10,11 @@ namespace A_ZCamp.Models
     public class SurveyResponse
     {
         [Key]
+        public int ResponseId { get; set; }
         [ForeignKey("SurveyType")]
-        [Column(Order = 1)]
         public int SurveyTypeId { get; set; }
         public virtual SurveyType SurveyType { get; set; }
-        [Key]
         [ForeignKey("SurveyQuestion")]
-        [Column(Order = 2)]
         public int SurveyQuestionId { get; set; }
         public virtual SurveyQuestion SurveyQuestion { get; set; }
         public String Response { get; set; }

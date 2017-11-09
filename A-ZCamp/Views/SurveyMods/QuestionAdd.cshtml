@@ -23,7 +23,7 @@
             {
                 <tr>
                    @* <th scope="row">@Html.RadioButtonFor(m => m.SurveyID, 1) @x.SurveyName</th> *@
-                    <td>@Html.RadioButtonFor(m => m.SurveyID, 1) @x.SurveyName</td>
+                    <td>@Html.RadioButtonFor(m => m.SurveyID, x.Sid) @x.SurveyName</td>
                     <td>@x.SurveyType.ToString()</td>
                 </tr>  }
         </tbody>

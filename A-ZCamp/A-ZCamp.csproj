@@ -193,18 +193,20 @@
     <Compile Include="Controllers\SurveyModsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SurveyReportsController.cs" />
     <Compile Include="Controllers\SurveysController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711081555540_DBsetup.cs" />
-    <Compile Include="Migrations\201711081555540_DBsetup.Designer.cs">
-      <DependentUpon>201711081555540_DBsetup.cs</DependentUpon>
+    <Compile Include="Migrations\201711091524212_DBEst.cs" />
+    <Compile Include="Migrations\201711091524212_DBEst.Designer.cs">
+      <DependentUpon>201711091524212_DBEst.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\REPORTVIEWMODEL.cs" />
     <Compile Include="Models\SurveyAddQuestionViewModel.cs" />
     <Compile Include="Models\SurveyPageViewModel.cs" />
     <Compile Include="Models\SurveyQuestionModels.cs" />
@@ -317,6 +319,7 @@
     <Content Include="Views\Home\Index - ORIGINAL.cshtml" />
     <Content Include="Views\Shared\_Layout - ORIGINAL.cshtml" />
     <Content Include="Views\Shared\_LoginPartial - ORIGINAL.cshtml" />
+    <Content Include="Views\SurveyReports\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -335,8 +338,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711081555540_DBsetup.resx">
-      <DependentUpon>201711081555540_DBsetup.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711091524212_DBEst.resx">
+      <DependentUpon>201711091524212_DBEst.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

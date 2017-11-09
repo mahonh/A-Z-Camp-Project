@@ -116,7 +116,31 @@ namespace A_ZCamp.Controllers
 
         public ActionResult PostSurvey()
         {
-            return View();
+            SurveyPageViewModel vms = new SurveyPageViewModel();
+
+            var questionsToShow = preSurvey.SurveyQuestionOrderings;
+            var answersToShow = preSurvey.SurveyQuestionSuppliedAnswers;
+
+            var surveyData = (from x in questionsToShow
+                              where x.SurveyType.Survey == Survey.PostCamp &&
+                                    x.SurveyType.Active == true &&
+                                    x.SurveyQuestion.Active == true
+                              join y in answersToShow on x.SurveyQuestionId equals y.SurveyQuestionId into GOOD
+                              orderby x.Order ascending
+                              select new QuestionData
+                              {
+                                  Sid = x.SurveyTypeId,
+                                  Qid = x.SurveyQuestionId,
+                                  QType = x.SurveyQuestion.QuestionType,
+                                  Question = x.SurveyQuestion.Question,
+                                  QSupAnswers = (from y in GOOD select y.Answer).ToList()
+                              }).ToList();
+
+            foreach (var p in surveyData)
+            {
+                vms.QuestionData.Add(p);
+            }
+            return View(vms);
         }
 
         public ActionResult AddSurveyResults(SurveyPageViewModel newResults)

@@ -2,37 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using A_ZCamp.Models;
 using System.Web.Mvc;
+using A_ZCamp.Models;
 
 namespace A_ZCamp.Controllers
 {
+    [Authorize]
     public class SurveyReportsController : Controller
     {
-        private ApplicationDbContext _dbContext;
+        private ApplicationDbContext report = new ApplicationDbContext();
 
-        public SurveyReportsController()
-        {
-            _dbContext = new ApplicationDbContext();
-        }
-
-        // GET: SurveyReports
         public ActionResult Index()
         {
-            return View();
-        }
+            REPORTVIEWMODEL reporter = new REPORTVIEWMODEL();
 
-        public ActionResult RunReport()
-        {
-            var PreSurveys = _dbContext.PreSurvey.ToList();
-            var PostSurveys = _dbContext.PostSurvey.ToList();
+            var results = from x in report.SurveyResponses
+                          select new REPORTDATA
+                          {
+                              Question = x.SurveyQuestion.Question,
+                              Response = x.Response,
+                              Survey = x.SurveyType.Name
+                          };
 
-            SurveyReports view = new SurveyReports();
+            foreach (var x in results)
+            {
+                reporter.reportData.Add(x);
+            }
 
-            view.PreSurveys = PreSurveys;
-            view.PostSurveys = PostSurveys;
-
-            return View(view);
+            return View(reporter);
         }
     }
 }

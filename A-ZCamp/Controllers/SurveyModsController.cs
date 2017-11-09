@@ -7,6 +7,7 @@ using A_ZCamp.Models;
 
 namespace A_ZCamp.Controllers
 {
+    [Authorize]
     public class SurveyModsController : Controller
     {
         private ApplicationDbContext AddQuestion;

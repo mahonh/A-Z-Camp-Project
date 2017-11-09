@@ -1,2 +1,61 @@
-﻿<h2>@ViewBag.Title</h2>
-<h3>Welcome! Please fill out the survey</h3>
+﻿@model A_ZCamp.Models.SurveyPageViewModel
+@{
+    ViewBag.Title = "Post Camp Survey";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm("AddSurveyResults", "Surveys", FormMethod.Post, new { @class = "form" }))
+{
+    int z = 0;
+
+    if (!(Model.QuestionData.Count == 0))
+    {
+        <h3>Welcome! Please fill out the survey</h3>
+
+        foreach (var x in Model.QuestionData)
+        {
+            int temp = x.Qid;
+
+            if (x.QType == A_ZCamp.Models.QuestionType.ShortAnswer)
+            {
+                <div>
+                    @Html.HiddenFor(m => m.QuestionData[z].Sid)
+                    @Html.HiddenFor(m => m.QuestionData[z].Qid)
+                    @Html.DisplayFor(modelItem => x.Question) <br />
+                    @Html.TextAreaFor(m => m.QuestionData[z].UserResponse) <br />
+                </div>
+                <br />
+                z++;
+            }
+
+            if (x.QType == A_ZCamp.Models.QuestionType.MultipleChoice)
+            {
+                <div>
+                    @Html.HiddenFor(m => m.QuestionData[z].Sid)
+                    @Html.HiddenFor(m => m.QuestionData[z].Qid)
+                    @Html.DisplayFor(modelItem => x.Question) <br />
+
+                    @foreach (var u in x.QSupAnswers)
+                    {
+                        @Html.RadioButtonFor(m => m.QuestionData[z].UserResponse, u) @Html.Label(u) <br />
+                    }
+                </div>
+                <br />
+                z++;
+            }
+        }
+
+        <input type="submit" class="btn btn-primary " value="Submit" />
+
+    }
+
+    else
+    {
+        <h3>No Surveys are available at this time. Check back soon!</h3>
+    }
+
+}

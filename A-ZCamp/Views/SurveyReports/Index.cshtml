@@ -1,27 +1,32 @@
-﻿
+﻿@model A_ZCamp.Models.REPORTVIEWMODEL
 @{
-    ViewBag.Title = "Survey Reports";
+    ViewBag.Title = "Reporting";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>This page will only be visible to Administrators.</h3>
-<h3>This page will be used to select data for a report <br />
-    and the type of chart to use.</h3>
-
-
-<h2>Select Data Type (Doesn't change anything right now)</h2>
-<form>
-<input type="radio" name="data" value="type1" checked />Data Type 1<br>
-<input type="radio" name="data" value="type2" />Data Type 2<br>
-<input type="radio" name="data" value="type3" />Data Type 3<br>
-</form>
-
-<h2>Select Chart Type (Doesn't change anything right now)</h2>
-<form>
-    <input type="radio" name="data" value="type1" checked />Chart Type 1<br>
-    <input type="radio" name="data" value="type2" />Chart Type 2<br>
-    <input type="radio" name="data" value="type3" />Chart Type 3<br>
-</form>
-
 <br />
-<p><a class="btn btn-default" href="/SurveyReports/RunReport">Run Report (I actually do something) &raquo;</a></p>
+
+<h2>Reporting</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Counter</th>
+            <th>Survey Name</th>
+            <th>Question</th>
+            <th>Response</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var x in Model.reportData)
+        {
+            <tr>
+                <th scope="row">1</th>
+                <td>@x.Survey</td>
+                <td>@x.Question</td>
+                <td>@x.Response</td>
+            </tr> 
+        }
+    </tbody>
+</table>

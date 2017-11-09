@@ -9,6 +9,8 @@
 
 @using (Html.BeginForm("UpdateQuestions", "SurveyMods", FormMethod.Post, new { @class = "form" }))
 {
+    int z = 0;
+
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -24,18 +26,15 @@
             @foreach (var x in Model.AllSurveyQuestions)
             {
                 <tr>
-                    @Html.HiddenFor(modelItem => x.Qid)
+                        @Html.HiddenFor(m => m.AllSurveyQuestions[z].Qid)
                     <td>@x.SurveyName</td>
                     <td>@x.Question</td>
                     <td>@x.QuestionType.ToString()</td>
-                    <td>@Html.DropDownListFor(modelItem => x.Active, new[]
-                   {
-                       new SelectListItem { Text = "True", Value = "1" },
-                       new SelectListItem { Text = "False", Value = "0" }
-                   })
+                    <td>@Html.EditorFor(m => m.AllSurveyQuestions[z].Active)
                     </td>
-                    <td>@Html.TextBoxFor(modelItem => x.Ordering)</td>
+                    <td>@Html.TextBoxFor(m => m.AllSurveyQuestions[z].Ordering)</td>
                 </tr>
+                z++;
             }
         </tbody>
     </table>
