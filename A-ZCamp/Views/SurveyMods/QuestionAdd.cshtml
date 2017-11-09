@@ -1,30 +1,80 @@
-﻿@model A_ZCamp.Models.SurveyQuestionOrdering
+﻿@model A_ZCamp.Models.SurveyAddQuestionViewModel
 
 @{
-    ViewBag.Title = "Add";
+    ViewBag.Title = "Add Survey Question";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <br />
 <h2>Add a New Survey Question</h2>
 
-@using (Html.BeginForm("QuestionAdd", "SurveyMods", FormMethod.Post, new { @class = "form" }))
+@using (Html.BeginForm("AddNewQuestion", "SurveyMods", FormMethod.Post, new { @class = "form" }))
 {
-    <div class="form-group">
-        @Html.LabelFor(m => m.SurveyType.Survey)
-        @Html.EnumDropDownListFor(model => model.SurveyType.Survey, new { @class = "form-control" })
-    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Survey Name</th>
+                <th>Survey Type</th>
+            </tr>
+        </thead>
+        <tbody>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.SurveyQuestion.QuestionType)
-        @Html.EnumDropDownListFor(model => model.SurveyQuestion.QuestionType, new { @class = "form-control" })
-    </div>
+            @foreach (var x in Model.Surveys)
+            {
+                <tr>
+                   @* <th scope="row">@Html.RadioButtonFor(m => m.SurveyID, 1) @x.SurveyName</th> *@
+                    <td>@Html.RadioButtonFor(m => m.SurveyID, 1) @x.SurveyName</td>
+                    <td>@x.SurveyType.ToString()</td>
+                </tr>  }
+        </tbody>
+    </table>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.SurveyQuestion.Question)
-        @Html.TextBoxFor(m => m.SurveyQuestion.Question, new { @class = "form-control", rows = 4 })
-    </div>
+    @*
+                foreach (var x in Model.Surveys)
+                {
 
+                    if (x.SurveyType == A_ZCamp.Models.Survey.PreCamp)
+                    {
+            @Html.Label(x.SurveyName) <br />
+            @Html.Label(x.SurveyType.ToString()) <br />
+        }
+
+        if (x.SurveyType == A_ZCamp.Models.Survey.PostCamp)
+        {
+            @Html.Label(x.SurveyName) <br />
+            @Html.Label(x.SurveyType.ToString()) <br />
+        }
+    }
+        *@
+
+    <br />
+    <h4>Choose Question Type</h4>
+
+    @Html.RadioButtonFor(m => m.QuestionTypeToSubmit, 1) @:Short Answer <br />
+    @Html.RadioButtonFor(m => m.QuestionTypeToSubmit, 2) @:Multiple Choice <br />
+
+    <br />
+    <h4>Your Question</h4>
+
+    @Html.Label("Question:") <br />
+    @Html.TextAreaFor(m => m.QuestionToSubmit) <br />
+
+    <br />
+    <h4>Multiple Choice Supplied Answers</h4>
+
+    @:First Answer:
+    @Html.TextBoxFor(m => m.SuppliedAnswersQuestionToSumbit[0])
+    <br />
+
+    @:Second Answer:
+    @Html.TextBoxFor(m => m.SuppliedAnswersQuestionToSumbit[1])
+    <br />
+
+    @:Third Answer:
+    @Html.TextBoxFor(m => m.SuppliedAnswersQuestionToSumbit[2])
+    <br />
+
+    <br />
     <input type="submit" class="btn btn-primary" value="Save" />
 }
    

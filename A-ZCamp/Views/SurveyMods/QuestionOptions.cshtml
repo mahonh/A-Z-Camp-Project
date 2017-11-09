@@ -1,9 +1,44 @@
-﻿
+﻿@model A_ZCamp.Models.SurveyQuestionOptionsViewModel
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Modify Survey Question";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <br />
 <h2>Modify a Survey Question</h2>
 
+@using (Html.BeginForm("UpdateQuestions", "SurveyMods", FormMethod.Post, new { @class = "form" }))
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Survey Name</th>
+                <th>Question</th>
+                <th>Question Type</th>
+                <th>Active?</th>
+                <th>Order</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var x in Model.AllSurveyQuestions)
+            {
+                <tr>
+                    @Html.HiddenFor(modelItem => x.Qid)
+                    <td>@x.SurveyName</td>
+                    <td>@x.Question</td>
+                    <td>@x.QuestionType.ToString()</td>
+                    <td>@Html.DropDownListFor(modelItem => x.Active, new[]
+                   {
+                       new SelectListItem { Text = "True", Value = "1" },
+                       new SelectListItem { Text = "False", Value = "0" }
+                   })
+                    </td>
+                    <td>@Html.TextBoxFor(modelItem => x.Ordering)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <input type="submit" class="btn btn-primary" value="Update" />
+}

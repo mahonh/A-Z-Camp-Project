@@ -8,30 +8,35 @@
 
 <br />
 <h2>@ViewBag.Title</h2>
-<h3>Welcome! Please fill out the survey</h3>
 
 @using (Html.BeginForm("AddSurveyResults", "Surveys", FormMethod.Post, new { @class = "form" }))
 {
     int z = 0;
 
-    foreach (var x in Model.QuestionData)
+    if (!(Model.QuestionData == null))
     {
-        int temp = x.Qid;
+        <h3>Welcome! Please fill out the survey</h3>
 
-        if (x.QType == A_ZCamp.Models.QuestionType.ShortAnswer)
+        foreach (var x in Model.QuestionData)
         {
+            int temp = x.Qid;
+
+            if (x.QType == A_ZCamp.Models.QuestionType.ShortAnswer)
+            {
             <div>
+                @Html.HiddenFor(m => m.QuestionData[z].Sid)
                 @Html.HiddenFor(m => m.QuestionData[z].Qid)
                 @Html.DisplayFor(modelItem => x.Question) <br />
                 @Html.TextAreaFor(m => m.QuestionData[z].UserResponse) <br />
             </div>
             <br />
-            z++;
-        }
+                z++;
+            }
 
-        if (x.QType == A_ZCamp.Models.QuestionType.MultipleChoice)
-        {
+            if (x.QType == A_ZCamp.Models.QuestionType.MultipleChoice)
+            {
             <div>
+                @Html.HiddenFor(m => m.QuestionData[z].Sid)
                 @Html.HiddenFor(m => m.QuestionData[z].Qid)
                 @Html.DisplayFor(modelItem => x.Question) <br />
                 
@@ -41,11 +46,17 @@
                 }
             </div>
             <br />
-            z++;
+                z++;
+            }
         }
 
+        <input type="submit" class="btn btn-primary " value="Submit" />
 
+    }
 
+    else
+    {
+        <h3>No Surveys are available at this time. Check back soon!</h3>
     }
 
     /*
@@ -58,8 +69,6 @@
     }
     <br />
     */
-    <input type="submit" class="btn btn-primary "value="Submit" />
-
 }
 
 @*

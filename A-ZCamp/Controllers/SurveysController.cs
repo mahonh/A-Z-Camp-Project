@@ -39,6 +39,7 @@ namespace A_ZCamp.Controllers
                              orderby x.Order ascending
                              select new QuestionData
                              {
+                                 Sid = x.SurveyTypeId,
                                  Qid = x.SurveyQuestionId,
                                  QType = x.SurveyQuestion.QuestionType,
                                  Question = x.SurveyQuestion.Question,
@@ -126,6 +127,7 @@ namespace A_ZCamp.Controllers
             {
                 test.Add(new SurveyResponse
                 {
+                    SurveyTypeId = x.Sid,
                     SurveyQuestionId = x.Qid,
                     Response = x.UserResponse
                 });

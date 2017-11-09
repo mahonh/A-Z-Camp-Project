@@ -21,6 +21,7 @@ namespace A_ZCamp.Models
 
     public class QuestionData
     {
+        public int Sid { get; set; }
         public int Qid { get; set; }
         public String Question { get; set; }
         public QuestionType QType { get; set; }
