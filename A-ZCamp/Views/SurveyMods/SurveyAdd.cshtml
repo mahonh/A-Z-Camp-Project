@@ -1,0 +1,46 @@
+﻿@model A_ZCamp.Models.SurveyAddViewModel
+@{
+    ViewBag.Title = "Add a Survey";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Add a New Survey</h2>
+
+@using (Html.BeginForm("SurveyCreate", "SurveyMods", FormMethod.Post, new { @class = "form" }))
+{
+
+    <h3>All Surveys</h3>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Survey Type</th>
+                <th>Survey Name</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var x in Model.Surveys)
+            {
+                <tr>
+                    <td>@x.SurveyType.ToString()</td>
+                    <td>@x.SurveyName</td>
+                </tr>  }
+        </tbody>
+    </table>
+
+    <h4>Survey Type</h4>
+
+    @Html.EnumDropDownListFor(m => Model.SurveyType, "Select a Survey Type", new { @class = "form-control"})
+
+    <br />
+
+    <h4>Survey Name</h4>
+
+    @Html.TextBoxFor(m => Model.SurveyName)
+
+    <br />
+    <br />
+    <input type="submit" class="btn btn-primary" value="Save" />
+}

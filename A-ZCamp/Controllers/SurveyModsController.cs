@@ -30,11 +30,12 @@ namespace A_ZCamp.Controllers
             SurveyAddQuestionViewModel addAQuestion = new SurveyAddQuestionViewModel();
 
             var Surveys = (from x in AddQuestion.SurveyTypes
+                           orderby x.Survey ascending, x.Name
                            select new SurveyData
                            {
                                SurveyName = x.Name,
                                SurveyType = x.Survey,
-                               Sid = x.SurveyTypeId 
+                               Sid = x.SurveyTypeId
                            }).ToList();
 
             foreach (var x in Surveys)
@@ -71,6 +72,43 @@ namespace A_ZCamp.Controllers
         public ActionResult SurveyOptions()
         {
             return View();
+        }
+
+        public ActionResult SurveyAdd()
+        {
+            SurveyAddViewModel addSurvey = new SurveyAddViewModel();
+
+            var Surveys = (from x in AddQuestion.SurveyTypes
+                           orderby x.Survey ascending, x.Name
+                           select new SurveyData
+                           {
+                               SurveyName = x.Name,
+                               SurveyType = x.Survey
+                           }).ToList();
+
+            foreach (var x in Surveys)
+            {
+                addSurvey.Surveys.Add(x);
+            }
+
+            return View(addSurvey);
+        }
+
+        public ActionResult SurveyCreate(SurveyAddViewModel model)
+        {
+            var newSurvey = AddQuestion.SurveyTypes;
+
+            var AddSurvey = new SurveyType
+            {
+                Name = model.SurveyName,
+                Survey = model.SurveyType,
+                Active = false
+            };
+
+            newSurvey.Add(AddSurvey);
+            AddQuestion.SaveChanges();
+
+            return RedirectToAction("SurveyAdd", "SurveyMods");
         }
 
         public ActionResult UpdateQuestions(SurveyQuestionOptionsViewModel options)

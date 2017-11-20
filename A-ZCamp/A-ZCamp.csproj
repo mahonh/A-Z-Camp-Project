@@ -208,6 +208,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\REPORTVIEWMODEL.cs" />
     <Compile Include="Models\SurveyAddQuestionViewModel.cs" />
+    <Compile Include="Models\SurveyAddViewModel.cs" />
     <Compile Include="Models\SurveyPageViewModel.cs" />
     <Compile Include="Models\SurveyQuestionModels.cs" />
     <Compile Include="Models\SurveyQuestionOptionsViewModel.cs" />
@@ -320,6 +321,7 @@
     <Content Include="Views\Shared\_Layout - ORIGINAL.cshtml" />
     <Content Include="Views\Shared\_LoginPartial - ORIGINAL.cshtml" />
     <Content Include="Views\SurveyReports\Index.cshtml" />
+    <Content Include="Views\SurveyMods\SurveyAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
