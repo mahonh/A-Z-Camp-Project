@@ -209,6 +209,7 @@
     <Compile Include="Models\REPORTVIEWMODEL.cs" />
     <Compile Include="Models\SurveyAddQuestionViewModel.cs" />
     <Compile Include="Models\SurveyAddViewModel.cs" />
+    <Compile Include="Models\SurveyOptionsViewModel.cs" />
     <Compile Include="Models\SurveyPageViewModel.cs" />
     <Compile Include="Models\SurveyQuestionModels.cs" />
     <Compile Include="Models\SurveyQuestionOptionsViewModel.cs" />

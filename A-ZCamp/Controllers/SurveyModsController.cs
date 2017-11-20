@@ -71,6 +71,64 @@ namespace A_ZCamp.Controllers
 
         public ActionResult SurveyOptions()
         {
+            SurveyOptionsViewModel SurveyOptions = new SurveyOptionsViewModel();
+
+            var SurveysToSee = (from x in OptionsQuestions.SurveyTypes
+                                select new SurveyData
+                                {
+                                    Sid = x.SurveyTypeId,
+                                    SurveyName = x.Name,
+                                    SurveyType = x.Survey,
+                                    Active = x.Active
+                                }).ToList();
+
+            foreach (var x in SurveysToSee)
+            {
+                SurveyOptions.AllSurveys.Add(x);
+            }
+
+            return View(SurveyOptions);
+        }
+
+        public ActionResult SurveyOptionsUpdate(SurveyOptionsViewModel model)
+        {
+            int y = 0;
+
+            foreach (var x in model.AllSurveys)
+            {
+                if (x.Active == true)
+                {
+                    y++;
+                }
+            }
+
+            if (y > 2)
+            {
+                return View(model);
+            }
+
+            else
+            { 
+
+                foreach (var x in model.AllSurveys)
+                {
+                    var mod = AddQuestion.SurveyTypes.SingleOrDefault(z => z.SurveyTypeId == x.Sid);
+                    mod.Active = x.Active;
+                }
+
+                AddQuestion.SaveChanges();
+
+                return RedirectToAction("SurveyOptions", "SurveyMods");
+            }
+        }
+
+        public ActionResult SurveyOptionsQuestionGet()
+        {
+            return View();
+        }
+
+        public ActionResult SurveyOptionsQuestionUpdate()
+        {
             return View();
         }
 

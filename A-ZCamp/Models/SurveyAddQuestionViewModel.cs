@@ -30,5 +30,6 @@ namespace A_ZCamp.Models
         public String SurveyName { get; set; }
         public Survey SurveyType { get; set; }
         public int Sid { get; set; }
+        public Boolean Active { get; set; }
     }
 }

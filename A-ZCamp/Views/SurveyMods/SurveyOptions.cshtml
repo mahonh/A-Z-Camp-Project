@@ -1,4 +1,4 @@
-﻿
+﻿@model A_ZCamp.Models.SurveyOptionsViewModel
 @{
     ViewBag.Title = "Survey Options";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,3 +8,94 @@
 <h2>Survey Options</h2>
 
 
+@using (Html.BeginForm("SurveyOptionsUpdate", "SurveyMods", FormMethod.Post, new { @class = "form" }))
+{
+
+    int a = 0;
+    int b = 0;
+    int c = 0;
+
+    <h4>Pre-Camp Surveys</h4>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Active</th>
+                <th>Survey Name</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var x in Model.AllSurveys)
+            {
+                if (x.SurveyType == A_ZCamp.Models.Survey.PreCamp)
+                {
+                <tr>
+                    @Html.HiddenFor(m => m.AllSurveys[a].Sid)
+                    <td>@Html.EditorFor(m => m.AllSurveys[a].Active, true)</td> @*m => m.AllSurveys[a].Active*@
+                    <td>@x.SurveyName</td>
+                    <td>???</td>
+                </tr>  
+                }
+                a++;
+            }
+        </tbody>
+    </table>
+
+
+    <h4>Post-Camp Surveys</h4>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Active</th>
+                <th>Survey Name</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var y in Model.AllSurveys)
+            {
+                if (y.SurveyType == A_ZCamp.Models.Survey.PostCamp)
+                {
+                <tr>
+                    @Html.HiddenFor(m => m.AllSurveys[b].Sid)
+                    <td>@Html.EditorFor(m => m.AllSurveys[b].Active, true)</td> @*m => m.AllSurveys[b].Active*@
+                    <td>@y.SurveyName</td>
+                    <td>???</td>
+                </tr>  
+                }
+                b++;
+            }
+        </tbody>
+    </table>
+
+
+    <h4>Other Surveys</h4>
+    @*
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Active</th>
+                <th>Survey Type</th>
+                <th>Survey Name</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var x in Model.AllSurveys)
+            {
+                <tr>
+                    <td>@Html.Label(x.Active.ToString())</td>
+                    <td>@x.SurveyType.ToString()</td>
+                    <td>@x.SurveyName</td>
+                </tr>  }
+        </tbody>
+    </table>
+    *@
+
+    <br />
+    <input type="submit" class="btn btn-primary" value="Update" />
+}
