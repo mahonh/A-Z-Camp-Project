@@ -33,7 +33,7 @@
                     <td>@x.QuestionType.ToString()</td>
                     <td>@Html.EditorFor(m => m.AllSurveyQuestions[z].Active)
                     </td>
-                    <td>@Html.TextBoxFor(m => m.AllSurveyQuestions[z].Ordering)</td>
+                    <td>@Html.TextBoxFor(m => m.AllSurveyQuestions[z].Ordering, new { required = "required" })</td>
                 </tr>
                 z++;
             }

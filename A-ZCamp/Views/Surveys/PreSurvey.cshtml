@@ -4,8 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*IEnumerable<>*@
-
 <br />
 <h2>@ViewBag.Title</h2>
 
@@ -27,8 +25,9 @@
             <div>
                 @Html.HiddenFor(m => m.QuestionData[z].Sid)
                 @Html.HiddenFor(m => m.QuestionData[z].Qid)
+
                 @Html.DisplayFor(modelItem => x.Question) <br />
-                @Html.TextAreaFor(m => m.QuestionData[z].UserResponse) <br />
+                @Html.TextAreaFor(m => m.QuestionData[z].UserResponse, new { required = "required" }) <br />
             </div>
             <br />
                 z++;
@@ -39,11 +38,12 @@
             <div>
                 @Html.HiddenFor(m => m.QuestionData[z].Sid)
                 @Html.HiddenFor(m => m.QuestionData[z].Qid)
+
                 @Html.DisplayFor(modelItem => x.Question) <br />
                 
                 @foreach (var u in x.QSupAnswers)
                 {
-                    @Html.RadioButtonFor(m => m.QuestionData[z].UserResponse, u) @Html.Label(u) <br />
+                    @Html.RadioButtonFor(m => m.QuestionData[z].UserResponse, u, new { required = "required" }) @Html.Label(u) <br />
                 }
             </div>
             <br />
@@ -59,47 +59,4 @@
     {
         <h3>No Surveys are available at this time. Check back soon!</h3>
     }
-
-    /*
-    for (int i = 0; i < Model.QuestionData.Count; i++)
-    {
-        <div>
-            @Html.DisplayFor(m => m.QuestionData[i].Question) <br />
-            @Html.TextAreaFor(m => m.QuestionData[i].UserResponse) <br />
-        </div>
-    }
-    <br />
-    */
 }
-
-@*
-@using (Html.BeginForm("AddSurveyResults", "Surveys", FormMethod.Post, new { @class = "form" }))
-{
-  
-    foreach (var x in Model)
-    {
-        if (x.SurveyQuestionType == A_ZCamp.Models.QuestionType.MultipleChoice)
-        {
-            <h3>MULTIPLE CHOICE</h3>
-            @Html.Label(x.SurveyQuestion) <br />
-
-            foreach (String y in x.SuppliedAnswers)
-            {
-                @Html.RadioButton(x.SurveyQuestion, y)
-                @y <br />
-            }
-        }
-
-        if (x.SurveyQuestionType == A_ZCamp.Models.QuestionType.ShortAnswer)
-        {
-            <h3>SHORT ANSWER</h3>
-            @x.SurveyQuestion <br />
-            @Html.TextArea(x.SurveyQuestion, new { rows = 4, columns = 20 })
-        }
-    }
-
-    <br />
-    <br />
-    <input type="submit" class="btn btn-primary" value="Submit" />
-}
-    *@

@@ -17,6 +17,8 @@ namespace A_ZCamp.Models
         [ForeignKey("SurveyQuestion")]
         public int SurveyQuestionId { get; set; }
         public virtual SurveyQuestion SurveyQuestion { get; set; }
+        [Required]
+        [StringLength(10000, MinimumLength = 1, ErrorMessage = "This field can not be blank")]
         public String Response { get; set; }
     }
     /*

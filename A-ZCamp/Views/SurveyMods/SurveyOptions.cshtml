@@ -7,6 +7,7 @@
 <br />
 <h2>Survey Options</h2>
 
+@Html.ValidationSummary()
 
 @using (Html.BeginForm("SurveyOptionsUpdate", "SurveyMods", FormMethod.Post, new { @class = "form" }))
 {
@@ -33,7 +34,10 @@
                 {
                 <tr>
                     @Html.HiddenFor(m => m.AllSurveys[a].Sid)
-                    <td>@Html.EditorFor(m => m.AllSurveys[a].Active, true)</td> @*m => m.AllSurveys[a].Active*@
+                    @Html.HiddenFor(m => m.AllSurveys[a].SurveyType)
+                    @Html.HiddenFor(m => m.AllSurveys[a].SurveyName)
+
+                    <td>@Html.EditorFor(m => m.AllSurveys[a].Active, true)</td>
                     <td>@x.SurveyName</td>
                     <td>@Html.ActionLink("Edit Questions", "SurveyQuestionUpdate", new { surveyID = Model.AllSurveys[a].Sid })</td>
                 </tr>  
@@ -62,7 +66,10 @@
                 {
                 <tr>
                     @Html.HiddenFor(m => m.AllSurveys[b].Sid)
-                    <td>@Html.EditorFor(m => m.AllSurveys[b].Active, true)</td> @*m => m.AllSurveys[b].Active*@
+                    @Html.HiddenFor(m => m.AllSurveys[b].SurveyType)
+                    @Html.HiddenFor(m => m.AllSurveys[b].SurveyName)
+
+                    <td>@Html.EditorFor(m => m.AllSurveys[b].Active, true)</td>
                     <td>@y.SurveyName</td>
                     <td>@Html.ActionLink("Edit Questions", "SurveyQuestionUpdate", new { surveyID = Model.AllSurveys[b].Sid })</td>
                 </tr>  
@@ -90,7 +97,10 @@
                 {
                     <tr>
                         @Html.HiddenFor(m => m.AllSurveys[c].Sid)
-                        <td>@Html.EditorFor(m => m.AllSurveys[c].Active, true)</td> @*m => m.AllSurveys[b].Active*@
+                        @Html.HiddenFor(m => m.AllSurveys[c].SurveyType)
+                        @Html.HiddenFor(m => m.AllSurveys[c].SurveyName)
+
+                        <td>@Html.EditorFor(m => m.AllSurveys[c].Active, true)</td>
                         <td>@z.SurveyName</td>
                         <td>@Html.ActionLink("Edit Questions", "SurveyQuestionUpdate", new { surveyID = Model.AllSurveys[c].Sid })</td>
                     </tr>

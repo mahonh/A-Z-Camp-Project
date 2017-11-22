@@ -4,17 +4,11 @@
 
 <br />
 <h1>Surveys</h1>
+<h2>Welcome! Let's get started. First, what's your email address?</h2>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Pre-Camp Survey</h2>
-        <p>Complete the Pre-Camp Survey</p>
-        <p><a class="btn btn-default" href="/Surveys/PreSurvey">Get Started &raquo;</a></p>
-    </div>
-
-    <div class="col-md-4">
-        <h2>Post-Camp Survey</h2>
-        <p>Complete the Post-Camp Survey</p>
-        <p><a class="btn btn-default" href="/Surveys/PostSurvey">Get Started &raquo;</a></p>
-    </div>
-</div>
+@using (Html.BeginForm("AddSurveyResults", "Surveys", FormMethod.Post, new { @class = "form" }))
+{
+    <h3>Email: </h3>
+    @Html.TextBox("Hello");
+        <input type="submit" class="btn btn-primary " value="Go!" />
+}

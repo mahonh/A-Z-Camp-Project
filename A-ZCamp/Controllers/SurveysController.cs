@@ -174,6 +174,7 @@ namespace A_ZCamp.Controllers
             return View(vms);
         }
 
+        [HttpGet]
         public ActionResult PostSurvey()
         {
             SurveyPageViewModel vms = new SurveyPageViewModel();
@@ -203,6 +204,7 @@ namespace A_ZCamp.Controllers
             return View(vms);
         }
 
+        [HttpPost]
         public ActionResult AddSurveyResults(SurveyPageViewModel newResults)
         {
             var test = addResults.SurveyResponses;

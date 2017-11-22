@@ -32,13 +32,13 @@
 
     <h4>Survey Type</h4>
 
-    @Html.EnumDropDownListFor(m => Model.SurveyType, "Select a Survey Type", new { @class = "form-control"})
+    @Html.EnumDropDownListFor(m => Model.SurveyType, null , new { @class = "form-control" })
 
     <br />
 
     <h4>Survey Name</h4>
 
-    @Html.TextBoxFor(m => Model.SurveyName)
+    @Html.TextBoxFor(m => Model.SurveyName, new { required = "required" })
 
     <br />
     <br />

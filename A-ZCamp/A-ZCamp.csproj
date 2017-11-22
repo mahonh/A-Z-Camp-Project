@@ -198,9 +198,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711091524212_DBEst.cs" />
-    <Compile Include="Migrations\201711091524212_DBEst.Designer.cs">
-      <DependentUpon>201711091524212_DBEst.cs</DependentUpon>
+    <Compile Include="Migrations\201711221913327_DBSetup.cs" />
+    <Compile Include="Migrations\201711221913327_DBSetup.Designer.cs">
+      <DependentUpon>201711221913327_DBSetup.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -214,6 +214,7 @@
     <Compile Include="Models\SurveyQuestionModels.cs" />
     <Compile Include="Models\SurveyQuestionOptionsViewModel.cs" />
     <Compile Include="Models\SurveyRepsonseModels.cs" />
+    <Compile Include="Models\SurveyRespondentModels.cs" />
     <Compile Include="Models\ViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -345,8 +346,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711091524212_DBEst.resx">
-      <DependentUpon>201711091524212_DBEst.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711221913327_DBSetup.resx">
+      <DependentUpon>201711221913327_DBSetup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

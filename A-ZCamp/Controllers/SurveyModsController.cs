@@ -94,19 +94,33 @@ namespace A_ZCamp.Controllers
 
         public ActionResult SurveyOptionsUpdate(SurveyOptionsViewModel model)
         {
-            int y = 0;
+            int a = 0;
+            int b = 0;
+            int c = 0;
 
             foreach (var x in model.AllSurveys)
             {
-                if (x.Active == true)
+                if (x.Active == true && x.SurveyType == Survey.PreCamp)
                 {
-                    y++;
+                    a++;
+                }
+
+                else if (x.Active == true && x.SurveyType == Survey.PostCamp)
+                {
+                    b++;
+                }
+
+                else if (x.Active == true && x.SurveyType == Survey.Other)
+                {
+                    c++;
                 }
             }
 
-            if (y > 2)
+            if (a > 1 || b > 1 || c > 1)
             {
-                return View(model);
+                ModelState.AddModelError("Assignments", "Only 0 or 1 of each survey type can be active at a time");
+
+                return View("SurveyOptions", model);
             }
 
             else

@@ -22,29 +22,31 @@
 
             if (x.QType == A_ZCamp.Models.QuestionType.ShortAnswer)
             {
-                <div>
-                    @Html.HiddenFor(m => m.QuestionData[z].Sid)
-                    @Html.HiddenFor(m => m.QuestionData[z].Qid)
-                    @Html.DisplayFor(modelItem => x.Question) <br />
-                    @Html.TextAreaFor(m => m.QuestionData[z].UserResponse) <br />
-                </div>
-                <br />
+            <div>
+                @Html.HiddenFor(m => m.QuestionData[z].Sid)
+                @Html.HiddenFor(m => m.QuestionData[z].Qid)
+
+                @Html.DisplayFor(modelItem => x.Question) <br />
+                @Html.TextAreaFor(m => m.QuestionData[z].UserResponse, new { required = "required"}) <br />
+            </div>
+            <br />
                 z++;
             }
 
             if (x.QType == A_ZCamp.Models.QuestionType.MultipleChoice)
             {
-                <div>
-                    @Html.HiddenFor(m => m.QuestionData[z].Sid)
-                    @Html.HiddenFor(m => m.QuestionData[z].Qid)
-                    @Html.DisplayFor(modelItem => x.Question) <br />
+            <div>
+                @Html.HiddenFor(m => m.QuestionData[z].Sid)
+                @Html.HiddenFor(m => m.QuestionData[z].Qid)
 
-                    @foreach (var u in x.QSupAnswers)
-                    {
-                        @Html.RadioButtonFor(m => m.QuestionData[z].UserResponse, u) @Html.Label(u) <br />
-                    }
-                </div>
-                <br />
+                @Html.DisplayFor(modelItem => x.Question) <br />
+
+                @foreach (var u in x.QSupAnswers)
+                {
+                    @Html.RadioButtonFor(m => m.QuestionData[z].UserResponse, u, new { required = "required"}) @Html.Label(u) <br />
+                }
+            </div>
+            <br />
                 z++;
             }
         }
@@ -57,5 +59,4 @@
     {
         <h3>No Surveys are available at this time. Check back soon!</h3>
     }
-
 }

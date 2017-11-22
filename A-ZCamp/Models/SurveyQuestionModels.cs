@@ -13,12 +13,13 @@ namespace A_ZCamp.Models
         public int SurveyTypeId { get; set; }
         public Survey Survey { get; set; }
         public Boolean Active { get; set; }
+        [Required]
         public String Name { get; set; }
     }
 
     public enum Survey
     {
-        PreCamp = 1,
+        PreCamp = 0,
         PostCamp,
         Other
     }
@@ -35,6 +36,7 @@ namespace A_ZCamp.Models
         [Column(Order = 2)]
         public int SurveyQuestionId { get; set; }
         public virtual SurveyQuestion SurveyQuestion { get; set; }
+        [Required]
         public int Order { get; set; }
     }
 
@@ -42,7 +44,9 @@ namespace A_ZCamp.Models
     {
         [Key]
         public int SurveyQuestionId { get; set; }
+        [Required]
         public QuestionType QuestionType { get; set; }
+        [Required]
         public string Question { get; set; }
         public virtual ICollection<SurveyQuestionSuppliedAnswer> SuppliedAnswers { get; set; }
         public Boolean Active { get; set; }
@@ -62,6 +66,7 @@ namespace A_ZCamp.Models
         [ForeignKey("SurveyQuestion")]
         public int SurveyQuestionId { get; set; }
         public virtual SurveyQuestion SurveyQuestion { get; set; }
+        [Required]
         public string Answer { get; set; }
     }
     /*
