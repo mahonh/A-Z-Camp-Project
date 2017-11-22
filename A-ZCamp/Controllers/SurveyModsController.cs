@@ -118,7 +118,7 @@ namespace A_ZCamp.Controllers
 
             if (a > 1 || b > 1 || c > 1)
             {
-                ModelState.AddModelError("Assignments", "Only 0 or 1 of each survey type can be active at a time");
+                ModelState.AddModelError("Assignments", "Only 0 or 1 of each Survey Type can be active at a time.");
 
                 return View("SurveyOptions", model);
             }
@@ -138,8 +138,15 @@ namespace A_ZCamp.Controllers
             }
         }
 
-        public ActionResult SurveyQuestionUpdate(int surveyID)
+        public ActionResult SurveyQuestionUpdate(int? surveyID)
         {
+            if (surveyID == null)
+            {
+                return RedirectToAction("SurveyOptions", "SurveyMods");
+            }
+
+            int SurID = surveyID.Value;
+
             SurveyQuestionAssignment questionsUpdate = new SurveyQuestionAssignment();
 
             var attachments = (from x in AddQuestion.SurveyQuestionOrderings
@@ -152,7 +159,7 @@ namespace A_ZCamp.Controllers
                                  QuestionID = x.SurveyQuestionId,
                                  QuestionName = x.Question,
                                  QuestionType = x.QuestionType,
-                                 SurveyID = surveyID
+                                 SurveyID = SurID
                              }).ToList();
 
             foreach (var x in questions)
@@ -242,6 +249,20 @@ namespace A_ZCamp.Controllers
 
         public ActionResult SurveyCreate(SurveyAddViewModel model)
         {
+            var nameCheck = (from x in AddQuestion.SurveyTypes
+                             select x.Name).ToList();
+
+            foreach (var x in nameCheck)
+            {
+                if (x == model.SurveyName)
+                {
+                    ModelState.AddModelError("Duplicate Survey Name", "There already exists a Survey with that name. Pick a new name.");
+
+                    return View("SurveyAdd", model);
+                }
+            }
+
+
             var newSurvey = AddQuestion.SurveyTypes;
 
             var AddSurvey = new SurveyType

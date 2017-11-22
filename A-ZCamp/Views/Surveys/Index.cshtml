@@ -1,14 +1,18 @@
-﻿@{
+﻿@model A_ZCamp.Models.SurveyLandingViewModel
+@{
     ViewBag.Title = "Surveys";
 }
 
 <br />
 <h1>Surveys</h1>
-<h2>Welcome! Let's get started. First, what's your email address?</h2>
+<h3>Welcome! Let's get started. First, what's your email address?</h3>
 
-@using (Html.BeginForm("AddSurveyResults", "Surveys", FormMethod.Post, new { @class = "form" }))
+@using (Html.BeginForm("IndexUpdate", "Surveys", FormMethod.Post, new { @class = "form" }))
 {
-    <h3>Email: </h3>
-    @Html.TextBox("Hello");
+
+    @Html.ValidationSummary()
+
+    <h4>Email: </h4>
+    @Html.TextBoxFor(m => m.Email, new { required = "required"})
         <input type="submit" class="btn btn-primary " value="Go!" />
 }

@@ -9,25 +9,35 @@
 <h1>Surveys</h1>
 
 <div class="row">
+    
+    @if (!Model.PreCampDone)
+    {
     <div class="col-md-4">
         <h2>Pre-Camp Survey</h2>
         <p>Complete the Pre-Camp Survey</p>
-        <p><a class="btn btn-default" href="/Surveys/PreSurvey">Get Started &raquo;</a></p>
+        @Html.ActionLink("Get Started", "PreSurvey", new { email = Model.Email}, new { @class = "btn btn-primary"})
     </div>
+    }
 
+    @if (!Model.PostCampDone)
+    {
     <div class="col-md-4">
         <h2>Post-Camp Survey</h2>
         <p>Complete the Post-Camp Survey</p>
         <p><a class="btn btn-default" href="/Surveys/PostSurvey">Get Started &raquo;</a></p>
     </div>
+    }
 
     @if (Model.ShowOther)
     {
+        if (Model.OtherDone)
+        {
         <div class="col-md-4">
             <h2>@Model.OtherName</h2>
             <p>Complete the @Model.OtherName Survey</p>
             <p><a class="btn btn-default" href="/Surveys/OtherSurvey">Get Started &raquo;</a></p>
         </div>
+        }
     }
 
 </div>

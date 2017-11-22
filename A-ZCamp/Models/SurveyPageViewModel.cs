@@ -14,6 +14,7 @@ namespace A_ZCamp.Models
         }
         public List<QuestionData> QuestionData { get; set; }
         public String SurveyName { get; set; }
+        public String ID { get; set; }
         /*
         public String ShortAnswerResponse { get; set; }
         public String MCAnswerReponse { get; set; }

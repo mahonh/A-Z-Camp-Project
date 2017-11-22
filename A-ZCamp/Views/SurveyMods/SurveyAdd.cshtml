@@ -7,6 +7,8 @@
 <br />
 <h2>Add a New Survey</h2>
 
+@Html.ValidationSummary()
+
 @using (Html.BeginForm("SurveyCreate", "SurveyMods", FormMethod.Post, new { @class = "form" }))
 {
 
@@ -21,12 +23,19 @@
         </thead>
         <tbody>
 
+            @{int z = 0;}
+
             @foreach (var x in Model.Surveys)
             {
+                @Html.HiddenFor(m => m.Surveys[z].SurveyName)
+                @Html.HiddenFor(m => m.Surveys[z].SurveyType)
+
                 <tr>
                     <td>@x.SurveyType.ToString()</td>
                     <td>@x.SurveyName</td>
-                </tr>  }
+                </tr>  
+                z++;
+            }
         </tbody>
     </table>
 
