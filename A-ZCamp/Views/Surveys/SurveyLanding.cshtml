@@ -1,0 +1,33 @@
+﻿@model A_ZCamp.Models.SurveyLandingViewModel
+
+@{
+    ViewBag.Title = "Surveys";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h1>Surveys</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Pre-Camp Survey</h2>
+        <p>Complete the Pre-Camp Survey</p>
+        <p><a class="btn btn-default" href="/Surveys/PreSurvey">Get Started &raquo;</a></p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>Post-Camp Survey</h2>
+        <p>Complete the Post-Camp Survey</p>
+        <p><a class="btn btn-default" href="/Surveys/PostSurvey">Get Started &raquo;</a></p>
+    </div>
+
+    @if (Model.ShowOther)
+    {
+        <div class="col-md-4">
+            <h2>@Model.OtherName</h2>
+            <p>Complete the @Model.OtherName Survey</p>
+            <p><a class="btn btn-default" href="/Surveys/OtherSurvey">Get Started &raquo;</a></p>
+        </div>
+    }
+
+</div>

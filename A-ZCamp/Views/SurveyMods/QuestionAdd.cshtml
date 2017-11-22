@@ -62,7 +62,7 @@
     <br />
     <h4>Multiple Choice Supplied Answers</h4>
 
-
+    @*
     <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
 
     <script type="text/javascript">
@@ -109,7 +109,8 @@
                 list.push($('#textbox' + i).val());
             }
 
-          
+
+
         });
     });
     </script>
@@ -122,6 +123,8 @@
         <input type='button' value='Add Button' id='addButton'>
         <input type='button' value='Remove Button' id='removeButton'>
         <input type='button' value='Get TextBox Value' id='getButtonValue'>
+    *@
+
 
     <br />
 
@@ -161,7 +164,7 @@
                 window.onload = RecreateDynamicTextboxes;
             </script>
         *@
-        @*
+     
             @:First Answer:
             @Html.TextBoxFor(m => m.SuppliedAnswersQuestionToSumbit[0])
             <br />
@@ -173,8 +176,7 @@
             @:Third Answer:
             @Html.TextBoxFor(m => m.SuppliedAnswersQuestionToSumbit[2])
             <br />
-        *@
-
+       
         <br />
         <input type="submit" class="btn btn-primary" value="Save" />
         }

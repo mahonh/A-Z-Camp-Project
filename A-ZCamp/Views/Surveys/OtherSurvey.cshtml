@@ -1,6 +1,6 @@
 ﻿@model A_ZCamp.Models.SurveyPageViewModel
 @{
-    ViewBag.Title = "Post-Camp Survey";
+    ViewBag.Title = Model.SurveyName;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -57,5 +57,4 @@
     {
         <h3>No Surveys are available at this time. Check back soon!</h3>
     }
-
 }

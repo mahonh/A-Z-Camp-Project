@@ -19,7 +19,8 @@ namespace A_ZCamp.Models
     public enum Survey
     {
         PreCamp = 1,
-        PostCamp
+        PostCamp,
+        Other
     }
 
     public class SurveyQuestionOrdering

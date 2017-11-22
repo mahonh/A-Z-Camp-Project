@@ -24,6 +24,66 @@ namespace A_ZCamp.Controllers
             return View();
         }
 
+        public ActionResult SurveyLanding()
+        {
+            var display = (from x in preSurvey.SurveyTypes
+                           where x.Survey == Survey.Other && x.Active == true
+                           select new SurveyLandingViewModel
+                           {
+                               ShowOther = x.Active,
+                               OtherName = x.Name
+                           }).ToList();
+
+            SurveyLandingViewModel landing = new SurveyLandingViewModel();
+
+            foreach (var x in display)
+            {
+                landing.OtherName = x.OtherName;
+                landing.ShowOther = x.ShowOther;
+            }
+
+            return View(landing);
+        }
+
+        public ActionResult OtherSurvey()
+        {
+            SurveyPageViewModel vms = new SurveyPageViewModel();
+
+            var questionsToShow = preSurvey.SurveyQuestionOrderings;
+            var answersToShow = preSurvey.SurveyQuestionSuppliedAnswers;
+            var nameToShow = preSurvey.SurveyTypes;
+
+            var surveyData = (from x in questionsToShow
+                              where x.SurveyType.Survey == Survey.Other &&
+                                    x.SurveyType.Active == true &&
+                                    x.SurveyQuestion.Active == true
+                              join y in answersToShow on x.SurveyQuestionId equals y.SurveyQuestionId into GOOD
+                              orderby x.Order ascending
+                              select new QuestionData
+                              {
+                                  Sid = x.SurveyTypeId,
+                                  Qid = x.SurveyQuestionId,
+                                  QType = x.SurveyQuestion.QuestionType,
+                                  Question = x.SurveyQuestion.Question,
+                                  QSupAnswers = (from y in GOOD select y.Answer).ToList()
+                              }).ToList();
+
+            var name = (from x in nameToShow
+                        where x.Survey == Survey.Other && x.Active == true
+                        select x.Name).ToList();
+
+            foreach (var x in name)
+            {
+                vms.SurveyName = x;
+            }
+
+            foreach (var p in surveyData)
+            {
+                vms.QuestionData.Add(p);
+            }
+            return View(vms);
+        }
+
         public ActionResult PreSurvey()
         {
             SurveyPageViewModel vms = new SurveyPageViewModel();

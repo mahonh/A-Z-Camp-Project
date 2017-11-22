@@ -74,7 +74,6 @@
 
 
     <h4>Other Surveys</h4>
-    @*
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -85,16 +84,21 @@
         </thead>
         <tbody>
 
-            @foreach (var x in Model.AllSurveys)
+            @foreach (var z in Model.AllSurveys)
             {
-                <tr>
-                    <td>@Html.Label(x.Active.ToString())</td>
-                    <td>@x.SurveyType.ToString()</td>
-                    <td>@x.SurveyName</td>
-                </tr>  }
+                if (z.SurveyType == A_ZCamp.Models.Survey.Other)
+                {
+                    <tr>
+                        @Html.HiddenFor(m => m.AllSurveys[c].Sid)
+                        <td>@Html.EditorFor(m => m.AllSurveys[c].Active, true)</td> @*m => m.AllSurveys[b].Active*@
+                        <td>@z.SurveyName</td>
+                        <td>@Html.ActionLink("Edit Questions", "SurveyQuestionUpdate", new { surveyID = Model.AllSurveys[c].Sid })</td>
+                    </tr>
+                }
+                c++;
+            }
         </tbody>
     </table>
-    *@
 
     <br />
     <input type="submit" class="btn btn-primary" value="Update" />
