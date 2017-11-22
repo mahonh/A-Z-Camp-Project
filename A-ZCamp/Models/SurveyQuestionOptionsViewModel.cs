@@ -17,6 +17,7 @@ namespace A_ZCamp.Models
     public class OptionsData
     {
         public int Qid { get; set; }
+        public int Sid { get; set; }
         public String SurveyName { get; set; }
         public String Question { get; set; }
         public QuestionType QuestionType { get; set; }

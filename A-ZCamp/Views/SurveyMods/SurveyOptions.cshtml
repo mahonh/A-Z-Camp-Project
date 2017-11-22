@@ -35,7 +35,7 @@
                     @Html.HiddenFor(m => m.AllSurveys[a].Sid)
                     <td>@Html.EditorFor(m => m.AllSurveys[a].Active, true)</td> @*m => m.AllSurveys[a].Active*@
                     <td>@x.SurveyName</td>
-                    <td>???</td>
+                    <td>@Html.ActionLink("Edit Questions", "SurveyQuestionUpdate", new { surveyID = Model.AllSurveys[a].Sid })</td>
                 </tr>  
                 }
                 a++;
@@ -64,7 +64,7 @@
                     @Html.HiddenFor(m => m.AllSurveys[b].Sid)
                     <td>@Html.EditorFor(m => m.AllSurveys[b].Active, true)</td> @*m => m.AllSurveys[b].Active*@
                     <td>@y.SurveyName</td>
-                    <td>???</td>
+                    <td>@Html.ActionLink("Edit Questions", "SurveyQuestionUpdate", new { surveyID = Model.AllSurveys[b].Sid })</td>
                 </tr>  
                 }
                 b++;

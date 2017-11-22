@@ -1,0 +1,42 @@
+﻿@model A_ZCamp.Models.SurveyQuestionAssignment
+@{
+    ViewBag.Title = "Update Survey Questions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Survey Question Update</h2>
+
+
+@using (Html.BeginForm("SurveyQuestionsAssignment", "SurveyMods", FormMethod.Post, new { @class = "form" }))
+{
+    int z = 0;
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Attach Question?</th>
+                <th>Question</th>
+                <th>Question Type</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var x in Model.QuestionData)
+                {
+                    <tr>
+                        @Html.HiddenFor(m => m.QuestionData[z].SurveyID)
+                        @Html.HiddenFor(m => m.QuestionData[z].QuestionID)
+
+                        <td>@Html.EditorFor(m => m.QuestionData[z].ChangeAssignment)</td>
+                        <td>@x.QuestionName</td>
+                        <td>@x.QuestionType.ToString()</td>
+                    </tr>
+                z++;
+            }
+        </tbody>
+    </table>
+
+    <br />
+    <input type="submit" class="btn btn-primary" value="Update" />
+}

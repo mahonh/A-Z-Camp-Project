@@ -323,6 +323,7 @@
     <Content Include="Views\Shared\_LoginPartial - ORIGINAL.cshtml" />
     <Content Include="Views\SurveyReports\Index.cshtml" />
     <Content Include="Views\SurveyMods\SurveyAdd.cshtml" />
+    <Content Include="Views\SurveyMods\SurveyQuestionUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

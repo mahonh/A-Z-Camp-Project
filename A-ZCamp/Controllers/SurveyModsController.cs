@@ -51,6 +51,7 @@ namespace A_ZCamp.Controllers
             SurveyQuestionOptionsViewModel QuestionOptions = new SurveyQuestionOptionsViewModel();
 
             var Options = (from x in OptionsQuestions.SurveyQuestionOrderings
+                           where x.SurveyType.Active
                            select new OptionsData
                            {
                                Active = x.SurveyQuestion.Active,
@@ -58,7 +59,8 @@ namespace A_ZCamp.Controllers
                                QuestionType = x.SurveyQuestion.QuestionType,
                                Ordering = x.Order,
                                SurveyName = x.SurveyType.Name,
-                               Qid = x.SurveyQuestion.SurveyQuestionId
+                               Qid = x.SurveyQuestion.SurveyQuestionId,
+                               Sid = x.SurveyTypeId
                            }).ToList();
 
             foreach (var x in Options)
@@ -122,14 +124,86 @@ namespace A_ZCamp.Controllers
             }
         }
 
-        public ActionResult SurveyOptionsQuestionGet()
+        public ActionResult SurveyQuestionUpdate(int surveyID)
         {
-            return View();
+            SurveyQuestionAssignment questionsUpdate = new SurveyQuestionAssignment();
+
+            var attachments = (from x in AddQuestion.SurveyQuestionOrderings
+                               where x.SurveyTypeId == surveyID
+                               select x).ToList();
+
+            var questions = (from x in AddQuestion.SurveyQuestions
+                             select new QuestionAssignmentData
+                             {
+                                 QuestionID = x.SurveyQuestionId,
+                                 QuestionName = x.Question,
+                                 QuestionType = x.QuestionType,
+                                 SurveyID = surveyID
+                             }).ToList();
+
+            foreach (var x in questions)
+            {
+                foreach (var y in attachments)
+                {
+                    if (y.SurveyQuestionId == x.QuestionID)
+                    {
+                        x.ChangeAssignment = (y.SurveyTypeId == surveyID);
+                    }
+                }
+            }
+
+            foreach (var x in questions)
+            {
+                questionsUpdate.QuestionData.Add(x);
+            }
+
+            return View(questionsUpdate);
         }
 
-        public ActionResult SurveyOptionsQuestionUpdate()
+        public ActionResult SurveyQuestionsAssignment(SurveyQuestionAssignment model)
         {
-            return View();
+            foreach (var x in model.QuestionData)
+            {
+                if (x.ChangeAssignment.Equals(true))
+                {
+                    var update = OptionsQuestions.SurveyQuestionOrderings.SingleOrDefault(z => z.SurveyTypeId == x.SurveyID && z.SurveyQuestionId == x.QuestionID);
+
+                    if (update == null)
+                    {
+                        var AddEntry = new SurveyQuestionOrdering
+                        {
+                            SurveyTypeId = x.SurveyID,
+                            SurveyQuestionId = x.QuestionID,
+                            Order = 1
+                        };
+
+                        OptionsQuestions.SurveyQuestionOrderings.Add(AddEntry);
+                    }
+
+                    else
+                    {
+                    }
+                }
+
+                else if (x.ChangeAssignment.Equals(false))
+                {
+                    var update = OptionsQuestions.SurveyQuestionOrderings.SingleOrDefault(z => z.SurveyTypeId == x.SurveyID && z.SurveyQuestionId == x.QuestionID);
+
+                    if (update == null)
+                    {
+                    }
+
+                    else
+                    {
+                        OptionsQuestions.SurveyQuestionOrderings.Remove(update);
+                    }
+                }
+                
+            }
+
+            OptionsQuestions.SaveChanges();
+
+            return RedirectToAction("SurveyOptions", "SurveyMods");
         }
 
         public ActionResult SurveyAdd()
@@ -174,7 +248,7 @@ namespace A_ZCamp.Controllers
 
             foreach (var x in options.AllSurveyQuestions)
             {
-                var update = OptionsQuestions.SurveyQuestionOrderings.SingleOrDefault(z => z.SurveyQuestion.SurveyQuestionId == x.Qid);
+                var update = OptionsQuestions.SurveyQuestionOrderings.FirstOrDefault(z => z.SurveyQuestion.SurveyQuestionId == x.Qid && z.SurveyTypeId == x.Sid);
                 update.Order = x.Ordering;
                 update.SurveyQuestion.Active = x.Active;
             }
