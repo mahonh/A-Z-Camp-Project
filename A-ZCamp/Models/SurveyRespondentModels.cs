@@ -10,8 +10,8 @@ namespace A_ZCamp.Models
     {
         [Key]
         public int RespondentId { get; set; }
-        [Required]
         public String Email { get; set; }
+        public String RID { get; set; }
         public Boolean PreCampComplete { get; set; }
         public Boolean PostCampComplete { get; set; }
         public Boolean OtherComplete { get; set; }

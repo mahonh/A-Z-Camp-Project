@@ -41,6 +41,7 @@ namespace A_ZCamp.Controllers
                                         select new SurveyLandingViewModel
                                         {
                                             Email = x.Email,
+                                            RID = x.RID,
                                             PreCampDone = x.PreCampComplete,
                                             PostCampDone = x.PostCampComplete,
                                             OtherDone = x.OtherComplete
@@ -51,13 +52,33 @@ namespace A_ZCamp.Controllers
                     model.PreCampDone = x.PreCampDone;
                     model.PostCampDone = x.PostCampDone;
                     model.OtherDone = x.OtherDone;
+                    model.RID = x.RID;
                 }
             }
 
             else if (update == null)
             {
+                Random rand = new Random();
+                String temp = rand.Next(1, 999999999).ToString();
+
+                var randCheck = addResults.SurveyRespondents.SingleOrDefault(z => z.RID == temp);
+                Boolean newNumber = true;
+
+                while (newNumber)
+                {
+                    if (randCheck != null)
+                    {
+                        temp = rand.Next(1, 999999999).ToString();
+                    }
+                    else
+                    {
+                        newNumber = false;
+                    }
+                }
+
                 var addUser = new SurveyRespondent
                 {
+                    RID = temp,
                     Email = model.Email,
                     PreCampComplete = false,
                     PostCampComplete = false,
@@ -67,12 +88,13 @@ namespace A_ZCamp.Controllers
                 model.PreCampDone = false;
                 model.PostCampDone = false;
                 model.OtherDone = false;
+                model.RID = temp;
 
                 userAdd.Add(addUser);
                 addResults.SaveChanges();
             }
 
-            return View("SurveyLanding", model);
+            return RedirectToAction("SurveyLanding", model);
         }
 
         public ActionResult SurveyLanding(SurveyLandingViewModel model)
@@ -99,9 +121,17 @@ namespace A_ZCamp.Controllers
             return View(model);
         }
 
-        public ActionResult OtherSurvey(String ID)
+        public ActionResult OtherSurvey(String RID)
         {
+            if (RID == null)
+            {
+                return RedirectToAction("Index", "Surveys");
+            }
+
             SurveyPageViewModel vms = new SurveyPageViewModel();
+
+            vms.ID = RID;
+            vms.SurveyType = Survey.Other;
 
             var questionsToShow = preSurvey.SurveyQuestionOrderings;
             var answersToShow = preSurvey.SurveyQuestionSuppliedAnswers;
@@ -135,12 +165,21 @@ namespace A_ZCamp.Controllers
             {
                 vms.QuestionData.Add(p);
             }
+
             return View(vms);
         }
 
-        public ActionResult PreSurvey(String ID)
+        public ActionResult PreSurvey(String RID)
         {
+            if (RID == null)
+            {
+                return RedirectToAction("Index", "Surveys");
+            }
+
             SurveyPageViewModel vms = new SurveyPageViewModel();
+
+            vms.ID = RID;
+            vms.SurveyType = Survey.PreCamp;
 
             var questionsToShow = preSurvey.SurveyQuestionOrderings;
             var answersToShow = preSurvey.SurveyQuestionSuppliedAnswers;
@@ -168,9 +207,17 @@ namespace A_ZCamp.Controllers
             return View(vms);
         }
 
-        public ActionResult PostSurvey(String ID)
+        public ActionResult PostSurvey(String RID)
         {
+            if (RID == null)
+            {
+                return RedirectToAction("Index", "Surveys");
+            }
+
             SurveyPageViewModel vms = new SurveyPageViewModel();
+
+            vms.ID = RID;
+            vms.SurveyType = Survey.PostCamp;
 
             var questionsToShow = preSurvey.SurveyQuestionOrderings;
             var answersToShow = preSurvey.SurveyQuestionSuppliedAnswers;
@@ -194,6 +241,7 @@ namespace A_ZCamp.Controllers
             {
                 vms.QuestionData.Add(p);
             }
+
             return View(vms);
         }
 
@@ -213,7 +261,33 @@ namespace A_ZCamp.Controllers
 
             addResults.SaveChanges();
 
-            return RedirectToAction("Index", "Surveys");
+            var userLookup = addResults.SurveyRespondents.SingleOrDefault(z => z.RID == newResults.ID);
+
+            if (newResults.SurveyType == Survey.PreCamp)
+            {
+                userLookup.PreCampComplete = true;
+                addResults.SaveChanges();
+            }
+
+            else if (newResults.SurveyType == Survey.PostCamp)
+            {
+                userLookup.PostCampComplete = true;
+                addResults.SaveChanges();
+            }
+
+            else if (newResults.SurveyType == Survey.Other)
+            {
+                userLookup.OtherComplete = true;
+                addResults.SaveChanges();
+            }
+
+            return RedirectToAction("SurveyConfirm", "Surveys");
         }
+
+        public ActionResult SurveyConfirm()
+        {
+            return View();
+        }
+
     }
 }

@@ -10,6 +10,7 @@ namespace A_ZCamp.Models
     {
         [EmailAddress]
         public String Email { get; set; }
+        public String RID { get; set; }
         public Boolean PreCampDone { get; set; }
         public Boolean PostCampDone { get; set; }
         public Boolean OtherDone { get; set; }

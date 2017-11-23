@@ -16,6 +16,9 @@
     {
         <h3>Welcome! Please fill out the survey</h3>
 
+        @Html.HiddenFor(m => m.ID)
+        @Html.HiddenFor(m => m.SurveyType)
+
         foreach (var x in Model.QuestionData)
         {
             int temp = x.Qid;
