@@ -8,42 +8,44 @@
 <br />
 <h1>Surveys</h1>
 
-<div class="row">
+@if ((Model.PreCampDone && Model.PostCampDone && Model.OtherDone && Model.ShowOther)
+                    || (Model.PreCampDone && Model.PostCampDone && !Model.ShowOther))
+{
+    <h3>All Surveys have been completed! Thanks!</h3>
+}
+
+else
+{
+    <div class="row">
     
-    @if ((Model.PreCampDone && Model.PostCampDone && Model.OtherDone && Model.ShowOther)
-        || (Model.PreCampDone && Model.PostCampDone && !Model.ShowOther))
-    {
-        <h3>All Surveys have been completed! Thanks!</h3>
-    }
-
-    @if (!Model.PreCampDone)
-    {
-    <div class="col-md-4">
-        <h2>Pre-Camp Survey</h2>
-        <p>Complete the Pre-Camp Survey</p>
-        @Html.ActionLink("Get Started", "PreSurvey", new { RID = Model.RID}, new { @class = "btn btn-primary"})
-    </div>
-    }
-
-    @if (!Model.PostCampDone)
-    {
-    <div class="col-md-4">
-        <h2>Post-Camp Survey</h2>
-        <p>Complete the Post-Camp Survey</p>
-        @Html.ActionLink("Get Started", "PostSurvey", new { RID = Model.RID }, new { @class = "btn btn-primary" })
-    </div>
-    }
-
-    @if (Model.ShowOther)
-    {
-        if (!Model.OtherDone)
+        @if (!Model.PreCampDone)
         {
         <div class="col-md-4">
-            <h2>@Model.OtherName</h2>
-            <p>Complete the @Model.OtherName Survey</p>
-            @Html.ActionLink("Get Started", "OtherSurvey", new { RID = Model.RID }, new { @class = "btn btn-primary" })
+            <h2>Pre-Camp Survey</h2>
+            <p>Complete the Pre-Camp Survey</p>
+            @Html.ActionLink("Get Started", "PreSurvey", new { RID = Model.RID}, new { @class = "btn btn-primary"})
         </div>
         }
-    }
 
-</div>
+        @if (!Model.PostCampDone)
+        {
+        <div class="col-md-4">
+            <h2>Post-Camp Survey</h2>
+            <p>Complete the Post-Camp Survey</p>
+            @Html.ActionLink("Get Started", "PostSurvey", new { RID = Model.RID }, new { @class = "btn btn-primary" })
+        </div>
+        }
+
+        @if (Model.ShowOther)
+        {
+            if (!Model.OtherDone)
+            {
+            <div class="col-md-4">
+                <h2>@Model.OtherName</h2>
+                <p>Complete the @Model.OtherName Survey</p>
+                @Html.ActionLink("Get Started", "OtherSurvey", new { RID = Model.RID }, new { @class = "btn btn-primary" })
+            </div>
+            }
+        }
+    </div>
+}

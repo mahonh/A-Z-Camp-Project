@@ -10,26 +10,25 @@ namespace A_ZCamp.Controllers
     [Authorize]
     public class SurveyModsController : Controller
     {
-        private ApplicationDbContext AddQuestion;
-        private ApplicationDbContext NewQuestion;
-        private ApplicationDbContext OptionsQuestions;
+        private ApplicationDbContext SurveyModHandler;
 
         public SurveyModsController()
         {
-            AddQuestion = new ApplicationDbContext();
-            NewQuestion = new ApplicationDbContext();
-            OptionsQuestions = new ApplicationDbContext();
+            SurveyModHandler = new ApplicationDbContext();
         }
+
+        //Index View for SurveyMods
         public ActionResult Index()
         {
             return View();
         }
 
+        //GET for the Add Question page
         public ActionResult QuestionAdd()
         {
             SurveyAddQuestionViewModel addAQuestion = new SurveyAddQuestionViewModel();
 
-            var Surveys = (from x in AddQuestion.SurveyTypes
+            var Surveys = (from x in SurveyModHandler.SurveyTypes
                            orderby x.Survey ascending, x.Name
                            select new SurveyData
                            {
@@ -46,11 +45,12 @@ namespace A_ZCamp.Controllers
             return View(addAQuestion);
         }
 
+        //GET for the Question Options page
         public ActionResult QuestionOptions()
         {
             SurveyQuestionOptionsViewModel QuestionOptions = new SurveyQuestionOptionsViewModel();
 
-            var Options = (from x in OptionsQuestions.SurveyQuestionOrderings
+            var Options = (from x in SurveyModHandler.SurveyQuestionOrderings
                            where x.SurveyType.Active
                            select new OptionsData
                            {
@@ -71,11 +71,12 @@ namespace A_ZCamp.Controllers
             return View(QuestionOptions);
         }
 
+        //GET for the Survey Options page
         public ActionResult SurveyOptions()
         {
             SurveyOptionsViewModel SurveyOptions = new SurveyOptionsViewModel();
 
-            var SurveysToSee = (from x in OptionsQuestions.SurveyTypes
+            var SurveysToSee = (from x in SurveyModHandler.SurveyTypes
                                 select new SurveyData
                                 {
                                     Sid = x.SurveyTypeId,
@@ -92,6 +93,7 @@ namespace A_ZCamp.Controllers
             return View(SurveyOptions);
         }
 
+        //POST for the Survey Options page
         public ActionResult SurveyOptionsUpdate(SurveyOptionsViewModel model)
         {
             int a = 0;
@@ -128,16 +130,17 @@ namespace A_ZCamp.Controllers
 
                 foreach (var x in model.AllSurveys)
                 {
-                    var mod = AddQuestion.SurveyTypes.SingleOrDefault(z => z.SurveyTypeId == x.Sid);
+                    var mod = SurveyModHandler.SurveyTypes.SingleOrDefault(z => z.SurveyTypeId == x.Sid);
                     mod.Active = x.Active;
                 }
 
-                AddQuestion.SaveChanges();
+                SurveyModHandler.SaveChanges();
 
                 return RedirectToAction("SurveyOptions", "SurveyMods");
             }
         }
 
+        //POST for the Survey Options / Update Question page
         public ActionResult SurveyQuestionUpdate(int? surveyID)
         {
             if (surveyID == null)
@@ -149,11 +152,11 @@ namespace A_ZCamp.Controllers
 
             SurveyQuestionAssignment questionsUpdate = new SurveyQuestionAssignment();
 
-            var attachments = (from x in AddQuestion.SurveyQuestionOrderings
+            var attachments = (from x in SurveyModHandler.SurveyQuestionOrderings
                                where x.SurveyTypeId == surveyID
                                select x).ToList();
 
-            var questions = (from x in AddQuestion.SurveyQuestions
+            var questions = (from x in SurveyModHandler.SurveyQuestions
                              select new QuestionAssignmentData
                              {
                                  QuestionID = x.SurveyQuestionId,
@@ -181,13 +184,14 @@ namespace A_ZCamp.Controllers
             return View(questionsUpdate);
         }
 
+        //POST for Survey Options / Question Update page
         public ActionResult SurveyQuestionsAssignment(SurveyQuestionAssignment model)
         {
             foreach (var x in model.QuestionData)
             {
                 if (x.ChangeAssignment.Equals(true))
                 {
-                    var update = OptionsQuestions.SurveyQuestionOrderings.SingleOrDefault(z => z.SurveyTypeId == x.SurveyID && z.SurveyQuestionId == x.QuestionID);
+                    var update = SurveyModHandler.SurveyQuestionOrderings.SingleOrDefault(z => z.SurveyTypeId == x.SurveyID && z.SurveyQuestionId == x.QuestionID);
 
                     if (update == null)
                     {
@@ -198,7 +202,7 @@ namespace A_ZCamp.Controllers
                             Order = 1
                         };
 
-                        OptionsQuestions.SurveyQuestionOrderings.Add(AddEntry);
+                        SurveyModHandler.SurveyQuestionOrderings.Add(AddEntry);
                     }
 
                     else
@@ -208,7 +212,7 @@ namespace A_ZCamp.Controllers
 
                 else if (x.ChangeAssignment.Equals(false))
                 {
-                    var update = OptionsQuestions.SurveyQuestionOrderings.SingleOrDefault(z => z.SurveyTypeId == x.SurveyID && z.SurveyQuestionId == x.QuestionID);
+                    var update = SurveyModHandler.SurveyQuestionOrderings.SingleOrDefault(z => z.SurveyTypeId == x.SurveyID && z.SurveyQuestionId == x.QuestionID);
 
                     if (update == null)
                     {
@@ -216,22 +220,23 @@ namespace A_ZCamp.Controllers
 
                     else
                     {
-                        OptionsQuestions.SurveyQuestionOrderings.Remove(update);
+                        SurveyModHandler.SurveyQuestionOrderings.Remove(update);
                     }
                 }
                 
             }
 
-            OptionsQuestions.SaveChanges();
+            SurveyModHandler.SaveChanges();
 
             return RedirectToAction("SurveyOptions", "SurveyMods");
         }
 
+        //GET for Add Survey page
         public ActionResult SurveyAdd()
         {
             SurveyAddViewModel addSurvey = new SurveyAddViewModel();
 
-            var Surveys = (from x in AddQuestion.SurveyTypes
+            var Surveys = (from x in SurveyModHandler.SurveyTypes
                            orderby x.Survey ascending, x.Name
                            select new SurveyData
                            {
@@ -247,9 +252,10 @@ namespace A_ZCamp.Controllers
             return View(addSurvey);
         }
 
+        //POST for Add Survey page
         public ActionResult SurveyCreate(SurveyAddViewModel model)
         {
-            var nameCheck = (from x in AddQuestion.SurveyTypes
+            var nameCheck = (from x in SurveyModHandler.SurveyTypes
                              select x.Name).ToList();
 
             foreach (var x in nameCheck)
@@ -263,7 +269,7 @@ namespace A_ZCamp.Controllers
             }
 
 
-            var newSurvey = AddQuestion.SurveyTypes;
+            var newSurvey = SurveyModHandler.SurveyTypes;
 
             var AddSurvey = new SurveyType
             {
@@ -273,31 +279,33 @@ namespace A_ZCamp.Controllers
             };
 
             newSurvey.Add(AddSurvey);
-            AddQuestion.SaveChanges();
+            SurveyModHandler.SaveChanges();
 
             return RedirectToAction("SurveyAdd", "SurveyMods");
         }
 
+        //POST for Survey Options page
         public ActionResult UpdateQuestions(SurveyQuestionOptionsViewModel options)
         {
 
             foreach (var x in options.AllSurveyQuestions)
             {
-                var update = OptionsQuestions.SurveyQuestionOrderings.FirstOrDefault(z => z.SurveyQuestion.SurveyQuestionId == x.Qid && z.SurveyTypeId == x.Sid);
+                var update = SurveyModHandler.SurveyQuestionOrderings.FirstOrDefault(z => z.SurveyQuestion.SurveyQuestionId == x.Qid && z.SurveyTypeId == x.Sid);
                 update.Order = x.Ordering;
                 update.SurveyQuestion.Active = x.Active;
             }
 
-            OptionsQuestions.SaveChanges();
+            SurveyModHandler.SaveChanges();
 
             return RedirectToAction("Index", "SurveyMods");
         }
 
+        //POST for Add Question page
         public ActionResult AddNewQuestion(SurveyAddQuestionViewModel QModel)
         {
-            var questionCreate = NewQuestion.SurveyQuestions;
-            var questionOrdering = NewQuestion.SurveyQuestionOrderings;
-            var answersCreate = NewQuestion.SurveyQuestionSuppliedAnswers;
+            var questionCreate = SurveyModHandler.SurveyQuestions;
+            var questionOrdering = SurveyModHandler.SurveyQuestionOrderings;
+            var answersCreate = SurveyModHandler.SurveyQuestionSuppliedAnswers;
 
             var SurveyQuestion = new SurveyQuestion
             {
@@ -307,7 +315,7 @@ namespace A_ZCamp.Controllers
             };
 
             questionCreate.Add(SurveyQuestion);
-            NewQuestion.SaveChanges();
+            SurveyModHandler.SaveChanges();
 
             int Qid = SurveyQuestion.SurveyQuestionId;
 
@@ -330,16 +338,17 @@ namespace A_ZCamp.Controllers
                 SurveyTypeId = QModel.SurveyID
             });
 
-            NewQuestion.SaveChanges();
+            SurveyModHandler.SaveChanges();
 
             return RedirectToAction("Index", "SurveyMods");
         }
 
+        //GET for Question Edit page
         public ActionResult QuestionEdit()
         {
             QuestionOverallViewModel all = new QuestionOverallViewModel();
 
-            var questions = (from x in NewQuestion.SurveyQuestions
+            var questions = (from x in SurveyModHandler.SurveyQuestions
                              select new QuestionData
                              {
                                  Qid = x.SurveyQuestionId,
@@ -355,6 +364,7 @@ namespace A_ZCamp.Controllers
             return View(all);
         }
 
+        //GET for Question Edit Specific page
         public ActionResult QuestionSpecificEdit(int? questionID)
         {
             if (questionID == null)
@@ -364,9 +374,9 @@ namespace A_ZCamp.Controllers
 
             QuestionData data = new QuestionData();
 
-            var questionEdit = (from x in NewQuestion.SurveyQuestions
+            var questionEdit = (from x in SurveyModHandler.SurveyQuestions
                                 where x.SurveyQuestionId == questionID
-                                join y in NewQuestion.SurveyQuestionSuppliedAnswers on x.SurveyQuestionId equals y.SurveyQuestionId into GOOD
+                                join y in SurveyModHandler.SurveyQuestionSuppliedAnswers on x.SurveyQuestionId equals y.SurveyQuestionId into GOOD
                                 select new QuestionData
                                 {
                                     Qid = x.SurveyQuestionId,
@@ -388,21 +398,23 @@ namespace A_ZCamp.Controllers
             return View(data);
         }
 
+
+        //POST for Question Edit Specific page
         public ActionResult QuestionSpecificUpdate(QuestionData model)
         {
-            var question = OptionsQuestions.SurveyQuestions.FirstOrDefault(z => z.SurveyQuestionId == model.Qid);
+            var question = SurveyModHandler.SurveyQuestions.FirstOrDefault(z => z.SurveyQuestionId == model.Qid);
 
             question.Question = model.Question;
 
             if (model.QSupAnswers == null)
             {
-                OptionsQuestions.SaveChanges();
+                SurveyModHandler.SaveChanges();
                 return RedirectToAction("QuestionEdit", "SurveyMods");
             }
 
             else
             {
-                var suppliedAnswers = (from x in OptionsQuestions.SurveyQuestionSuppliedAnswers
+                var suppliedAnswers = (from x in SurveyModHandler.SurveyQuestionSuppliedAnswers
                                        where x.SurveyQuestionId == model.Qid
                                        select x).ToList();
 
@@ -414,11 +426,12 @@ namespace A_ZCamp.Controllers
                     z++;
                 }
 
-                OptionsQuestions.SaveChanges();
+                SurveyModHandler.SaveChanges();
                 return RedirectToAction("QuestionEdit", "SurveyMods");
             }
         }
 
+        //GET for Survey Options / Edit Survey Name page
         public ActionResult SurveyEdit(int? surveyID)
         {
             if (surveyID == null)
@@ -426,7 +439,7 @@ namespace A_ZCamp.Controllers
                 return RedirectToAction("Index", "SurveyMods");
             }
 
-            var SurveyEdit = OptionsQuestions.SurveyTypes.FirstOrDefault(z => z.SurveyTypeId == surveyID);
+            var SurveyEdit = SurveyModHandler.SurveyTypes.FirstOrDefault(z => z.SurveyTypeId == surveyID);
 
             if (SurveyEdit == null)
             {
@@ -443,13 +456,14 @@ namespace A_ZCamp.Controllers
             return View(SurveyData);
         }
 
+        //POST for Survey Options / Edit Survey Name page
         public ActionResult SurveyEditSubmit(SurveyData model)
         {
-            var survey = OptionsQuestions.SurveyTypes.FirstOrDefault(z => z.SurveyTypeId == model.Sid);
+            var survey = SurveyModHandler.SurveyTypes.FirstOrDefault(z => z.SurveyTypeId == model.Sid);
 
             survey.Name = model.SurveyName;
 
-            OptionsQuestions.SaveChanges();
+            SurveyModHandler.SaveChanges();
 
             return RedirectToAction("SurveyOptions", "SurveyMods");
         }

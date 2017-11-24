@@ -207,12 +207,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\REPORTVIEWMODEL.cs" />
-    <Compile Include="Models\SurveyAddQuestionViewModel.cs" />
-    <Compile Include="Models\SurveyAddViewModel.cs" />
-    <Compile Include="Models\SurveyOptionsViewModel.cs" />
-    <Compile Include="Models\SurveyPageViewModel.cs" />
     <Compile Include="Models\SurveyQuestionModels.cs" />
-    <Compile Include="Models\SurveyQuestionOptionsViewModel.cs" />
     <Compile Include="Models\SurveyRepsonseModels.cs" />
     <Compile Include="Models\SurveyRespondentModels.cs" />
     <Compile Include="Models\ViewModels.cs" />

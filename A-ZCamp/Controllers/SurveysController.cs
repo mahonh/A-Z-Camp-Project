@@ -9,21 +9,20 @@ namespace A_ZCamp.Controllers
 {
     public class SurveysController : Controller
     {
-        private ApplicationDbContext preSurvey;
-      
-        private ApplicationDbContext addResults;
+        private ApplicationDbContext SurveyHandler;
 
         public SurveysController()
         {
-            addResults = new ApplicationDbContext();
-            preSurvey = new ApplicationDbContext();
+            SurveyHandler = new ApplicationDbContext();
         }
 
+        //Index for Survey
         public ActionResult Index()
         {
             return View();
         }
 
+        //POST for Survey Index page
         public ActionResult IndexUpdate(SurveyLandingViewModel model)
         {
             if (!ModelState.IsValid)
@@ -31,12 +30,12 @@ namespace A_ZCamp.Controllers
                 return View("Index", model);
             }
 
-            var userAdd = addResults.SurveyRespondents;
-            var update = addResults.SurveyRespondents.SingleOrDefault(z => z.Email == model.Email);
+            var userAdd = SurveyHandler.SurveyRespondents;
+            var update = SurveyHandler.SurveyRespondents.SingleOrDefault(z => z.Email == model.Email);
 
             if (update != null)
             {
-                var checkSurveyTaker = (from x in addResults.SurveyRespondents
+                var checkSurveyTaker = (from x in SurveyHandler.SurveyRespondents
                                         where x.Email == update.Email
                                         select new SurveyLandingViewModel
                                         {
@@ -61,7 +60,7 @@ namespace A_ZCamp.Controllers
                 Random rand = new Random();
                 String temp = rand.Next(1, 999999999).ToString();
 
-                var randCheck = addResults.SurveyRespondents.SingleOrDefault(z => z.RID == temp);
+                var randCheck = SurveyHandler.SurveyRespondents.SingleOrDefault(z => z.RID == temp);
                 Boolean newNumber = true;
 
                 while (newNumber)
@@ -91,22 +90,23 @@ namespace A_ZCamp.Controllers
                 model.RID = temp;
 
                 userAdd.Add(addUser);
-                addResults.SaveChanges();
+                SurveyHandler.SaveChanges();
             }
 
             return RedirectToAction("SurveyLanding", model);
         }
 
+        //GET for Survey Landing page
         public ActionResult SurveyLanding(SurveyLandingViewModel model)
         {
-            var RIDcheck = addResults.SurveyRespondents.SingleOrDefault(z => z.RID == model.RID);
+            var RIDcheck = SurveyHandler.SurveyRespondents.SingleOrDefault(z => z.RID == model.RID);
 
             if (RIDcheck == null || model.RID == null)
             {
                 return RedirectToAction("Index", "Surveys");
             }
 
-            var display = (from x in preSurvey.SurveyTypes
+            var display = (from x in SurveyHandler.SurveyTypes
                            where x.Survey == Survey.Other && x.Active == true
                            select new SurveyLandingViewModel
                            {
@@ -123,9 +123,10 @@ namespace A_ZCamp.Controllers
             return View(model);
         }
 
+        //GET for Other Survey page
         public ActionResult OtherSurvey(String RID)
         {
-            var RIDcheck = addResults.SurveyRespondents.SingleOrDefault(z => z.RID == RID);
+            var RIDcheck = SurveyHandler.SurveyRespondents.SingleOrDefault(z => z.RID == RID);
 
             if (RIDcheck == null || RID == null)
             {
@@ -137,9 +138,9 @@ namespace A_ZCamp.Controllers
             vms.ID = RID;
             vms.SurveyType = Survey.Other;
 
-            var questionsToShow = preSurvey.SurveyQuestionOrderings;
-            var answersToShow = preSurvey.SurveyQuestionSuppliedAnswers;
-            var nameToShow = preSurvey.SurveyTypes;
+            var questionsToShow = SurveyHandler.SurveyQuestionOrderings;
+            var answersToShow = SurveyHandler.SurveyQuestionSuppliedAnswers;
+            var nameToShow = SurveyHandler.SurveyTypes;
 
             var surveyData = (from x in questionsToShow
                               where x.SurveyType.Survey == Survey.Other &&
@@ -173,9 +174,10 @@ namespace A_ZCamp.Controllers
             return View(vms);
         }
 
+        //GET for PreSurvey page
         public ActionResult PreSurvey(String RID)
         {
-            var RIDcheck = addResults.SurveyRespondents.SingleOrDefault(z => z.RID == RID);
+            var RIDcheck = SurveyHandler.SurveyRespondents.SingleOrDefault(z => z.RID == RID);
 
             if (RIDcheck == null || RID == null)
             {
@@ -187,8 +189,8 @@ namespace A_ZCamp.Controllers
             vms.ID = RID;
             vms.SurveyType = Survey.PreCamp;
 
-            var questionsToShow = preSurvey.SurveyQuestionOrderings;
-            var answersToShow = preSurvey.SurveyQuestionSuppliedAnswers;
+            var questionsToShow = SurveyHandler.SurveyQuestionOrderings;
+            var answersToShow = SurveyHandler.SurveyQuestionSuppliedAnswers;
 
             var surveyData = (from x in questionsToShow
                              where x.SurveyType.Survey == Survey.PreCamp &&
@@ -213,9 +215,10 @@ namespace A_ZCamp.Controllers
             return View(vms);
         }
 
+        //GET for PostSurvey page
         public ActionResult PostSurvey(String RID)
         {
-            var RIDcheck = addResults.SurveyRespondents.SingleOrDefault(z => z.RID == RID);
+            var RIDcheck = SurveyHandler.SurveyRespondents.SingleOrDefault(z => z.RID == RID);
 
             if (RIDcheck == null || RID == null)
             {
@@ -227,8 +230,8 @@ namespace A_ZCamp.Controllers
             vms.ID = RID;
             vms.SurveyType = Survey.PostCamp;
 
-            var questionsToShow = preSurvey.SurveyQuestionOrderings;
-            var answersToShow = preSurvey.SurveyQuestionSuppliedAnswers;
+            var questionsToShow = SurveyHandler.SurveyQuestionOrderings;
+            var answersToShow = SurveyHandler.SurveyQuestionSuppliedAnswers;
 
             var surveyData = (from x in questionsToShow
                               where x.SurveyType.Survey == Survey.PostCamp &&
@@ -253,9 +256,10 @@ namespace A_ZCamp.Controllers
             return View(vms);
         }
 
+        //POST for all Survey pages
         public ActionResult AddSurveyResults(SurveyPageViewModel newResults)
         {
-            var test = addResults.SurveyResponses;
+            var test = SurveyHandler.SurveyResponses;
 
             foreach (var x in newResults.QuestionData)
             {
@@ -267,34 +271,35 @@ namespace A_ZCamp.Controllers
                 });
             }
 
-            addResults.SaveChanges();
+            SurveyHandler.SaveChanges();
 
-            var userLookup = addResults.SurveyRespondents.SingleOrDefault(z => z.RID == newResults.ID);
+            var userLookup = SurveyHandler.SurveyRespondents.SingleOrDefault(z => z.RID == newResults.ID);
 
             if (newResults.SurveyType == Survey.PreCamp)
             {
                 userLookup.PreCampComplete = true;
-                addResults.SaveChanges();
+                SurveyHandler.SaveChanges();
             }
 
             else if (newResults.SurveyType == Survey.PostCamp)
             {
                 userLookup.PostCampComplete = true;
-                addResults.SaveChanges();
+                SurveyHandler.SaveChanges();
             }
 
             else if (newResults.SurveyType == Survey.Other)
             {
                 userLookup.OtherComplete = true;
-                addResults.SaveChanges();
+                SurveyHandler.SaveChanges();
             }
 
             return RedirectToAction("SurveyConfirm", new { RID = newResults.ID});
         }
 
+        //GET for Survey Confirm page
         public ActionResult SurveyConfirm(String RID)
         {
-            var RIDcheck = addResults.SurveyRespondents.SingleOrDefault(z => z.RID == RID);
+            var RIDcheck = SurveyHandler.SurveyRespondents.SingleOrDefault(z => z.RID == RID);
 
             if (RIDcheck == null || RID == null )
             {

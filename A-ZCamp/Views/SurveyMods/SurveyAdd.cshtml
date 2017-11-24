@@ -11,8 +11,10 @@
 
 @using (Html.BeginForm("SurveyCreate", "SurveyMods", FormMethod.Post, new { @class = "form" }))
 {
-
     <h3>All Surveys</h3>
+
+    if (Model.Surveys != null)
+    {
 
     <table class="table table-bordered">
         <thead>
@@ -38,6 +40,13 @@
             }
         </tbody>
     </table>
+
+                }
+
+                else
+                {
+                    <h3>No Surveys have been created.</h3>
+                }
 
     <h4>Survey Type</h4>
 

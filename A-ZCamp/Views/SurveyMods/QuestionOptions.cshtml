@@ -7,38 +7,49 @@
 <br />
 <h2>Modify a Survey Question</h2>
 
-@using (Html.BeginForm("UpdateQuestions", "SurveyMods", FormMethod.Post, new { @class = "form" }))
+@if (Model.AllSurveyQuestions != null)
 {
-    int z = 0;
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Survey Name</th>
-                <th>Question</th>
-                <th>Question Type</th>
-                <th>Active?</th>
-                <th>Order</th>
-            </tr>
-        </thead>
-        <tbody>
+    using (Html.BeginForm("UpdateQuestions", "SurveyMods", FormMethod.Post, new { @class = "form" }))
+    {
+        int z = 0;
 
-            @foreach (var x in Model.AllSurveyQuestions)
-            {
+
+
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                        @Html.HiddenFor(m => m.AllSurveyQuestions[z].Qid)
-                        @Html.HiddenFor(m => m.AllSurveyQuestions[z].Sid)
-                    <td>@x.SurveyName</td>
-                    <td>@x.Question</td>
-                    <td>@x.QuestionType.ToString()</td>
-                    <td>@Html.EditorFor(m => m.AllSurveyQuestions[z].Active)
-                    </td>
-                    <td>@Html.TextBoxFor(m => m.AllSurveyQuestions[z].Ordering, new { required = "required" })</td>
+                    <th>Survey Name</th>
+                    <th>Question</th>
+                    <th>Question Type</th>
+                    <th>Active?</th>
+                    <th>Order</th>
                 </tr>
-                z++;
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
 
-    <input type="submit" class="btn btn-primary" value="Update" />
+                @foreach (var x in Model.AllSurveyQuestions)
+                {
+                    <tr>
+                            @Html.HiddenFor(m => m.AllSurveyQuestions[z].Qid)
+                            @Html.HiddenFor(m => m.AllSurveyQuestions[z].Sid)
+                        <td>@x.SurveyName</td>
+                        <td>@x.Question</td>
+                        <td>@x.QuestionType.ToString()</td>
+                        <td>@Html.EditorFor(m => m.AllSurveyQuestions[z].Active)
+                        </td>
+                        <td>@Html.TextBoxFor(m => m.AllSurveyQuestions[z].Ordering, new { required = "required" })</td>
+                    </tr>
+                    z++;
+                }
+            </tbody>
+        </table>
+
+        <input type="submit" class="btn btn-primary" value="Update" />
+    }
+}
+
+else
+{
+    <h3>No Quesitons have been created for the active surveys.</h3>
 }

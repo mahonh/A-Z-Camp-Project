@@ -16,100 +16,108 @@
     int b = 0;
     int c = 0;
 
-    <h4>Pre-Camp Surveys</h4>
+    if (Model == null)
+    {
+        <h3>No Surveys have been created.</h3>
+    }
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Active</th>
-                <th>Survey Name</th>
-                <th>Options</th>
-            </tr>
-        </thead>
-        <tbody>
+    else
+    {
+        <h4>Pre-Camp Surveys</h4>
 
-            @foreach (var x in Model.AllSurveys)
-            {
-                if (x.SurveyType == A_ZCamp.Models.Survey.PreCamp)
-                {
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    @Html.HiddenFor(m => m.AllSurveys[a].Sid)
-                    @Html.HiddenFor(m => m.AllSurveys[a].SurveyType)
-                    @Html.HiddenFor(m => m.AllSurveys[a].SurveyName)
+                    <th>Active</th>
+                    <th>Survey Name</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
 
-                    <td>@Html.EditorFor(m => m.AllSurveys[a].Active, true)</td>
-                    <td>@x.SurveyName</td>
-                    <td>@Html.ActionLink("Edit Questions", "SurveyQuestionUpdate", new { surveyID = Model.AllSurveys[a].Sid }) &nbsp; @Html.ActionLink("Edit Name", "SurveyEdit", new { surveyID = Model.AllSurveys[a].Sid })</td>
-                </tr>  
-                }
-                a++;
-            }
-        </tbody>
-    </table>
-
-
-    <h4>Post-Camp Surveys</h4>
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Active</th>
-                <th>Survey Name</th>
-                <th>Options</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (var y in Model.AllSurveys)
-            {
-                if (y.SurveyType == A_ZCamp.Models.Survey.PostCamp)
+                @foreach (var x in Model.AllSurveys)
                 {
-                <tr>
-                    @Html.HiddenFor(m => m.AllSurveys[b].Sid)
-                    @Html.HiddenFor(m => m.AllSurveys[b].SurveyType)
-                    @Html.HiddenFor(m => m.AllSurveys[b].SurveyName)
-
-                    <td>@Html.EditorFor(m => m.AllSurveys[b].Active, true)</td>
-                    <td>@y.SurveyName</td>
-                    <td>@Html.ActionLink("Edit Questions", "SurveyQuestionUpdate", new { surveyID = Model.AllSurveys[b].Sid }) &nbsp; @Html.ActionLink("Edit Name", "SurveyEdit", new { surveyID = Model.AllSurveys[b].Sid })</td>
-                </tr>  
-                }
-                b++;
-            }
-        </tbody>
-    </table>
-
-
-    <h4>Other Surveys</h4>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Active</th>
-                <th>Survey Name</th>
-                <th>Options</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (var z in Model.AllSurveys)
-            {
-                if (z.SurveyType == A_ZCamp.Models.Survey.Other)
-                {
+                    if (x.SurveyType == A_ZCamp.Models.Survey.PreCamp)
+                    {
                     <tr>
-                        @Html.HiddenFor(m => m.AllSurveys[c].Sid)
-                        @Html.HiddenFor(m => m.AllSurveys[c].SurveyType)
-                        @Html.HiddenFor(m => m.AllSurveys[c].SurveyName)
+                        @Html.HiddenFor(m => m.AllSurveys[a].Sid)
+                        @Html.HiddenFor(m => m.AllSurveys[a].SurveyType)
+                        @Html.HiddenFor(m => m.AllSurveys[a].SurveyName)
 
-                        <td>@Html.EditorFor(m => m.AllSurveys[c].Active, true)</td>
-                        <td>@z.SurveyName</td>
-                        <td>@Html.ActionLink("Edit Questions", "SurveyQuestionUpdate", new { surveyID = Model.AllSurveys[c].Sid }) &nbsp; @Html.ActionLink("Edit Name", "SurveyEdit", new { surveyID = Model.AllSurveys[c].Sid })</td>
-                    </tr>
+                        <td>@Html.EditorFor(m => m.AllSurveys[a].Active, true)</td>
+                        <td>@x.SurveyName</td>
+                        <td>@Html.ActionLink("Edit Questions", "SurveyQuestionUpdate", new { surveyID = Model.AllSurveys[a].Sid }) &nbsp; @Html.ActionLink("Edit Name", "SurveyEdit", new { surveyID = Model.AllSurveys[a].Sid })</td>
+                    </tr>  
+                    }
+                    a++;
                 }
-                c++;
-            }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <br />
-    <input type="submit" class="btn btn-primary" value="Update" />
+
+        <h4>Post-Camp Surveys</h4>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Active</th>
+                    <th>Survey Name</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var y in Model.AllSurveys)
+                {
+                    if (y.SurveyType == A_ZCamp.Models.Survey.PostCamp)
+                    {
+                    <tr>
+                        @Html.HiddenFor(m => m.AllSurveys[b].Sid)
+                        @Html.HiddenFor(m => m.AllSurveys[b].SurveyType)
+                        @Html.HiddenFor(m => m.AllSurveys[b].SurveyName)
+
+                        <td>@Html.EditorFor(m => m.AllSurveys[b].Active, true)</td>
+                        <td>@y.SurveyName</td>
+                        <td>@Html.ActionLink("Edit Questions", "SurveyQuestionUpdate", new { surveyID = Model.AllSurveys[b].Sid }) &nbsp; @Html.ActionLink("Edit Name", "SurveyEdit", new { surveyID = Model.AllSurveys[b].Sid })</td>
+                    </tr>  
+                    }
+                    b++;
+                }
+            </tbody>
+        </table>
+
+
+        <h4>Other Surveys</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Active</th>
+                    <th>Survey Name</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var z in Model.AllSurveys)
+                {
+                    if (z.SurveyType == A_ZCamp.Models.Survey.Other)
+                    {
+                        <tr>
+                            @Html.HiddenFor(m => m.AllSurveys[c].Sid)
+                            @Html.HiddenFor(m => m.AllSurveys[c].SurveyType)
+                            @Html.HiddenFor(m => m.AllSurveys[c].SurveyName)
+
+                            <td>@Html.EditorFor(m => m.AllSurveys[c].Active, true)</td>
+                            <td>@z.SurveyName</td>
+                            <td>@Html.ActionLink("Edit Questions", "SurveyQuestionUpdate", new { surveyID = Model.AllSurveys[c].Sid }) &nbsp; @Html.ActionLink("Edit Name", "SurveyEdit", new { surveyID = Model.AllSurveys[c].Sid })</td>
+                        </tr>
+                    }
+                    c++;
+                }
+            </tbody>
+        </table>
+
+        <br />
+        <input type="submit" class="btn btn-primary" value="Update" />
+    }
 }

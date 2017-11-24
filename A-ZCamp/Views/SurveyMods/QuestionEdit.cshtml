@@ -7,31 +7,37 @@
 <br />
 <h2>Edit a Question</h2>
 
-<br />
-
 @{int z = 0; }
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Question Type</th>
-            <th>Question</th>
-            <th>Options</th>
-        </tr>
-    </thead>
-    <tbody>
-
-        @foreach (var x in Model.allQuestions)
-        {
+@if (Model.allQuestions != null)
+{
+    <table class="table table-bordered">
+        <thead>
             <tr>
+                <th>Question Type</th>
+                <th>Question</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
 
-                @Html.HiddenFor(m => m.allQuestions[z].QType)
+            @foreach (var x in Model.allQuestions)
+            {
+                <tr>
 
-                <td>@x.QType.ToString()</td>
-                <td>@x.Question</td>
-                <td>@Html.ActionLink("Edit", "QuestionSpecificEdit", new { questionID = Model.allQuestions[z].Qid })</td>
-        </tr>
-            z++;
-        }
-    </tbody>
-</table>
+                    @Html.HiddenFor(m => m.allQuestions[z].QType)
+
+                    <td>@x.QType.ToString()</td>
+                    <td>@x.Question</td>
+                    <td>@Html.ActionLink("Edit", "QuestionSpecificEdit", new { questionID = Model.allQuestions[z].Qid })</td>
+            </tr>
+                z++;
+            }
+        </tbody>
+    </table>
+}
+
+else
+{
+    <h3>No Quesitons have been created.</h3>
+}
