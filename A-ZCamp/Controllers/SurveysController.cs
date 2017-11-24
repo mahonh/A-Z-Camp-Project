@@ -99,7 +99,9 @@ namespace A_ZCamp.Controllers
 
         public ActionResult SurveyLanding(SurveyLandingViewModel model)
         {
-            if (model.Email == null)
+            var RIDcheck = addResults.SurveyRespondents.SingleOrDefault(z => z.RID == model.RID);
+
+            if (RIDcheck == null || model.RID == null)
             {
                 return RedirectToAction("Index", "Surveys");
             }
@@ -123,7 +125,9 @@ namespace A_ZCamp.Controllers
 
         public ActionResult OtherSurvey(String RID)
         {
-            if (RID == null)
+            var RIDcheck = addResults.SurveyRespondents.SingleOrDefault(z => z.RID == RID);
+
+            if (RIDcheck == null || RID == null)
             {
                 return RedirectToAction("Index", "Surveys");
             }
@@ -171,7 +175,9 @@ namespace A_ZCamp.Controllers
 
         public ActionResult PreSurvey(String RID)
         {
-            if (RID == null)
+            var RIDcheck = addResults.SurveyRespondents.SingleOrDefault(z => z.RID == RID);
+
+            if (RIDcheck == null || RID == null)
             {
                 return RedirectToAction("Index", "Surveys");
             }
@@ -209,7 +215,9 @@ namespace A_ZCamp.Controllers
 
         public ActionResult PostSurvey(String RID)
         {
-            if (RID == null)
+            var RIDcheck = addResults.SurveyRespondents.SingleOrDefault(z => z.RID == RID);
+
+            if (RIDcheck == null || RID == null)
             {
                 return RedirectToAction("Index", "Surveys");
             }
@@ -281,11 +289,18 @@ namespace A_ZCamp.Controllers
                 addResults.SaveChanges();
             }
 
-            return RedirectToAction("SurveyConfirm", "Surveys");
+            return RedirectToAction("SurveyConfirm", new { RID = newResults.ID});
         }
 
-        public ActionResult SurveyConfirm()
+        public ActionResult SurveyConfirm(String RID)
         {
+            var RIDcheck = addResults.SurveyRespondents.SingleOrDefault(z => z.RID == RID);
+
+            if (RIDcheck == null || RID == null )
+            {
+                return RedirectToAction("Index", "Surveys");
+            }
+
             return View();
         }
 

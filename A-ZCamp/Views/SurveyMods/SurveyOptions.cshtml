@@ -39,7 +39,7 @@
 
                     <td>@Html.EditorFor(m => m.AllSurveys[a].Active, true)</td>
                     <td>@x.SurveyName</td>
-                    <td>@Html.ActionLink("Edit Questions", "SurveyQuestionUpdate", new { surveyID = Model.AllSurveys[a].Sid })</td>
+                    <td>@Html.ActionLink("Edit Questions", "SurveyQuestionUpdate", new { surveyID = Model.AllSurveys[a].Sid }) &nbsp; @Html.ActionLink("Edit Name", "SurveyEdit", new { surveyID = Model.AllSurveys[a].Sid })</td>
                 </tr>  
                 }
                 a++;
@@ -71,7 +71,7 @@
 
                     <td>@Html.EditorFor(m => m.AllSurveys[b].Active, true)</td>
                     <td>@y.SurveyName</td>
-                    <td>@Html.ActionLink("Edit Questions", "SurveyQuestionUpdate", new { surveyID = Model.AllSurveys[b].Sid })</td>
+                    <td>@Html.ActionLink("Edit Questions", "SurveyQuestionUpdate", new { surveyID = Model.AllSurveys[b].Sid }) &nbsp; @Html.ActionLink("Edit Name", "SurveyEdit", new { surveyID = Model.AllSurveys[b].Sid })</td>
                 </tr>  
                 }
                 b++;
@@ -85,8 +85,8 @@
         <thead>
             <tr>
                 <th>Active</th>
-                <th>Survey Type</th>
                 <th>Survey Name</th>
+                <th>Options</th>
             </tr>
         </thead>
         <tbody>
@@ -102,7 +102,7 @@
 
                         <td>@Html.EditorFor(m => m.AllSurveys[c].Active, true)</td>
                         <td>@z.SurveyName</td>
-                        <td>@Html.ActionLink("Edit Questions", "SurveyQuestionUpdate", new { surveyID = Model.AllSurveys[c].Sid })</td>
+                        <td>@Html.ActionLink("Edit Questions", "SurveyQuestionUpdate", new { surveyID = Model.AllSurveys[c].Sid }) &nbsp; @Html.ActionLink("Edit Name", "SurveyEdit", new { surveyID = Model.AllSurveys[c].Sid })</td>
                     </tr>
                 }
                 c++;

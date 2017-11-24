@@ -334,5 +334,124 @@ namespace A_ZCamp.Controllers
 
             return RedirectToAction("Index", "SurveyMods");
         }
+
+        public ActionResult QuestionEdit()
+        {
+            QuestionOverallViewModel all = new QuestionOverallViewModel();
+
+            var questions = (from x in NewQuestion.SurveyQuestions
+                             select new QuestionData
+                             {
+                                 Qid = x.SurveyQuestionId,
+                                 Question = x.Question,
+                                 QType = x.QuestionType
+                             }).ToList();
+
+            foreach (var x in questions)
+            {
+                all.allQuestions.Add(x);
+            }
+
+            return View(all);
+        }
+
+        public ActionResult QuestionSpecificEdit(int? questionID)
+        {
+            if (questionID == null)
+            {
+                return RedirectToAction("Index", "SurveyMods");
+            }
+
+            QuestionData data = new QuestionData();
+
+            var questionEdit = (from x in NewQuestion.SurveyQuestions
+                                where x.SurveyQuestionId == questionID
+                                join y in NewQuestion.SurveyQuestionSuppliedAnswers on x.SurveyQuestionId equals y.SurveyQuestionId into GOOD
+                                select new QuestionData
+                                {
+                                    Qid = x.SurveyQuestionId,
+                                    QType = x.QuestionType,
+                                    Question = x.Question,
+                                    QSupAnswers = (from y in GOOD select y.Answer).ToList()
+                                }).ToList();
+
+            if (questionEdit == null)
+            {
+                return RedirectToAction("Index", "SurveyMods");
+            }
+
+            foreach (var x in questionEdit)
+            {
+                data = x;
+            }
+
+            return View(data);
+        }
+
+        public ActionResult QuestionSpecificUpdate(QuestionData model)
+        {
+            var question = OptionsQuestions.SurveyQuestions.FirstOrDefault(z => z.SurveyQuestionId == model.Qid);
+
+            question.Question = model.Question;
+
+            if (model.QSupAnswers == null)
+            {
+                OptionsQuestions.SaveChanges();
+                return RedirectToAction("QuestionEdit", "SurveyMods");
+            }
+
+            else
+            {
+                var suppliedAnswers = (from x in OptionsQuestions.SurveyQuestionSuppliedAnswers
+                                       where x.SurveyQuestionId == model.Qid
+                                       select x).ToList();
+
+                int z = 0;
+
+                foreach (var x in suppliedAnswers)
+                {
+                    x.Answer = model.QSupAnswers[z];
+                    z++;
+                }
+
+                OptionsQuestions.SaveChanges();
+                return RedirectToAction("QuestionEdit", "SurveyMods");
+            }
+        }
+
+        public ActionResult SurveyEdit(int? surveyID)
+        {
+            if (surveyID == null)
+            {
+                return RedirectToAction("Index", "SurveyMods");
+            }
+
+            var SurveyEdit = OptionsQuestions.SurveyTypes.FirstOrDefault(z => z.SurveyTypeId == surveyID);
+
+            if (SurveyEdit == null)
+            {
+                return RedirectToAction("Index", "SurveyMods");
+            }
+
+            SurveyData SurveyData = new SurveyData
+            {
+                SurveyName = SurveyEdit.Name,
+                SurveyType = SurveyEdit.Survey,
+                Sid = SurveyEdit.SurveyTypeId
+            };
+
+            return View(SurveyData);
+        }
+
+        public ActionResult SurveyEditSubmit(SurveyData model)
+        {
+            var survey = OptionsQuestions.SurveyTypes.FirstOrDefault(z => z.SurveyTypeId == model.Sid);
+
+            survey.Name = model.SurveyName;
+
+            OptionsQuestions.SaveChanges();
+
+            return RedirectToAction("SurveyOptions", "SurveyMods");
+        }
     }
 }

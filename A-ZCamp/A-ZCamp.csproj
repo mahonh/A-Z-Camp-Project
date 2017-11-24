@@ -329,6 +329,9 @@
     <Content Include="Views\Surveys\SurveyLanding.cshtml" />
     <Content Include="Views\Surveys\OtherSurvey.cshtml" />
     <Content Include="Views\Surveys\SurveyConfirm.cshtml" />
+    <Content Include="Views\SurveyMods\QuestionEdit.cshtml" />
+    <Content Include="Views\SurveyMods\SurveyEdit.cshtml" />
+    <Content Include="Views\SurveyMods\QuestionSpecificEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

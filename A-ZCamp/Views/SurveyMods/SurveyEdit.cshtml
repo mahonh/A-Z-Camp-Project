@@ -1,0 +1,26 @@
+﻿@model A_ZCamp.Models.SurveyData
+@{
+    ViewBag.Title = "Survey Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Edit a Survey's Name</h2>
+
+@using (Html.BeginForm("SurveyEditSubmit", "SurveyMods", FormMethod.Post, new { @class = "form" }))
+{
+    @Html.HiddenFor(m => m.Sid)
+
+    <br />
+    <h4>Survey Name: </h4>
+    @Html.TextBoxFor(m => m.SurveyName, new { required = "required" })
+
+    <br />
+    <br />
+    <h4>Survey Type: </h4>
+    @Html.Label(Model.SurveyType.ToString())
+
+    <br />
+    <br />
+    <input type="submit" class="btn btn-primary " value="Update" />
+}
