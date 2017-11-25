@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 using System.Linq;
 using System.Web;
 
@@ -146,5 +147,62 @@ namespace A_ZCamp.Models
         public QuestionType QuestionType { get; set; }
         public Boolean Active { get; set; }
         public int Ordering { get; set; }
+    }
+
+    public class ReportDropDown
+    {
+        public Survey SurveyType { get; set; }
+        public int SurveyID { get; set; }
+        public QuestionType QuestionType { get; set; }
+        public int QuestionID { get; set; }
+    }
+
+    public class ChartMaker
+    {
+        public ChartMaker()
+        {
+            ChartData = new List<ChartMakerData>();
+        }
+        public List<ChartMakerData> ChartData { get; set; }
+    }
+
+    public class ChartMakerData
+    {
+        public ChartMakerData()
+        {
+            yValues = new List<int>();
+            xValues = new List<string>();
+        }
+        public List<int> yValues { get; set; }
+        public List<String> xValues { get; set; }
+    }
+
+    public class SurveyReportsViewModel
+    {
+        public SurveyReportsViewModel()
+        {
+            Surveys = new List<SelectListItem>();
+            DataToRun = new List<SurveyReportsData>();
+        }
+        public String SurveyChoice { get; set; }
+        public IEnumerable<SelectListItem> Surveys { get; set; }
+        public List<SurveyReportsData> DataToRun { get; set; }
+    }
+
+    public class SurveyReportsData
+    {
+        public int SurveyID { get; set; }
+        public int QuestionID { get; set; }
+        public QuestionType QuestionType { get; set; }
+        public String QuestionName { get; set; }
+        public Boolean Include { get; set; }
+        public ChartType ChartType { get; set; }
+    }
+
+    public enum ChartType
+    {
+        BarChart = 0,
+        PieChart,
+        Table
     }
 }

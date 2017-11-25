@@ -1,32 +1,81 @@
-﻿@model A_ZCamp.Models.REPORTVIEWMODEL
+﻿@model A_ZCamp.Models.SurveyReportsViewModel
 @{
     ViewBag.Title = "Reporting";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <br />
-
 <h2>Reporting</h2>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Counter</th>
-            <th>Survey Name</th>
-            <th>Question</th>
-            <th>Response</th>
-        </tr>
-    </thead>
-    <tbody>
 
-        @foreach (var x in Model.reportData)
-        {
+@using (Html.BeginForm("ViewQuestion", "SurveyReports", FormMethod.Post, new { @class = "form" }))
+{
+    <h3>Survey Name</h3>
+    @Html.DropDownListFor(x => x.SurveyChoice, Model.Surveys)
+
+    <input type="submit" class="btn btn-primary" value="View"/>
+}
+
+@if (Model.DataToRun.Count != 0)
+{
+    using (Html.BeginForm("RunReport", "SurveyReports", FormMethod.Post, new { @class = "form" }))
+    {
+        <div class="container">
+            <h2>Hover Rows</h2>
+            <p>The .table-hover class enables a hover state on table rows:</p>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Include?</th>
+                        <th>Question Name</th>
+                        <th>Question Type</th>
+                        <th>Chart Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int z = 0;}
+                    @foreach (var x in Model.DataToRun)
+                    {
+                    <tr>
+                        @Html.HiddenFor(m => m.DataToRun[z].QuestionID)
+                        @Html.HiddenFor(m => m.DataToRun[z].SurveyID)
+
+                        <td>@Html.EditorFor(m => m.DataToRun[z].Include)</td>
+                        <td>@x.QuestionName</td>
+                        <td>@x.QuestionType.ToString()</td>
+                        <td>@Html.EnumDropDownListFor(m => m.DataToRun[z].ChartType, null, new { @class = "form-control" })</td>
+                    </tr>
+                    {z++;}
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Run Report" />
+    }
+}
+
+@*
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <th scope="row">1</th>
-                <td>@x.Survey</td>
-                <td>@x.Question</td>
-                <td>@x.Response</td>
-            </tr> 
-        }
-    </tbody>
-</table>
+                <th>Counter</th>
+                <th>Survey Name</th>
+                <th>Question</th>
+                <th>Response</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var x in Model.reportData)
+            {
+                <tr>
+                    <th scope="row">1</th>
+                    <td>@x.Survey</td>
+                    <td>@x.Question</td>
+                    <td>@x.Response</td>
+                </tr>
+                }
+        </tbody>
+    </table>
+*@

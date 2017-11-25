@@ -1,0 +1,59 @@
+﻿@model A_ZCamp.Models.ChartMaker
+@{
+    ViewBag.Title = "BarChart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>BarChart</h2>
+@*
+        @{
+        var myChart = new Chart(width: 1200, height: 800).AddTitle("Chart Title")
+            .AddSeries(chartType: "Bar", xValue: Model.xValues, yValues: Model.yValues)
+            .Write();
+    }*@
+
+@**@
+
+@*
+    <script src="~/Scripts/Chart.js"></script>
+
+    @for (int i = 0; i < 3; i++)
+    {
+        <canvas id="bar-chart + @i" width="600" height="400"></canvas>
+
+        <script>
+
+        var xVals = @Html.Raw(Json.Encode(Model.xValues));
+        var yVals = @Html.Raw(Json.Encode(Model.yValues));
+
+
+            new Chart(document.getElementById("bar-chart + @i"), {
+            type: 'bar',
+            data: {
+                labels: xVals,
+              datasets: [
+                {
+                  //label: "Population (millions)",
+                  backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                  data: yVals
+                }
+              ]
+            },
+            options: {
+                scales: { yAxes: [{ ticks: { beginAtZero: true } }] },
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Predicted world population (millions) in 2050'
+              }
+            }
+            });
+        </script>
+*@
+    <br />
+    <br />
+    <br />
+    <br />
+}
+
