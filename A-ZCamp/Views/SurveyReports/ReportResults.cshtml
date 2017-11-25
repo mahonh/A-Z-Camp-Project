@@ -1,0 +1,147 @@
+﻿@model A_ZCamp.Models.ChartMaker
+@{
+    ViewBag.Title = "Report Results";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>Report Results</h2>
+
+<script src="~/Scripts/Chart.js"></script>
+
+@{int z = 0;}
+
+@foreach (var x in Model.ChartData)
+{
+    if (x.ChartType == A_ZCamp.Models.ChartType.BarChart)
+    {
+        <canvas id="bar-chart + @z" width="600" height="400"></canvas>
+        <br />
+
+        <script>
+
+            var xVals = @Html.Raw(Json.Encode(x.xValues));
+            var yVals = @Html.Raw(Json.Encode(x.yValues));
+            var title = @Html.Raw(Json.Encode(x.QuestionName));
+
+
+            new Chart(document.getElementById("bar-chart + @z"), {
+                type: 'bar',
+                data: {
+                  labels: xVals,
+                  datasets: [
+                    {
+                      //label: "Population (millions)",
+                      backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                      data: yVals
+                    }
+                  ]
+                },
+                options: {
+                    scales: { yAxes: [{ ticks: { beginAtZero: true } }] },
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: title
+                  }
+                }
+                });
+        </script>
+        z++;
+    }
+
+    else if (x.ChartType == A_ZCamp.Models.ChartType.PieChart)
+    {
+        <canvas id="pie-chart + @z" width="600" height="400"></canvas>
+        <br />
+
+        <script>
+            var xVals = @Html.Raw(Json.Encode(x.xValues));
+            var yVals = @Html.Raw(Json.Encode(x.yValues));
+            var title = @Html.Raw(Json.Encode(x.QuestionName));
+
+            new Chart(document.getElementById("pie-chart + @z"), {
+                type: 'pie',
+                data: {
+                    labels: xVals,
+                    datasets: [{
+                        //label: "Population (millions)",
+                        backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                        data: yVals
+                    }]
+                },
+                options: {
+                    legend: { display: true },
+                    title: {
+                        display: true,
+                        text: title
+                    }
+                }
+            });
+        </script>
+        z++;
+    }
+
+    else if (x.ChartType == A_ZCamp.Models.ChartType.Table)
+    {
+        <div class="container">
+            <h2>@x.QuestionName Responses</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Question</th>
+                        <th>Response</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var y in x.xValues)
+                    {
+                    <tr>
+                        <td>@x.QuestionName</td>
+                        <td>@y</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        z++;
+    }
+
+}
+
+@*
+    
+
+    @for (int i = 0; i < 3; i++)
+    {
+        <canvas id="bar-chart + @i" width="600" height="400"></canvas>
+
+        <script>
+
+        var xVals = @Html.Raw(Json.Encode(Model.xValues));
+        var yVals = @Html.Raw(Json.Encode(Model.yValues));
+
+
+            new Chart(document.getElementById("bar-chart + @i"), {
+            type: 'bar',
+            data: {
+                labels: xVals,
+              datasets: [
+                {
+                  //label: "Population (millions)",
+                  backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                  data: yVals
+                }
+              ]
+            },
+            options: {
+                scales: { yAxes: [{ ticks: { beginAtZero: true } }] },
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Predicted world population (millions) in 2050'
+              }
+            }
+            });
+        </script>
+*@

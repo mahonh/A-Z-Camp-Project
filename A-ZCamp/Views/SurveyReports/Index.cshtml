@@ -12,6 +12,8 @@
 {
     <h3>Survey Name</h3>
     @Html.DropDownListFor(x => x.SurveyChoice, Model.Surveys)
+    @Html.HiddenFor(m => Model.SurveyChoice)
+    @Html.HiddenFor(m => Model.Surveys)
 
     <input type="submit" class="btn btn-primary" value="View"/>
 }
@@ -21,34 +23,36 @@
     using (Html.BeginForm("RunReport", "SurveyReports", FormMethod.Post, new { @class = "form" }))
     {
         <div class="container">
-            <h2>Hover Rows</h2>
-            <p>The .table-hover class enables a hover state on table rows:</p>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Include?</th>
-                        <th>Question Name</th>
-                        <th>Question Type</th>
-                        <th>Chart Type</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @{int z = 0;}
-                    @foreach (var x in Model.DataToRun)
-                    {
-                    <tr>
-                        @Html.HiddenFor(m => m.DataToRun[z].QuestionID)
-                        @Html.HiddenFor(m => m.DataToRun[z].SurveyID)
+            <h2>Questions</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Include?</th>
+                            <th>Question Name</th>
+                            <th>Question Type</th>
+                            <th>Chart Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int z = 0;}
+                        @foreach (var x in Model.DataToRun)
+                        {
+                            <tr>
+                                @Html.HiddenFor(m => m.DataToRun[z].QuestionID)
+                                @Html.HiddenFor(m => m.DataToRun[z].SurveyID)
+                                @Html.HiddenFor(m => m.DataToRun[z].QuestionName)
 
-                        <td>@Html.EditorFor(m => m.DataToRun[z].Include)</td>
-                        <td>@x.QuestionName</td>
-                        <td>@x.QuestionType.ToString()</td>
-                        <td>@Html.EnumDropDownListFor(m => m.DataToRun[z].ChartType, null, new { @class = "form-control" })</td>
-                    </tr>
-                    {z++;}
-                    }
-                </tbody>
-            </table>
+                                <td>@Html.EditorFor(m => m.DataToRun[z].Include)</td>
+                                <td>@x.QuestionName</td>
+                                <td>@x.QuestionType.ToString()</td>
+                                <td>@Html.EnumDropDownListFor(m => m.DataToRun[z].ChartType, null, new { @class = "form-control" })</td>
+                            </tr>
+                            { z++; }
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <input type="submit" class="btn btn-primary" value="Run Report" />

@@ -327,7 +327,7 @@
     <Content Include="Views\SurveyMods\QuestionEdit.cshtml" />
     <Content Include="Views\SurveyMods\SurveyEdit.cshtml" />
     <Content Include="Views\SurveyMods\QuestionSpecificEdit.cshtml" />
-    <Content Include="Views\SurveyReports\BarChart.cshtml" />
+    <Content Include="Views\SurveyReports\ReportResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

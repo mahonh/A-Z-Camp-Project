@@ -48,7 +48,9 @@ namespace A_ZCamp.Controllers
                                  SurveyID = y.SurveyTypeId
                              }).ToList();
 
-            foreach (var x in questions)
+            var uniqueQuestion = questions.GroupBy(x => x.QuestionID).Select(y => y.First());
+
+            foreach (var x in uniqueQuestion)
             {
                 model.DataToRun.Add(x);
             }
@@ -98,6 +100,28 @@ namespace A_ZCamp.Controllers
                     ChartMakerData data = new ChartMakerData();
                     data.xValues = xVal;
                     data.yValues = yVal;
+                    data.QuestionName = z.QuestionName;
+                    data.ChartType = z.ChartType;
+                    charts.ChartData.Add(data);
+                }
+
+                else if (z.Include && z.ChartType == ChartType.Table)
+                {
+                    var results = (from x in reportHandler.SurveyResponses
+                                   where x.SurveyQuestionId == z.QuestionID && x.SurveyTypeId == z.SurveyID
+                                   select x).ToList();
+
+                    List<String> xVal = new List<string>();
+
+                    foreach (var u in results)
+                    {
+                        xVal.Add(u.Response);
+                    }
+
+                    ChartMakerData data = new ChartMakerData();
+                    data.xValues = xVal;
+                    data.QuestionName = z.QuestionName;
+                    data.ChartType = z.ChartType;
                     charts.ChartData.Add(data);
                 }
             }
@@ -147,12 +171,12 @@ namespace A_ZCamp.Controllers
 
             return View("BarChart", chart);
             */
-            return View(charts);
+            return View("ReportResults", charts);
         }
 
-        public ActionResult BarChart(ChartMaker chart)
+        public ActionResult ReportResults(ChartMaker charts)
         {
-            return View(chart);
+            return View(charts);
         }
     }
 }
