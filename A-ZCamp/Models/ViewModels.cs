@@ -173,6 +173,7 @@ namespace A_ZCamp.Models
             yValues = new List<int>();
             xValues = new List<string>();
         }
+
         public String QuestionName { get; set; }
         public ChartType ChartType { get; set; }
         public List<int> yValues { get; set; }

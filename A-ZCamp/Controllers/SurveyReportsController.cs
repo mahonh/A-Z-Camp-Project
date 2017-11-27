@@ -35,11 +35,22 @@ namespace A_ZCamp.Controllers
 
         public ActionResult ViewQuestion(SurveyReportsViewModel model)
         {
+            //Maybe remove this and use Hiddenfor on view?
+            IEnumerable<SelectListItem> items = reportHandler.SurveyTypes.Select
+                (x => new SelectListItem
+                {
+                    Value = x.SurveyTypeId.ToString(),
+                    Text = x.Name
+                });
+
+            model.Surveys = items;
+
             int choice = Int32.Parse(model.SurveyChoice);
 
             var questions = (from x in reportHandler.SurveyQuestions
                              join y in reportHandler.SurveyResponses on x.SurveyQuestionId equals y.SurveyQuestionId
                              where y.SurveyTypeId == choice
+                             orderby x.Question ascending
                              select new SurveyReportsData
                              {
                                  QuestionID = x.SurveyQuestionId,
@@ -177,6 +188,21 @@ namespace A_ZCamp.Controllers
         public ActionResult ReportResults(ChartMaker charts)
         {
             return View(charts);
+        }
+
+        public ActionResult ExportCSV(ChartMaker charts)
+        {
+            return View();
+            /*
+            List<String> csv = new List<string>();
+
+            foreach (var x in charts.ChartData)
+            {
+                csv.Add(x.QuestionName);
+            }
+
+            return File(new System.Text.UTF8Encoding().GetBytes(csv), "text/csv", "Report.csv");
+            */
         }
     }
 }

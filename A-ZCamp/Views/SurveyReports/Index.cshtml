@@ -12,8 +12,6 @@
 {
     <h3>Survey Name</h3>
     @Html.DropDownListFor(x => x.SurveyChoice, Model.Surveys)
-    @Html.HiddenFor(m => Model.SurveyChoice)
-    @Html.HiddenFor(m => Model.Surveys)
 
     <input type="submit" class="btn btn-primary" value="View"/>
 }
@@ -46,7 +44,21 @@
                                 <td>@Html.EditorFor(m => m.DataToRun[z].Include)</td>
                                 <td>@x.QuestionName</td>
                                 <td>@x.QuestionType.ToString()</td>
+                                <td>
+                                    @if (x.QuestionType == A_ZCamp.Models.QuestionType.ShortAnswer)
+                                    {
+                                        @Html.RadioButtonFor(m => m.DataToRun[z].ChartType, 2, new { Checked = "checked" }) @:Table
+                                    }
+                                    else
+                                    {
+                                        @Html.RadioButtonFor(m => m.DataToRun[z].ChartType, 0, new { Checked = "checked" }) @:BarChart
+                                        @:&nbsp;
+                                        @Html.RadioButtonFor(m => m.DataToRun[z].ChartType, 1) @:PieChart
+                                    }
+                                </td>
+                                @*
                                 <td>@Html.EnumDropDownListFor(m => m.DataToRun[z].ChartType, null, new { @class = "form-control" })</td>
+                                *@
                             </tr>
                             { z++; }
                         }
