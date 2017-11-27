@@ -39,72 +39,64 @@
     </div>
      *@
 
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="~/"><img src="~/Content/Images/Picture1.png" runat="server" class="image img-responsive" alt="LOGO"></a>
-            </div>
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="~/"><img src="~/Content/Images/Picture1.png" runat="server" class="image img-responsive" alt="LOGO"></a>
+                </div>
 
-            <div class="navbar-collapse collapse" id="navigation">
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li class=""> @*active*@
-                        <a href="~/">Home</a>
-                    </li>
-                    @*
-                    <li>
-                        <a href="#about">About</a>
-                    </li>
-                    <li>
-                        <a href="#Registration">Registration</a>
-                    </li>
-                    <li>
-                        <a href="#references">Activities</a>
-                    </li>
-                    <li>
-                        <a href="#contact">Contact</a>
-                    </li>
-                        *@
-                    <li>
-                        @Html.ActionLink("Surveys", "Index", "Surveys")
-                    </li>
-                    <li>
-                        @Html.Partial("_LoginPartial")
-                    </li>
-                    <li>
+                <div class="navbar-collapse collapse" id="navigation">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class=""> @*active*@
+                            <a href="~/">Home</a>
+                        </li>
                         @if (Context.User.Identity.IsAuthenticated)
                         {
-                            @Html.ActionLink("Survey MOD", "Index", "SurveyMods")
+
                         }
-                    </li>
-                    <li>
-                        @if (Context.User.Identity.IsAuthenticated)
+                        else
                         {
-                            @Html.ActionLink("Reporting", "Index", "SurveyReports")
+                            <li>
+                                <a href="#about">About</a>
+                            </li>
+                            <li>
+                                <a href="#Registration">Registration</a>
+                            </li>
+                            <li>
+                                <a href="#references">Activities</a>
+                            </li>
+                            <li>
+                                <a href="#contact">Contact</a>
+                            </li>
                         }
-                    </li>
-                </ul>
+                        <li>
+                            @Html.ActionLink("Surveys", "Index", "Surveys")
+                        </li>
+                        <li>
+                            @Html.Partial("_LoginPartial")
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - A-Z Camp</p>
-        </footer>
-    </div>
-    
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - A-Z Camp</p>
+            </footer>
+        </div>
 
-</body>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+
+    </body>
 </html>
