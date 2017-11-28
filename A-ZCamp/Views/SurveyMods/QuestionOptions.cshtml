@@ -33,12 +33,12 @@
                     <tr>
                             @Html.HiddenFor(m => m.AllSurveyQuestions[z].Qid)
                             @Html.HiddenFor(m => m.AllSurveyQuestions[z].Sid)
-                        <td>@x.SurveyName</td>
-                        <td>@x.Question</td>
-                        <td>@x.QuestionType.ToString()</td>
-                        <td>@Html.EditorFor(m => m.AllSurveyQuestions[z].Active)
+                        <td width="25%">@x.SurveyName</td>
+                        <td width="50%">@x.Question</td>
+                        <td width="15%">@x.QuestionType.ToString()</td>
+                        <td width="5%">@Html.EditorFor(m => m.AllSurveyQuestions[z].Active)
                         </td>
-                        <td>@Html.TextBoxFor(m => m.AllSurveyQuestions[z].Ordering, new { required = "required" })</td>
+                        <td width="5%">@Html.TextBoxFor(m => m.AllSurveyQuestions[z].Ordering, new { required = "required", size = 5 })</td>
                     </tr>
                     z++;
                 }

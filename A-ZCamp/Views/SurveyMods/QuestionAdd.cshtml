@@ -8,6 +8,8 @@
 <br />
 <h2>Add a New Survey Question</h2>
 
+@Html.ValidationSummary()
+
 @using (Html.BeginForm("AddNewQuestion", "SurveyMods", FormMethod.Post, new { @class = "form" }))
 {
     <table class="table table-bordered">
@@ -23,7 +25,7 @@
             {
                 <tr>
                    @* <th scope="row">@Html.RadioButtonFor(m => m.SurveyID, 1) @x.SurveyName</th> *@
-                    <td>@Html.RadioButtonFor(m => m.SurveyID, x.Sid) @x.SurveyName</td>
+                    <td>@Html.RadioButtonFor(m => m.SurveyID, x.Sid, new { required = "required" }) @x.SurveyName</td>
                     <td>@x.SurveyType.ToString()</td>
                 </tr>  }
         </tbody>
@@ -50,14 +52,14 @@
     <br />
     <h4>Choose Question Type</h4>
 
-    @Html.RadioButtonFor(m => m.QuestionTypeToSubmit, 1) @:Short Answer <br />
+    @Html.RadioButtonFor(m => m.QuestionTypeToSubmit, 1, new { Checked = "checked" }) @:Short Answer <br />
     @Html.RadioButtonFor(m => m.QuestionTypeToSubmit, 2) @:Multiple Choice <br />
 
     <br />
     <h4>Your Question</h4>
 
     @Html.Label("Question:") <br />
-    @Html.TextAreaFor(m => m.QuestionToSubmit) <br />
+    @Html.TextAreaFor(m => m.QuestionToSubmit, new { required = "required" }) <br />
 
     <br />
     <h4>Multiple Choice Supplied Answers</h4>

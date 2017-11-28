@@ -303,6 +303,53 @@ namespace A_ZCamp.Controllers
         //POST for Add Question page
         public ActionResult AddNewQuestion(SurveyAddQuestionViewModel QModel)
         {
+            //Repopulates survey data - can be removed
+            var Surveys = (from x in SurveyModHandler.SurveyTypes
+                           orderby x.Survey ascending, x.Name
+                           select new SurveyData
+                           {
+                               SurveyName = x.Name,
+                               SurveyType = x.Survey,
+                               Sid = x.SurveyTypeId
+                           }).ToList();
+
+            foreach (var x in Surveys)
+            {
+                QModel.Surveys.Add(x);
+            }
+
+            //for error checking, probably a better wyy
+            var nameCheck = (from x in SurveyModHandler.SurveyQuestions
+                             select x.Question).ToList();
+
+            foreach (var x in nameCheck)
+            {
+                if (x == QModel.QuestionToSubmit)
+                {
+                    ModelState.AddModelError("Duplicate Question Name", "A question by that name already exists, please pick another.");
+
+                    return View("QuestionAdd", QModel);
+                }
+            }
+
+            //supplied answer error checking, probably a better way
+            int errorCount = 0;
+            foreach (String e in QModel.SuppliedAnswersQuestionToSumbit)
+            {
+                if (e == "")
+                {
+                    errorCount++;
+                }
+            }
+
+            if (QModel.QuestionTypeToSubmit == QuestionType.MultipleChoice && errorCount > 3)
+            {
+                ModelState.AddModelError("No Supplied Answers", "A multiple choice question must have at least TWO supplied answers.");
+
+                return View("QuestionAdd", QModel);
+            }
+
+            //actual method data
             var questionCreate = SurveyModHandler.SurveyQuestions;
             var questionOrdering = SurveyModHandler.SurveyQuestionOrderings;
             var answersCreate = SurveyModHandler.SurveyQuestionSuppliedAnswers;
