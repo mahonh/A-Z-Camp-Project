@@ -37,11 +37,12 @@ namespace A_ZCamp.Models
         {
             Surveys = new List<SurveyData>();
             SuppliedAnswersQuestionToSumbit = new List<String>();
-
-            for (int i = 0; i < 3; i++)
+            
+            for (int i = 0; i < 5; i++)
             {
                 SuppliedAnswersQuestionToSumbit.Add("");
             }
+            
 
         }
         public List<SurveyData> Surveys { get; set; }

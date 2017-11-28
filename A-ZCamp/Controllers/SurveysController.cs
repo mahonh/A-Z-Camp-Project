@@ -93,7 +93,7 @@ namespace A_ZCamp.Controllers
                 SurveyHandler.SaveChanges();
             }
 
-            return RedirectToAction("SurveyLanding", model);
+            return View("SurveyLanding", model);
         }
 
         //GET for Survey Landing page

@@ -323,11 +323,14 @@ namespace A_ZCamp.Controllers
             {
                 foreach (var x in QModel.SuppliedAnswersQuestionToSumbit)
                 {
-                    answersCreate.Add(new SurveyQuestionSuppliedAnswer
+                    if (x != "")
                     {
-                        Answer = x,
-                        SurveyQuestionId = Qid
-                    });
+                        answersCreate.Add(new SurveyQuestionSuppliedAnswer
+                        {
+                            Answer = x,
+                            SurveyQuestionId = Qid
+                        });
+                    }
                 }
             }
 
@@ -340,7 +343,7 @@ namespace A_ZCamp.Controllers
 
             SurveyModHandler.SaveChanges();
 
-            return RedirectToAction("Index", "SurveyMods");
+            return RedirectToAction("QuestionAdd", "SurveyMods");
         }
 
         //GET for Question Edit page

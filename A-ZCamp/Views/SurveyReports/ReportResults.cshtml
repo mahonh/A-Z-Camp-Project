@@ -11,16 +11,19 @@
 
 @{int z = 0;}
 
-@foreach (var x in Model.ChartData)
-{
-    if (x.ChartType == A_ZCamp.Models.ChartType.BarChart)
-    {
-        <canvas id="bar-chart + @z" width="600" height="400"></canvas>
-        <br />
-        <br />
-        <br />
+<div class="row">
 
-        <script>
+    @foreach (var x in Model.ChartData)
+    {
+        if (x.ChartType == A_ZCamp.Models.ChartType.BarChart)
+        {
+            <div class="col-md-10">
+                <canvas id="bar-chart + @z" width="800" height="600"></canvas>
+                <br />
+                <br />
+                <br />
+            </div>
+            <script>
 
             var xVals = @Html.Raw(Json.Encode(x.xValues));
             var yVals = @Html.Raw(Json.Encode(x.yValues));
@@ -48,18 +51,19 @@
                   }
                 }
                 });
-        </script>
-        z++;
-    }
+            </script>
+            z++;
+        }
 
-    else if (x.ChartType == A_ZCamp.Models.ChartType.PieChart)
-    {
-        <canvas id="pie-chart + @z" width="600" height="400"></canvas>
-        <br />
-        <br />
-        <br />
-
-        <script>
+        else if (x.ChartType == A_ZCamp.Models.ChartType.PieChart)
+        {
+            <div class="col-md-10">
+                <canvas id="pie-chart + @z" width="800" height="600"></canvas>
+                <br />
+                <br />
+                <br />
+            </div>
+            <script>
             var xVals = @Html.Raw(Json.Encode(x.xValues));
             var yVals = @Html.Raw(Json.Encode(x.yValues));
             var title = @Html.Raw(Json.Encode(x.QuestionName));
@@ -82,39 +86,41 @@
                     }
                 }
             });
-        </script>
-        z++;
-    }
+            </script>
+            z++;
+        }
 
-    else if (x.ChartType == A_ZCamp.Models.ChartType.Table)
-    {
-        <div class="container">
-            <h2>@x.QuestionName Responses</h2>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Question</th>
-                        <th>Response</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var y in x.xValues)
-                    {
-                    <tr>
-                        <td>@x.QuestionName</td>
-                        <td>@y</td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        z++;
-        <br />
-        <br />
-        <br />
+        else if (x.ChartType == A_ZCamp.Models.ChartType.Table)
+        {
+            <div class="col-md-10">
+                <div class="container">
+                    <h2>"@x.QuestionName" Responses</h2>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Question</th>
+                                <th>Response</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var y in x.xValues)
+                            {
+                                <tr>
+                                    <td>@x.QuestionName</td>
+                                    <td>@y</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @{z++;}
+                <br />
+                <br />
+                <br />
+            </div>
+        }
     }
-}
-
+</div>
 @*
     
 

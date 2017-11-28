@@ -12,19 +12,5 @@ namespace A_ZCamp.Controllers
         {
             return View();
         }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "This page is for the Marshall University Adventure Zone Camp";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Do you have questions or concerns about the camp? Feel free to contact us!";
-
-            return View();
-        }
     }
 }
