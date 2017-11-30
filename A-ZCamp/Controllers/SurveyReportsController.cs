@@ -50,7 +50,7 @@ namespace A_ZCamp.Controllers
             var questions = (from x in reportHandler.SurveyQuestions
                              join y in reportHandler.SurveyResponses on x.SurveyQuestionId equals y.SurveyQuestionId
                              where y.SurveyTypeId == choice
-                             orderby x.Question ascending
+                             orderby y.SurveyQuestion.QuestionType descending
                              select new SurveyReportsData
                              {
                                  QuestionID = x.SurveyQuestionId,

@@ -17,7 +17,7 @@
     {
         if (x.ChartType == A_ZCamp.Models.ChartType.BarChart)
         {
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <canvas id="bar-chart + @z" width="800" height="600"></canvas>
                 <br />
                 <br />
@@ -57,13 +57,14 @@
 
         else if (x.ChartType == A_ZCamp.Models.ChartType.PieChart)
         {
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <canvas id="pie-chart + @z" width="800" height="600"></canvas>
                 <br />
                 <br />
                 <br />
             </div>
             <script>
+
             var xVals = @Html.Raw(Json.Encode(x.xValues));
             var yVals = @Html.Raw(Json.Encode(x.yValues));
             var title = @Html.Raw(Json.Encode(x.QuestionName));
@@ -92,7 +93,7 @@
 
         else if (x.ChartType == A_ZCamp.Models.ChartType.Table)
         {
-            <div class="col-md-12">
+            <div class="col-md-11">
                 <div class="container">
                     <h2>"@x.QuestionName" Responses</h2>
                     <table class="table table-bordered">

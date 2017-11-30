@@ -181,6 +181,8 @@ namespace A_ZCamp.Controllers
                 questionsUpdate.QuestionData.Add(x);
             }
 
+            //questionsUpdate.QuestionData.OrderByDescending(x => x.ChangeAssignment);
+
             return View(questionsUpdate);
         }
 
@@ -256,6 +258,7 @@ namespace A_ZCamp.Controllers
         public ActionResult SurveyCreate(SurveyAddViewModel model)
         {
             var nameCheck = (from x in SurveyModHandler.SurveyTypes
+                             orderby x.Survey
                              select x.Name).ToList();
 
             foreach (var x in nameCheck)
@@ -399,6 +402,7 @@ namespace A_ZCamp.Controllers
             QuestionOverallViewModel all = new QuestionOverallViewModel();
 
             var questions = (from x in SurveyModHandler.SurveyQuestions
+                             orderby x.QuestionType
                              select new QuestionData
                              {
                                  Qid = x.SurveyQuestionId,

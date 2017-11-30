@@ -53,9 +53,13 @@
 
                 <div class="navbar-collapse collapse" id="navigation">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class=""> @*active*@
-                            <a href="~/">Home</a>
-                        </li>
+                       
+                        @*
+                            <li class=""> active
+                                <a href="~/">Home</a>
+                            </li>
+                        *@
+
                         @if (Context.User.Identity.IsAuthenticated)
                         {
 
@@ -63,16 +67,16 @@
                         else
                         {
                             <li>
-                                <a href="#about">About</a>
+                                <a href="@Url.Action("Index", "Home")#about">About</a>
                             </li>
                             <li>
-                                <a href="#Registration">Registration</a>
+                                <a href="@Url.Action("Index", "Home")#Registration">Registration</a>
                             </li>
                             <li>
-                                <a href="#references">Activities</a>
+                                <a href="@Url.Action("Index", "Home")#references">Activities</a>
                             </li>
                             <li>
-                                <a href="#contact">Contact</a>
+                                <a href="@Url.Action("Index", "Home")#contact">Contact</a>
                             </li>
                         }
                         <li>

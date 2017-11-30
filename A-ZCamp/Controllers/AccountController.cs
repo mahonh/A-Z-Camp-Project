@@ -139,6 +139,13 @@ namespace A_ZCamp.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            /*
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            */
+
             return View();
         }
 

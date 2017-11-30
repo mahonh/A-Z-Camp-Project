@@ -3,6 +3,7 @@
     ViewBag.Title = "Manage";
 }
 
+<br />
 <h2>@ViewBag.Title.</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
@@ -10,6 +11,12 @@
     <h4>Change your account settings</h4>
     <hr />
     <dl class="dl-horizontal">
+
+        <dt>Additional Users</dt>
+        <dd>
+            @Html.ActionLink("Register a new Admin", "Register", "Account")
+        </dd>
+
         <dt>Password:</dt>
         <dd>
             [

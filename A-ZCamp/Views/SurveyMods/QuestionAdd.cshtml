@@ -52,7 +52,7 @@
     <br />
     <h4>Choose Question Type</h4>
 
-    @Html.RadioButtonFor(m => m.QuestionTypeToSubmit, 1, new { Checked = "checked" }) @:Short Answer <br />
+    @Html.RadioButtonFor(m => m.QuestionTypeToSubmit, 1, new { Checked = "checked"}) @:Short Answer <br />
     @Html.RadioButtonFor(m => m.QuestionTypeToSubmit, 2) @:Multiple Choice <br />
 
     <br />
@@ -62,91 +62,94 @@
     @Html.TextAreaFor(m => m.QuestionToSubmit, new { required = "required" }) <br />
 
     <br />
+
+
     <h4>Multiple Choice Supplied Answers</h4>
-
-    @*
-    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
-
-    <script type="text/javascript">
-
-    $(document).ready(function () {
-
-        var counter = 1;
-
-        $("#addButton").click(function () {
-
-            if (counter > 10) {
-                alert("Only 10 textboxes allow");
-                return false;
-            }
-
-            var newTextBoxDiv = $(document.createElement('div'))
-                .attr("id", 'TextBoxDiv' + counter);
-
-            newTextBoxDiv.after().html('<label>Textbox #' + counter + ' : </label>' +
-                '<input type="text" name="textbox' + counter +
-                '" id="textbox' + counter + '" value="" >');
-
-            newTextBoxDiv.appendTo("#TextBoxesGroup");
-
-
-            counter++;
-        });
-
-        $("#removeButton").click(function () {
-            if (counter == 1) {
-                alert("No more textbox to remove");
-                return false;
-            }
-
-            counter--;
-
-            $("#TextBoxDiv" + counter).remove();
-
-        });
-
-        $("#getButtonValue").click(function () {
-            var list = [];
-            for (i = 1; i < counter; i++) {
-                list.push($('#textbox' + i).val());
-            }
-
-            $.ajax({
-                url: "@Url.Action("AddNewQuestion", "SurveyMods")",
-                contentType: "application/json", /*; charset=utf-8*/
-                dataType: "json",
-                type: "POST",
-                data: JSON.stringify({ 'list': list })
-                //JSON.stringify({ coordinates: list })
-            })
-
-        });
-
-    });
-    </script>
-
-        <div id='TextBoxesGroup'>
-            <div id="TextBoxDiv1">
-                <label>"TextBox #1" : </label><input type='textbox' id='textbox1'>
-            </div>
-        </div>
-        <input type='button' value='Add Button' id='addButton'>
-        <input type='button' value='Remove Button' id='removeButton'>
-       // <input type='button' value='Get TextBox Value' id='getButtonValue'>
-    
-
-
-    <br />
-    <br />
-    <br />
-    *@
 
     for (int i = 0; i < Model.SuppliedAnswersQuestionToSumbit.Count; i++)
     {
-        @:Supplied Answer @(i+1)
-        @Html.TextBoxFor(m => m.SuppliedAnswersQuestionToSumbit[i]);
-        <br />
+    @:Supplied Answer @(i + 1)
+    @Html.TextBoxFor(m => m.SuppliedAnswersQuestionToSumbit[i]);
+    <br />
     }
+
+        @*
+            <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+            <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                var counter = 1;
+
+                $("#addButton").click(function () {
+
+                    if (counter > 10) {
+                        alert("Only 10 textboxes allow");
+                        return false;
+                    }
+
+                    var newTextBoxDiv = $(document.createElement('div'))
+                        .attr("id", 'TextBoxDiv' + counter);
+
+                    newTextBoxDiv.after().html('<label>Textbox #' + counter + ' : </label>' +
+                        '<input type="text" name="textbox' + counter +
+                        '" id="textbox' + counter + '" value="" >');
+
+                    newTextBoxDiv.appendTo("#TextBoxesGroup");
+
+
+                    counter++;
+                });
+
+                $("#removeButton").click(function () {
+                    if (counter == 1) {
+                        alert("No more textbox to remove");
+                        return false;
+                    }
+
+                    counter--;
+
+                    $("#TextBoxDiv" + counter).remove();
+
+                });
+
+                $("#getButtonValue").click(function () {
+                    var list = [];
+                    for (i = 1; i < counter; i++) {
+                        list.push($('#textbox' + i).val());
+                    }
+
+                    $.ajax({
+                        url: "@Url.Action("AddNewQuestion", "SurveyMods")",
+                        contentType: "application/json", /*; charset=utf-8*/
+                        dataType: "json",
+                        type: "POST",
+                        data: JSON.stringify({ 'list': list })
+                        //JSON.stringify({ coordinates: list })
+                    })
+
+                });
+
+            });
+            </script>
+
+                <div id='TextBoxesGroup'>
+                    <div id="TextBoxDiv1">
+                        <label>"TextBox #1" : </label><input type='textbox' id='textbox1'>
+                    </div>
+                </div>
+                <input type='button' value='Add Button' id='addButton'>
+                <input type='button' value='Remove Button' id='removeButton'>
+               // <input type='button' value='Get TextBox Value' id='getButtonValue'>
+
+
+
+            <br />
+            <br />
+            <br />
+        *@
+
         <br />
         <input type="submit" class="btn btn-primary" value="Save" id='getButtonValue'/>
         }
