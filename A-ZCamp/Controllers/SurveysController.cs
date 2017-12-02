@@ -298,7 +298,7 @@ namespace A_ZCamp.Controllers
         }
 
         //GET for Survey Confirm page
-        public ActionResult SurveyConfirm(String RID, SurveyLandingViewModel model)
+        public ActionResult SurveyConfirm(String RID)
         {
             var RIDcheck = SurveyHandler.SurveyRespondents.SingleOrDefault(z => z.RID == RID);
 
@@ -307,29 +307,32 @@ namespace A_ZCamp.Controllers
                 return RedirectToAction("Index", "Surveys");
             }
 
+            string x = "mu.az.camp@gmail.com"; //This will be the string that needs to be replaced
+            MailMessage mail = new MailMessage();
+            mail.To.Add(x);
+            //     mail.To.Add("Another Email ID where you wanna send same email");
+            mail.From = new MailAddress("mu.az.camp@gmail.com");
+            mail.Subject = "Email using Gmail";
+
+            string Body = "Hi, this mail is to test sending mail" +
+                          "using Gmail in ASP.NET";
+            mail.Body = Body;
+
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com"; //Or Your SMTP Server Address
+            smtp.Credentials = new System.Net.NetworkCredential
+                 ("mu.az.camp@gmail.com", "SURVEYSrule!");
+            //Or your Smtp Email ID and Password
+            smtp.EnableSsl = true;
+            smtp.Send(mail);
+
+
             return View();
 
 
 
-            string x = "mu.az.camp@gmail.com"; //This will be the string that needs to be replaced
-                MailMessage mail = new MailMessage();
-                mail.To.Add(x);
-                //     mail.To.Add("Another Email ID where you wanna send same email");
-                mail.From = new MailAddress("mu.az.camp@gmail.com");
-                mail.Subject = "Email using Gmail";
-
-                string Body = "Hi, this mail is to test sending mail" +
-                              "using Gmail in ASP.NET";
-                mail.Body = Body;
-
-                mail.IsBodyHtml = true;
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp.gmail.com"; //Or Your SMTP Server Address
-                smtp.Credentials = new System.Net.NetworkCredential
-                     ("mu.az.camp@gmail.com", "SURVEYSrule!");
-                //Or your Smtp Email ID and Password
-                smtp.EnableSsl = true;
-                smtp.Send(mail);
+           
         }
 
     }
