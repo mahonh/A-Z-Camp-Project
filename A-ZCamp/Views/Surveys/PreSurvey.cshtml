@@ -44,7 +44,7 @@
 
                 @Html.DisplayFor(modelItem => x.Question) <br />
                 
-                @foreach (var u in x.QSupAnswers)
+                @foreach (String u in x.QSupAnswers)
                 {
                     @Html.RadioButtonFor(m => m.QuestionData[z].UserResponse, u, new { required = "required" }) @Html.Label(u) <br />
                 }
