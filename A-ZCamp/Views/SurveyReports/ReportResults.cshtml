@@ -17,6 +17,8 @@
     {
         if (x.ChartType == A_ZCamp.Models.ChartType.BarChart)
         {
+            @Html.HiddenFor(ModelItem => Model.ChartData[z].xValues)
+            @Html.HiddenFor(ModelItem => Model.ChartData[z].yValues)
             <div class="col-md-6">
                 <canvas id="bar-chart + @z" width="800" height="600"></canvas>
                 <br />

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+
+using System.Data;
+
 using System.Web.Mvc;
 using A_ZCamp.Models;
 
@@ -190,9 +193,44 @@ namespace A_ZCamp.Controllers
             return View(charts);
         }
 
-        public ActionResult ExportCSV(ChartMaker charts)
+        public void ExportCSV(ChartMaker charts)
         {
-            return View();
+            string csv = string.Empty;
+
+            foreach (var x in charts.ChartData)
+            {
+                csv += x.QuestionName + ", ";
+            }
+
+            csv += "\r\n";
+
+            foreach (var y in charts.ChartData)
+            {
+                if (y.xValues == null)
+                {
+                    foreach (var z in y.yValues)
+                    {
+                        csv += z.ToString().Replace(",", ";") + ",";
+                    }
+                }
+
+                else
+                {
+                    for (int i = 0; i < y.xValues.Count; i++)
+                    {
+                        csv += y.xValues[i] + ";" + y.yValues[i];
+                    }
+                }
+            }
+
+            Response.Clear();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment;filename=Report.csv");
+            Response.Charset = "";
+            Response.ContentType = "application/text";
+            Response.Flush();
+            Response.End();
+                
             /*
             List<String> csv = new List<string>();
 

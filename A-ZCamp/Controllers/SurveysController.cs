@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using A_ZCamp.Models;
+using System.Net.Mail;
 
 namespace A_ZCamp.Controllers
 {
@@ -297,7 +298,7 @@ namespace A_ZCamp.Controllers
         }
 
         //GET for Survey Confirm page
-        public ActionResult SurveyConfirm(String RID)
+        public ActionResult SurveyConfirm(String RID, String SurveyType)
         {
             var RIDcheck = SurveyHandler.SurveyRespondents.SingleOrDefault(z => z.RID == RID);
 
@@ -306,7 +307,89 @@ namespace A_ZCamp.Controllers
                 return RedirectToAction("Index", "Surveys");
             }
 
+            if (RIDcheck.PostCampComplete)
+            {
+                String email = RIDcheck.Email;
+                String subject = "Survey Complete: Thanks for completing the Post-Camp Survey!";
+                String message = "You completed the Post-Camp Survey! Thanks! Your opinion matters to us.";
+
+                SendEmail(email, subject, message);
+            }
+
+            else if (RIDcheck.PreCampComplete)
+            {
+                String email = RIDcheck.Email;
+                String subject = "Survey Complete: Thanks for completing the Pre-Camp Survey!";
+                String message = "You completed the Pre-Camp Survey! Thanks! Your opinion matters to us.";
+
+                SendEmail(email, subject, message);
+
+                String email2 = RIDcheck.Email;
+                String subject2 = "Survey Reminder: Post-Camp Survey";
+                String message2 = "This is a reminder to compete the Post-Camp Survey once camp is over!";
+
+                SendEmail(email2, subject2, message2);
+            }
+
+            
+
+            /*
+            string x = RIDcheck.Email; //This will be the string that needs to be replaced
+            MailMessage mail = new MailMessage();
+            mail.To.Add(x);
+            //     mail.To.Add("Another Email ID where you wanna send same email");
+            mail.From = new MailAddress("mu.az.camp@gmail.com");
+
+            mail.Subject = "Email using Gmail";
+
+            string Body = "Hi, this mail is to test sending mail" +
+                          "using Gmail in ASP.NET";
+            mail.Body = Body;
+
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Port = 587;
+
+            smtp.Host = "smtp.gmail.com"; //Or Your SMTP Server Address
+            smtp.Credentials = new System.Net.NetworkCredential
+                 ("mu.az.camp@gmail.com", "SURVEYSrule!");
+            //Or your Smtp Email ID and Password
+            smtp.EnableSsl = true;
+            
+            smtp.Send(mail);
+            */
+
+
             return View();
+
+        }
+
+        public void SendEmail(String to, String subject, String message)
+        {
+            MailMessage mail = new MailMessage();
+            mail.To.Add(to);
+            //     mail.To.Add("Another Email ID where you wanna send same email");
+            mail.From = new MailAddress("mu.az.camp@gmail.com");
+            mail.Subject = subject;
+
+            mail.Body = message;
+
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Port = 587;
+
+            smtp.Host = "smtp.gmail.com"; //Or Your SMTP Server Address
+            smtp.Credentials = new System.Net.NetworkCredential
+                 ("mu.az.camp@gmail.com", "SURVEYSrule!");
+            //Or your Smtp Email ID and Password
+            smtp.EnableSsl = true;
+
+            try
+            {
+                smtp.Send(mail);
+            }
+            catch (Exception e) { }
+            
         }
 
     }
